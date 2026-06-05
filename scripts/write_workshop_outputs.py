@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -34,10 +35,14 @@ def pick(data: dict[str, Any], path: str, default: str = UNKNOWN) -> str:
 
 
 def slugify(value: str) -> str:
-    value = value.lower()
-    value = re.sub(r"[^a-z0-9]+", "-", value)
-    value = value.strip("-")
-    return value or "case"
+    raw_value = value.strip() or "case"
+    slug = raw_value.lower()
+    slug = re.sub(r"[^a-z0-9]+", "-", slug)
+    slug = slug.strip("-")
+    if slug:
+        return slug
+    fallback = hashlib.sha1(raw_value.encode("utf-8")).hexdigest()[:8]
+    return f"case-{fallback}"
 
 
 def metadata(data: dict[str, Any]) -> dict[str, str]:

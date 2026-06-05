@@ -313,6 +313,8 @@ python3 scripts/write_workshop_outputs.py --validate-only --output-dir /tmp/code
 }
 ```
 
+`project.slug`는 사례 ID에 들어가는 짧은 영문 식별자입니다. 가능하면 직접 넣는 것이 좋습니다. 비워두면 스크립트가 프로젝트 이름을 기준으로 `case-xxxxxxxx` 형태의 안정적인 대체 slug를 만듭니다.
+
 ## 파일 구조
 
 ```text

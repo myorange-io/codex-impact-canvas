@@ -61,6 +61,8 @@ impact-agent-[YYYYMMDD]-[short-slug]
 
 slug는 소문자 ASCII를 사용하고, 공백은 하이픈으로 바꿉니다.
 
+프로젝트 이름이 한국어라면 `project.slug`에 짧은 영문 식별자를 따로 넣는 것을 권장합니다. 스크립트는 slug가 없을 때 `case-xxxxxxxx` 형태의 안정적인 대체 slug를 만듭니다.
+
 ## 품질 점검
 
 마무리 전 아래를 확인합니다.
