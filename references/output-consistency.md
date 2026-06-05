@@ -77,7 +77,7 @@ Before finishing, verify:
 When possible, normalize answers into JSON and run:
 
 ```bash
-python3 codex-impact-canvas/scripts/write_workshop_outputs.py --input workshop.json --output-dir .
+python3 scripts/write_workshop_outputs.py --input workshop.json --output-dir .
 ```
 
 The script preserves stable headings and values across all teams.
