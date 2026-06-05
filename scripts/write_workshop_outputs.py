@@ -127,18 +127,21 @@ def render_workflow(data: dict[str, Any], meta: dict[str, str]) -> str:
 - 분야: {pick(data, "library_metadata.sector")}
 - 업무 유형: {pick(data, "library_metadata.workflow_type")}
 - 에이전트 역할: {pick(data, "library_metadata.agent_role")}
-- 데이터 형태: {pick(data, "library_metadata.data_type")}
-- 개인정보 수준: {pick(data, "library_metadata.privacy_level")}
+- 데이터 특성: {pick(data, "library_metadata.data_characteristics", pick(data, "current_workflow.inputs"))}
+- 정형/비정형 여부: {pick(data, "library_metadata.data_type")}
+- 개인정보 포함 여부: {pick(data, "library_metadata.privacy_included", pick(data, "library_metadata.privacy_level"))}
 - 연결 수준: {pick(data, "library_metadata.integration_level")}
+- MCP/CLI 연결 여부: {pick(data, "library_metadata.mcp_cli_connection", pick(data, "library_metadata.integration_level"))}
 - 사람 검토: {pick(data, "library_metadata.human_review")}
-- 재사용 수준: {pick(data, "library_metadata.reuse_level")}
+- 재사용 가능성: {pick(data, "library_metadata.reuse_level")}
 - 산출물 형식: {pick(data, "library_metadata.output_format")}
 
 ## 기존 업무 흐름
 - 업무 시작 조건: {pick(data, "existing_workflow.workflow_trigger")}
-- 처리량: {pick(data, "existing_workflow.baseline_volume")}
+- 데이터 수: {pick(data, "existing_workflow.data_count", pick(data, "existing_workflow.baseline_volume"))}
+- 반복 빈도: {pick(data, "existing_workflow.repeat_frequency", pick(data, "existing_workflow.baseline_time"))}
 - 기존 소요 시간: {pick(data, "existing_workflow.baseline_time")}
-- 입력 출처: {pick(data, "existing_workflow.input_sources")}
+- 입력 데이터 출처: {pick(data, "existing_workflow.input_sources")}
 - 기존 단계: {pick(data, "existing_workflow.current_steps")}
 - 기존 산출물: {pick(data, "existing_workflow.current_outputs")}
 - 불편한 지점: {pick(data, "existing_workflow.current_pain_points")}
@@ -156,18 +159,18 @@ def render_workflow(data: dict[str, Any], meta: dict[str, str]) -> str:
 - 바뀐 업무 흐름: {pick(data, "ai_agent_design.changed_workflow")}
 
 ## 사람 검토와 개입
-- 검토 지점: {pick(data, "human_in_the_loop.review_points")}
-- 실패 시 인계 방식: {pick(data, "human_in_the_loop.handoff_protocol")}
+- 주요 검수 포인트: {pick(data, "human_in_the_loop.key_review_points", pick(data, "human_in_the_loop.review_points"))}
+- 실패 시 사람이 이어받는 방식: {pick(data, "human_in_the_loop.handoff_protocol")}
 - 예상 오류 유형: {pick(data, "human_in_the_loop.error_types")}
 - 평가 샘플: {pick(data, "human_in_the_loop.evaluation_samples")}
 
 ## 데이터와 접근
 - 개인정보 처리: {pick(data, "data_and_access.privacy_action")}
-- 권한 이슈: {pick(data, "data_and_access.permission_issues", NA)}
-- 공유 가능 범위: {pick(data, "data_and_access.shareability")}
+- 권한/접근 이슈: {pick(data, "data_and_access.permission_issues", NA)}
+- 결과물의 공유 가능 범위: {pick(data, "data_and_access.shareability")}
 
 ## 영향과 재사용
-- 예상 시간 변화: {pick(data, "impact_and_reuse.expected_time_change")}
+- 기존 대비 소요 시간 변화: {pick(data, "impact_and_reuse.expected_time_change")}
 - 품질 변화: {pick(data, "impact_and_reuse.quality_change")}
 - 재사용 방법: {pick(data, "impact_and_reuse.case_reuse_recipe")}
 - 유지관리 주체: {pick(data, "impact_and_reuse.maintenance_owner")}
@@ -285,9 +288,12 @@ def sample_data() -> dict[str, Any]:
             "sector": "운영",
             "workflow_type": "신청서검토",
             "agent_role": "검토보조",
+            "data_characteristics": "신청서 PDF에서 추출한 텍스트와 필수 항목 목록",
             "data_type": "비정형",
+            "privacy_included": "개인정보 포함 가능. 샘플은 익명화 필요",
             "privacy_level": "익명화 필요",
             "integration_level": "수동 업로드",
+            "mcp_cli_connection": "MCP/CLI 연결 없음. 수동 업로드로 처리",
             "human_review": "최종 검토",
             "reuse_level": "템플릿 재사용 가능",
             "output_format": "md",
@@ -295,6 +301,8 @@ def sample_data() -> dict[str, Any]:
         "existing_workflow": {
             "workflow_trigger": "신청서 접수",
             "baseline_volume": "한 번에 10-30건",
+            "data_count": "데모 1건, 실제 업무 한 번에 10-30건",
+            "repeat_frequency": "신청 접수 기간마다 반복",
             "baseline_time": "건당 5-10분",
             "input_sources": "이메일 첨부 PDF",
             "current_steps": "사람이 PDF를 열고 필수 항목을 확인한다.",
@@ -315,6 +323,7 @@ def sample_data() -> dict[str, Any]:
         },
         "human_in_the_loop": {
             "review_points": "발송 전 담당자 최종 검토",
+            "key_review_points": "누락 항목이 실제 필수 항목인지, 안내 문구가 과도하지 않은지 확인",
             "handoff_protocol": "AI 결과가 비어 있으면 기존 수동 검토로 진행한다.",
             "error_types": "누락 오탐, 표현 부정확",
             "evaluation_samples": "익명화 샘플 1개와 기대 누락 목록",
@@ -352,8 +361,11 @@ def write_outputs(data: dict[str, Any], output_dir: Path, stage: str) -> None:
     memory_path = output_dir / "MEMORY.md"
     if not memory_path.exists():
         memory_path.write_text(memory_header(data, meta).rstrip() + "\n", encoding="utf-8")
-    with memory_path.open("a", encoding="utf-8") as handle:
-        handle.write(memory_entry(data, stage).rstrip() + "\n")
+    entry = memory_entry(data, stage).rstrip() + "\n"
+    existing_memory = memory_path.read_text(encoding="utf-8")
+    if entry not in existing_memory:
+        with memory_path.open("a", encoding="utf-8") as handle:
+            handle.write(entry)
 
 
 def validate_outputs(output_dir: Path) -> list[str]:
@@ -365,7 +377,25 @@ def validate_outputs(output_dir: Path) -> list[str]:
     if "## 3시간 MVP" not in plan:
         issues.append("PLAN.md에 ## 3시간 MVP 섹션이 없습니다")
     workflow = (output_dir / "WORKFLOW_ANALYSIS.md").read_text(encoding="utf-8") if (output_dir / "WORKFLOW_ANALYSIS.md").exists() else ""
-    for field in ["사례 ID", "에이전트 입력 조건", "실패 시 인계 방식", "재사용 방법"]:
+    for field in [
+        "사례 ID",
+        "데이터 특성",
+        "정형/비정형 여부",
+        "데이터 수",
+        "개인정보 포함 여부",
+        "MCP/CLI 연결 여부",
+        "입력 데이터 출처",
+        "산출물 형식",
+        "반복 빈도",
+        "기존 대비 소요 시간 변화",
+        "주요 검수 포인트",
+        "권한/접근 이슈",
+        "재사용 가능성",
+        "실패 시 사람이 이어받는 방식",
+        "결과물의 공유 가능 범위",
+        "에이전트 입력 조건",
+        "재사용 방법",
+    ]:
         if field not in workflow:
             issues.append(f"WORKFLOW_ANALYSIS.md에 {field} 필드가 없습니다")
     case = (output_dir / "CASE_STUDY.md").read_text(encoding="utf-8") if (output_dir / "CASE_STUDY.md").exists() else ""

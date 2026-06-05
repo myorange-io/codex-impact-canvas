@@ -50,7 +50,10 @@
     "integration_level": "수동 업로드",
     "human_review": "최종 검토",
     "reuse_level": "그대로 재사용 가능",
-    "output_format": "md"
+    "output_format": "md",
+    "data_characteristics": "주민 제보 텍스트와 사진 설명이 섞인 반정형 데이터",
+    "privacy_included": "공개 데이터 중심. 연락처와 상세 주소가 있으면 제거 필요",
+    "mcp_cli_connection": "MCP/CLI 연결 없음. 제보 텍스트 수동 업로드"
   },
   "existing_workflow": {
     "workflow_trigger": "주민 제보 접수",
@@ -59,7 +62,9 @@
     "input_sources": "카카오톡과 구글폼",
     "current_steps": "활동가가 제보를 읽고 분류한 뒤 답변을 직접 작성한다.",
     "current_outputs": "스프레드시트 분류표와 답변 메시지",
-    "current_pain_points": "채널이 흩어져 누락이 생기고 답변 톤이 달라진다."
+    "current_pain_points": "채널이 흩어져 누락이 생기고 답변 톤이 달라진다.",
+    "data_count": "데모 1건, 실제 업무 주 10-25건",
+    "repeat_frequency": "수시 접수, 비나 행사 이후 증가"
   },
   "automation_target": {
     "selected_task": "제보 유형 분류와 답변 초안 작성",
@@ -77,7 +82,8 @@
     "review_points": "주민에게 답변하기 전 활동가 검토",
     "handoff_protocol": "담당 후보가 불확실하면 기존 담당자 문의 방식으로 전환한다.",
     "error_types": "담당 기관 오분류, 사유지/공공영역 혼동",
-    "evaluation_samples": "익명화 제보 5건과 기대 유형"
+    "evaluation_samples": "익명화 제보 5건과 기대 유형",
+    "key_review_points": "담당 후보가 맞는지, 사유지/공공영역 판단이 안전한지, 주민 답변 톤이 적절한지 확인"
   },
   "data_and_access": {
     "privacy_action": "연락처와 상세 주소를 제거한다.",

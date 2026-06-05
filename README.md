@@ -208,16 +208,26 @@ AI 에이전트 워크플로 라이브러리용 구조화 분석입니다.
 
 - 사례 ID
 - 분야, 업무 유형, 에이전트 역할
-- 데이터 형태와 개인정보 수준
+- 데이터 특성
+- 정형/비정형 여부
+- 데이터 수
+- 개인정보 포함 여부
+- MCP/CLI 연결 여부
+- 입력 데이터 출처
+- 산출물 형식
+- 반복 빈도
 - 기존 업무 흐름
 - 자동화 대상으로 선정한 업무
 - 에이전트 입력 조건과 산출물 조건
 - AI가 판단해도 되는 것과 사람이 판단해야 하는 것
-- 사람 검토 지점
-- 실패 시 인계 방식
+- 기존 대비 소요 시간 변화
+- 주요 검수 포인트
+- 권한/접근 이슈
+- 재사용 가능성
+- 실패 시 사람이 이어받는 방식
 - 예상 오류 유형
 - 평가 샘플
-- 공유 가능 범위
+- 결과물의 공유 가능 범위
 - 재사용 방법
 
 ### CASE_STUDY.md
@@ -309,6 +319,31 @@ python3 scripts/write_workshop_outputs.py --validate-only --output-dir /tmp/code
     "demo_input": "데모 입력",
     "demo_output": "데모 산출물",
     "success_criterion": "성공 기준"
+  },
+  "library_metadata": {
+    "data_characteristics": "데이터 특성",
+    "data_type": "정형/반정형/비정형/혼합",
+    "privacy_included": "개인정보 포함 여부",
+    "mcp_cli_connection": "MCP/CLI 연결 여부",
+    "output_format": "산출물 형식",
+    "reuse_level": "재사용 가능성"
+  },
+  "existing_workflow": {
+    "data_count": "데이터 수",
+    "repeat_frequency": "반복 빈도",
+    "input_sources": "입력 데이터 출처",
+    "baseline_time": "기존 소요 시간"
+  },
+  "human_in_the_loop": {
+    "key_review_points": "주요 검수 포인트",
+    "handoff_protocol": "실패 시 사람이 이어받는 방식"
+  },
+  "data_and_access": {
+    "permission_issues": "권한/접근 이슈",
+    "shareability": "결과물의 공유 가능 범위"
+  },
+  "impact_and_reuse": {
+    "expected_time_change": "기존 대비 소요 시간 변화"
   }
 }
 ```
