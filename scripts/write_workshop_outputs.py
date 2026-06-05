@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""JSON에서 일관된 Codex Impact Workshop Markdown 산출물을 생성합니다."""
+"""JSON에서 일관된 Codex Impact Workshop 마크다운 산출물을 생성합니다."""
 
 from __future__ import annotations
 
@@ -235,7 +235,7 @@ def memory_entry(data: dict[str, Any], stage: str) -> str:
     today = dt.date.today().isoformat()
     return f"""
 ### {today} {stage}
-- **정한 것 / 한 것**: {pick(data, "memory_entry.did", "필수 Markdown 산출물 구조와 3시간 MVP 범위를 정리했다.")}
+- **정한 것 / 한 것**: {pick(data, "memory_entry.did", "필수 마크다운 산출물 구조와 3시간 MVP 범위를 정리했다.")}
 - **왜**: {pick(data, "memory_entry.why", "팀별 결과물을 같은 구조로 남겨 이후 사례집과 워크플로 라이브러리로 재사용하기 위해서다.")}
 - **어떻게**: {pick(data, "memory_entry.how", "반응형 질문 답변을 표준 필드로 정규화해 PLAN.md, WORKFLOW_ANALYSIS.md, CASE_STUDY.md, MEMORY.md에 기록했다.")}
 - **막힌 점 / 바꾼 점**: {pick(data, "memory_entry.blocked", "없음")}
@@ -373,7 +373,7 @@ def validate_outputs(output_dir: Path) -> list[str]:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input", type=Path, help="정규화한 워크숍 답변 JSON 파일")
-    parser.add_argument("--output-dir", type=Path, default=Path("."), help="Markdown 산출물을 쓸 디렉터리")
+    parser.add_argument("--output-dir", type=Path, default=Path("."), help="마크다운 산출물을 쓸 디렉터리")
     parser.add_argument("--demo", action="store_true", help="내장 샘플 데이터로 산출물을 생성합니다")
     parser.add_argument("--stage", default="문제 정의", help="MEMORY.md에 추가할 단계 이름")
     parser.add_argument("--validate-only", action="store_true", help="기존 산출물 검증만 실행합니다")
