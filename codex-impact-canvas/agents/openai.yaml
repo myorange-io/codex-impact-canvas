@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codex Impact Canvas"
+  short_description: "Guide teams to a 3-hour AI agent MVP"
+  default_prompt: "Use $codex-impact-canvas to guide our hackathon team and write the required Markdown outputs."
