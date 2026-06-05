@@ -1,41 +1,41 @@
-# Output Consistency
+# 산출물 일관성
 
-Use this reference before writing or updating workshop Markdown outputs. Consistency matters because the files may later become an AI Agent social-impact casebook or workflow library.
+워크숍 Markdown 산출물을 새로 만들거나 수정하기 전에 이 문서를 확인합니다. 파일들이 나중에 "AI 에이전트를 활용한 사회문제 해결 사례집" 또는 "사회혁신가를 위한 AI 에이전트 워크플로 라이브러리"로 합쳐질 수 있으므로 일관성이 중요합니다.
 
-## Required Files
+## 필수 파일
 
-Always create or maintain these files:
+아래 파일은 항상 만들거나 유지합니다.
 
 - `PLAN.md`
 - `MEMORY.md`
 - `WORKFLOW_ANALYSIS.md`
 - `CASE_STUDY.md`
 
-Do not rename required files. Do not make `CASE_STUDY.md` optional.
+필수 파일명은 바꾸지 않습니다. `CASE_STUDY.md`는 선택이 아니라 필수입니다.
 
-## Canonical Values
+## 표준 상태값
 
-Use these exact Korean placeholders:
+아래 값을 정확히 사용합니다.
 
-- Unknown: `미정`
-- Not applicable: `해당 없음`
-- Needs review: `검토 필요`
-- Public shareability: `공개 가능`, `익명화 후 공개 가능`, `내부 공유만`, `공개 불가`
-- Privacy level: `공개 데이터`, `내부자료`, `익명화 필요`, `개인정보 포함`, `민감정보 포함`
-- Data type: `정형`, `반정형`, `비정형`, `혼합`, `미정`
-- Integration level: `수동 업로드`, `CLI`, `MCP`, `API`, `브라우저`, `SaaS`, `미정`
-- Human review: `최종 검토`, `중간 검토`, `예외 검토`, `검토 없음`, `미정`
-- Reuse level: `그대로 재사용 가능`, `템플릿 재사용 가능`, `도메인 특화`, `일회성`, `미정`
+- 알 수 없음: `미정`
+- 해당 없음: `해당 없음`
+- 검토 필요: `검토 필요`
+- 공개 범위: `공개 가능`, `익명화 후 공개 가능`, `내부 공유만`, `공개 불가`
+- 개인정보 수준: `공개 데이터`, `내부자료`, `익명화 필요`, `개인정보 포함`, `민감정보 포함`
+- 데이터 형태: `정형`, `반정형`, `비정형`, `혼합`, `미정`
+- 연결 수준: `수동 업로드`, `CLI`, `MCP`, `API`, `브라우저`, `SaaS`, `미정`
+- 사람 검토: `최종 검토`, `중간 검토`, `예외 검토`, `검토 없음`, `미정`
+- 재사용 수준: `그대로 재사용 가능`, `템플릿 재사용 가능`, `도메인 특화`, `일회성`, `미정`
 
-## Output Order
+## 산출물 순서
 
-Within each file, keep section order stable. If information is missing, keep the heading and write `미정`.
+각 파일의 섹션 순서는 고정합니다. 정보가 없으면 제목을 유지하고 `미정`이라고 씁니다.
 
-Use compact bullet lists and tables. Avoid long narrative paragraphs except in `CASE_STUDY.md` sections meant for public explanation.
+짧은 bullet list와 표를 우선 사용합니다. 단, `CASE_STUDY.md`에서 공개 설명이 필요한 섹션은 자연스러운 문단을 허용합니다.
 
-## Front Matter
+## 프런트 매터
 
-Add this YAML front matter to `PLAN.md`, `WORKFLOW_ANALYSIS.md`, and `CASE_STUDY.md`:
+`PLAN.md`, `WORKFLOW_ANALYSIS.md`, `CASE_STUDY.md`에는 아래 YAML 프런트 매터를 넣습니다.
 
 ```yaml
 ---
@@ -47,37 +47,37 @@ version: "1"
 ---
 ```
 
-Use the same `team_name`, `project_name`, `created_date`, and `event` across all three files.
+세 파일에서 `team_name`, `project_name`, `created_date`, `event` 값은 동일해야 합니다.
 
-## Stable IDs
+## 안정적인 사례 ID
 
-For library use, add a `case_id` in `WORKFLOW_ANALYSIS.md` and `CASE_STUDY.md`.
+라이브러리화를 위해 `WORKFLOW_ANALYSIS.md`와 `CASE_STUDY.md`에 같은 `case_id`를 넣습니다.
 
-Format:
+형식:
 
 ```text
 impact-agent-[YYYYMMDD]-[short-slug]
 ```
 
-Use lowercase ASCII for the slug, replacing spaces with hyphens.
+slug는 소문자 ASCII를 사용하고, 공백은 하이픈으로 바꿉니다.
 
-## Quality Checks
+## 품질 점검
 
-Before finishing, verify:
+마무리 전 아래를 확인합니다.
 
-- All four required files exist.
-- `PLAN.md` contains exactly one selected 3-hour MVP feature.
-- `WORKFLOW_ANALYSIS.md` includes input, output, agent role, human review, privacy, failure handoff, and reuse fields.
-- `CASE_STUDY.md` does not include raw personal data, secrets, internal document contents, access instructions, tokens, or unredacted source data.
-- Unknown fields use `미정`; headings are not silently removed.
-- Extra ideas are recorded as out-of-scope or next iteration, not mixed into the MVP.
+- 네 개의 필수 파일이 모두 존재합니다.
+- `PLAN.md`에는 선택된 3시간 MVP 기능이 정확히 1개만 있습니다.
+- `WORKFLOW_ANALYSIS.md`에는 입력, 산출물, 에이전트 역할, 사람 검토, 개인정보 수준, 실패 시 인계, 재사용 필드가 있습니다.
+- `CASE_STUDY.md`에는 원본 개인정보, 비밀값, 내부 문서 원문, 접근 방법, 토큰, 익명화되지 않은 원본 데이터가 없습니다.
+- 알 수 없는 필드는 `미정`을 사용하고, 필수 제목을 조용히 삭제하지 않습니다.
+- 추가 아이디어는 MVP에 섞지 않고 제외 범위나 다음 단계에 기록합니다.
 
-## Preferred Automation
+## 권장 자동화
 
-When possible, normalize answers into JSON and run:
+가능하면 답변을 JSON으로 정규화한 뒤 아래 명령을 실행합니다.
 
 ```bash
 python3 scripts/write_workshop_outputs.py --input workshop.json --output-dir .
 ```
 
-The script preserves stable headings and values across all teams.
+이 스크립트는 모든 팀의 산출물 제목과 값을 같은 구조로 유지합니다.

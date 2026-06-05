@@ -1,30 +1,30 @@
-# MEMORY.md Logging
+# MEMORY.md 기록 규칙
 
-`MEMORY.md` records how the team made the MVP. It is process evidence for later review and teaching.
+`MEMORY.md`는 팀이 MVP를 어떤 과정으로 만들었는지 남기는 기록입니다. 나중에 복기하거나 수업 자료, 사회혁신 AI 에이전트 워크플로 사례로 정리할 때 씁니다.
 
-## Principles
+## 원칙
 
-- Append only. Do not rewrite earlier entries except to update a live URL or correct clearly wrong metadata.
-- Record process, not only results.
-- Be concrete about decisions, rejected options, blocked points, error messages, commands, and fixes.
-- Write in Korean in human language.
-- Use the date from `date +%Y-%m-%d`.
-- Do not include secrets, tokens, personal data, internal raw data, or permission details.
+- append만 합니다. 라이브 URL 업데이트나 명백한 메타데이터 오류 수정 외에는 이전 항목을 덮어쓰지 않습니다.
+- 결과만이 아니라 과정을 기록합니다.
+- 결정, 버린 선택지, 막힌 지점, 오류 메시지, 사용한 명령, 해결 방법을 구체적으로 씁니다.
+- 한국어로, 사람이 읽고 이해할 수 있는 문장으로 씁니다.
+- 날짜는 `date +%Y-%m-%d` 결과를 사용합니다.
+- 비밀값, 토큰, 개인정보, 내부 원본 데이터, 접근권한 세부 정보는 넣지 않습니다.
 
-## First File Template
+## 처음 만들 때 템플릿
 
-If `MEMORY.md` does not exist, create:
+`MEMORY.md`가 없으면 아래 형식으로 만듭니다.
 
 ```markdown
 # 만들기 기록 - [프로젝트 이름]
 
 > 이 파일은 이 MVP를 어떤 과정으로 만들었는지 남기는 기록입니다.
-> 나중에 복기하거나 사회혁신 AI Agent Workflow 사례로 정리할 때 씁니다.
+> 나중에 복기하거나 사회혁신 AI 에이전트 워크플로 사례로 정리할 때 씁니다.
 
 ## 한눈에 보기
 - 무엇을: [PLAN.md 한 줄 요약]
 - 누구를 위해: [주 사용자/수혜자]
-- 핵심 흐름: [입력 -> AI Agent -> 사람 검토 -> 산출물]
+- 핵심 흐름: [입력 -> AI 에이전트 -> 사람 검토 -> 산출물]
 - 스택/도구: [Codex/ChatGPT/API/MCP/CLI/외부 서비스]
 - 시작: [YYYY-MM-DD]
 
@@ -33,9 +33,9 @@ If `MEMORY.md` does not exist, create:
 ## 기록
 ```
 
-## Entry Template
+## 항목 템플릿
 
-Append entries in this shape:
+아래 형식으로 새 항목을 파일 끝에 붙입니다.
 
 ```markdown
 ### [YYYY-MM-DD] [단계 이름]
@@ -46,7 +46,7 @@ Append entries in this shape:
 - **배운 것 / 다음**: [다음에 이어서 할 것]
 ```
 
-Recommended stage names:
+권장 단계 이름:
 
 - `문제 정의`
 - `MVP 범위 합의`

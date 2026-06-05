@@ -1,115 +1,115 @@
-# Canvas Flow
+# 캔버스 진행 흐름
 
-Use this flow in Korean. Ask one question at a time, then summarize the answer and ask a follow-up if it is not yet concrete enough.
+이 흐름은 한국어로 진행합니다. 한 번에 하나의 질문만 묻고, 답변을 받은 뒤 요약한 다음 충분히 구체적이지 않으면 후속 질문을 합니다.
 
-## Contents
+## 목차
 
-- Team Start
-- Anchor Questions
-- Additional Questions
-- Convergence Rule
+- 팀 시작
+- 앵커 질문
+- 추가 질문
+- 수렴 규칙
 
-## Team Start
+## 팀 시작
 
-Collect:
+아래 정보를 받습니다.
 
-- Social innovator name
-- Developer name
-- Team or project name, if already known
+- 사회혁신가 이름
+- 개발자 이름
+- 팀 이름 또는 프로젝트 이름. 이미 정해져 있을 때만 받습니다.
 
-If the project name is missing, create a short working title from the problem and mark it as provisional.
+프로젝트 이름이 없다면 문제 설명에서 짧은 임시 제목을 만들고, 임시 제목이라고 표시합니다.
 
-## Anchor Questions
+## 앵커 질문
 
-### 1. Actual Work Problem
+### 1. 실제 업무 문제
 
-Ask: "오늘 해결하려는 실제 업무 문제는 무엇인가요?"
+질문: "오늘 해결하려는 실제 업무 문제는 무엇인가요?"
 
-Completion criterion: The answer names who is blocked, when the problem happens, what is delayed or repeated, and why it matters.
+완료 기준: 누가 막히는지, 언제 문제가 생기는지, 무엇이 지연되거나 반복되는지, 왜 중요한지가 드러납니다.
 
-Follow-ups:
+후속 질문:
 
 - "그 문제가 실제로 발생하는 최근 상황 하나를 예로 들어주실 수 있나요?"
 - "이 문제가 반복되는 업무인가요, 특정 행사나 사업 때 생기는 업무인가요?"
 - "지금 가장 시간이 오래 걸리거나 자주 누락되는 부분은 어디인가요?"
 
-### 2. People Affected
+### 2. 어려움을 겪는 사람
 
-Ask: "누가 이 문제로 가장 큰 어려움을 겪고, 어떤 순간에 막히나요?"
+질문: "누가 이 문제로 가장 큰 어려움을 겪고, 어떤 순간에 막히나요?"
 
-Completion criterion: The direct tool user and final beneficiary are distinguishable.
+완료 기준: 도구를 직접 쓰는 사람과 최종적으로 도움을 받는 사람이 구분됩니다.
 
-Follow-ups:
+후속 질문:
 
 - "이 도구를 직접 쓰는 사람은 누구이고, 도움을 받는 사람은 누구인가요?"
 - "업무 담당자, 검토자, 최종 수혜자가 각각 다르다면 누가 어떤 역할인가요?"
 - "발표장에서 이 결과물을 보고 가장 먼저 판단할 사람은 누구인가요?"
 
-### 3. Current Workflow
+### 3. 현재 업무 흐름
 
-Ask: "지금은 어떤 자료를 받아, 어떤 순서로 처리하고, 어떤 결과물을 만드나요?"
+질문: "지금은 어떤 자료를 받아, 어떤 순서로 처리하고, 어떤 결과물을 만드나요?"
 
-Completion criterion: The answer contains input -> processing -> judgment -> output.
+완료 기준: 입력 -> 처리 -> 판단 -> 산출물 흐름이 확인됩니다.
 
-Follow-ups:
+후속 질문:
 
 - "처음 받는 자료는 무엇이고, 마지막에 만들어야 하는 결과물은 무엇인가요?"
 - "중간에 사람이 읽고 판단하는 기준은 무엇인가요?"
 - "지금 이 업무가 엑셀, 구글폼, 이메일, 카카오톡, 내부 시스템 중 어디에서 시작되나요?"
 
-### 4. Expected Change
+### 4. 기대 변화
 
-Ask: "이 문제가 해결되면 업무나 대상자에게 어떤 변화가 생기나요?"
+질문: "이 문제가 해결되면 업무나 대상자에게 어떤 변화가 생기나요?"
 
-Completion criterion: The change can be observed as time saved, fewer errors, fewer omissions, faster response, better consistency, or better decision support.
+완료 기준: 시간 절감, 오류 감소, 누락 방지, 응답 속도 개선, 일관성 개선, 의사결정 보조처럼 관찰 가능한 변화가 있습니다.
 
-Follow-ups:
+후속 질문:
 
 - "이게 잘 되면 내일부터 어떤 일이 덜 힘들어지나요?"
 - "누가 어떤 결과를 더 빨리 보거나 더 정확하게 받을 수 있나요?"
 - "결과가 좋아졌다는 걸 업무 현장에서 어떻게 느낄 수 있나요?"
 
-### 5. One 3-Hour MVP Feature
+### 5. 3시간 MVP 기능 1개
 
-Ask: "3시간 안에 보여줄 수 있는 가장 핵심적인 기능 1가지는 무엇인가요?"
+질문: "3시간 안에 보여줄 수 있는 가장 핵심적인 기능 1가지는 무엇인가요?"
 
-Completion criterion: One input produces one visible output that can be demoed in 3 hours.
+완료 기준: 하나의 입력이 하나의 눈에 보이는 산출물로 이어지며, 3시간 안에 시연할 수 있습니다.
 
-Follow-ups:
+후속 질문:
 
 - "지금 말한 기능 중 발표 때 반드시 보여줄 1개만 고르면 무엇인가요?"
 - "샘플 데이터 1개로 바로 시연할 수 있는 가장 작은 흐름은 무엇인가요?"
 - "이 기능을 만들기 위해 오늘 하지 않을 것은 무엇인가요?"
 
-### 6. Success Criterion
+### 6. 성공 판단 기준
 
-Ask: "그 기능이 성공했다는 걸 무엇을 보고 판단할 수 있나요?"
+질문: "그 기능이 성공했다는 걸 무엇을 보고 판단할 수 있나요?"
 
-Completion criterion: The answer can be checked during the demo.
+완료 기준: 발표장에서 확인 가능한 기준이 있습니다.
 
-Follow-ups:
+후속 질문:
 
 - "샘플 데이터 1개를 넣었을 때 어떤 결과가 나오면 성공이라고 볼 수 있나요?"
 - "정확도, 시간 절감, 누락 방지, 사람이 검토하기 쉬움 중 무엇이 가장 중요한 기준인가요?"
 - "발표장에서 실패라고 판단할 수 있는 신호는 무엇인가요?"
 
-## Additional Questions
+## 추가 질문
 
-Ask these only when needed to make the outputs usable.
+산출물을 쓸 수 있게 만드는 데 필요할 때만 아래 질문을 짧게 묻습니다.
 
-- Data: "행사 당일 사용할 샘플 데이터나 문서가 있나요? 민감정보는 제거됐나요?"
-- Tools: "이 업무가 지금 어떤 도구에서 시작되고, 결과는 어디에 남아야 하나요?"
-- Review: "AI가 만든 결과를 사람이 반드시 확인해야 하는 지점은 어디인가요?"
-- Failure: "AI 결과가 틀리거나 비어 있으면 사람이 어떻게 이어받으면 되나요?"
-- Sharing: "이 사례를 공개할 때 어떤 정보는 반드시 숨겨야 하나요?"
-- Reuse: "다른 조직도 비슷하게 쓸 수 있으려면 무엇을 바꿔 끼우면 되나요?"
+- 데이터: "행사 당일 사용할 샘플 데이터나 문서가 있나요? 민감정보는 제거됐나요?"
+- 도구: "이 업무가 지금 어떤 도구에서 시작되고, 결과는 어디에 남아야 하나요?"
+- 검수: "AI가 만든 결과를 사람이 반드시 확인해야 하는 지점은 어디인가요?"
+- 실패 대응: "AI 결과가 틀리거나 비어 있으면 사람이 어떻게 이어받으면 되나요?"
+- 공유 범위: "이 사례를 공개할 때 어떤 정보는 반드시 숨겨야 하나요?"
+- 재사용성: "다른 조직도 비슷하게 쓸 수 있으려면 무엇을 바꿔 끼우면 되나요?"
 
-## Convergence Rule
+## 수렴 규칙
 
-If the team lists multiple ideas, force a choice:
+팀이 여러 아이디어를 나열하면 하나를 고르게 합니다.
 
 "3시간 MVP에서는 하나만 남기겠습니다. 발표 때 보여줄 핵심 기능은 `[기능]`으로 두고, `[나머지]`는 다음 단계로 기록해도 될까요?"
 
-If the team keeps the answer abstract, ask for a sample:
+답변이 계속 추상적이면 샘플로 바꾸게 합니다.
 
 "그 설명을 샘플 입력 1개와 기대 산출물 1개로 바꿔 말하면 어떻게 되나요?"

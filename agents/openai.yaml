@@ -1,4 +1,4 @@
 interface:
   display_name: "Codex Impact Canvas"
-  short_description: "Guide teams to a 3-hour AI agent MVP"
-  default_prompt: "Use $codex-impact-canvas to guide our hackathon team and write the required Markdown outputs."
+  short_description: "3시간 AI 에이전트 MVP 합의 도구"
+  default_prompt: "$codex-impact-canvas를 사용해 우리 해커톤 팀의 문제 정의를 돕고 필수 Markdown 산출물을 작성해줘."
