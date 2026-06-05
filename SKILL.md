@@ -1,6 +1,6 @@
 ---
 name: codex-impact-canvas
-description: 사회문제 해결 해커톤 팀이 문제 정의, 3시간 MVP 범위 합의, 필수 마크다운 산출물 작성을 반응형 질문으로 진행하도록 돕는 스킬입니다. 사회문제를 정의하고, 하나의 AI 에이전트 MVP 기능으로 수렴하고, PLAN.md와 MEMORY.md를 작성하고, WORKFLOW_ANALYSIS.md로 AI 에이전트 워크플로를 분석하고, 공개 가능한 CASE_STUDY.md를 만들 때 사용합니다.
+description: 사회문제 해결 해커톤 팀이 문제 정의, 3시간 MVP 범위 합의, 필수 마크다운 산출물 작성을 반응형 질문으로 진행하도록 돕는 스킬입니다. 사용자가 /codex-impact-canvas라고 입력하거나, 사회문제를 정의하고, 하나의 AI 에이전트 MVP 기능으로 수렴하고, PLAN.md와 MEMORY.md를 작성하고, WORKFLOW_ANALYSIS.md로 AI 에이전트 워크플로를 분석하고, 공개 가능한 CASE_STUDY.md를 만들 때 사용합니다.
 ---
 
 # Codex Impact Canvas
@@ -14,14 +14,15 @@ description: 사회문제 해결 해커톤 팀이 문제 정의, 3시간 MVP 범
 
 ## 진행 흐름
 
-1. 먼저 팀 시작 정보를 받습니다: 사회혁신가 이름, 개발자 이름.
-2. `references/canvas-flow.md`를 읽고 한국어 반응형 질문 흐름을 진행합니다.
-3. 현재 답변이 `PLAN.md`에 기록 가능한 수준이 되기 전에는 다음 앵커 질문으로 넘어가지 않습니다.
-4. 범위는 3시간 안에 보여줄 수 있는 기능 1개로 좁힙니다. 추가 아이디어는 제외 범위나 다음 단계로 옮깁니다.
-5. 산출물을 쓰기 전에 `references/output-consistency.md`를 읽고 제목, 필드명, 상태값, 미정 표기를 일관되게 유지합니다.
-6. 네 개의 필수 마크다운 산출물을 모두 생성합니다. 답변을 JSON으로 정규화했다면 `scripts/write_workshop_outputs.py`를 우선 사용합니다.
-7. 구현이나 큰 변경이 끝날 때마다 `MEMORY.md` 파일 끝에 새 항목을 추가합니다. 이전 항목은 덮어쓰지 않습니다. 형식은 `references/memory-log.md`를 따릅니다.
-8. 완료 시 `references/workflow-analysis.md`를 읽고 `WORKFLOW_ANALYSIS.md`와 `CASE_STUDY.md`가 재사용 가능한 워크플로 라이브러리 자료로 충분한지 확인합니다.
+1. 사용자가 `/codex-impact-canvas`라고만 입력해도 이 스킬을 시작합니다.
+2. 먼저 팀 시작 정보를 받습니다: 사회혁신가 이름, 개발자 이름.
+3. `references/canvas-flow.md`를 읽고 한국어 반응형 질문 흐름을 진행합니다.
+4. 현재 답변이 `PLAN.md`에 기록 가능한 수준이 되기 전에는 다음 앵커 질문으로 넘어가지 않습니다.
+5. 범위는 3시간 안에 보여줄 수 있는 기능 1개로 좁힙니다. 추가 아이디어는 제외 범위나 다음 단계로 옮깁니다.
+6. 산출물을 쓰기 전에 `references/output-consistency.md`를 읽고 제목, 필드명, 상태값, 미정 표기를 일관되게 유지합니다.
+7. 네 개의 필수 마크다운 산출물을 모두 생성합니다. 답변을 JSON으로 정규화했다면 `scripts/write_workshop_outputs.py`를 우선 사용합니다.
+8. 구현이나 큰 변경이 끝날 때마다 `MEMORY.md` 파일 끝에 새 항목을 추가합니다. 이전 항목은 덮어쓰지 않습니다. 형식은 `references/memory-log.md`를 따릅니다.
+9. 완료 시 `references/workflow-analysis.md`를 읽고 `WORKFLOW_ANALYSIS.md`와 `CASE_STUDY.md`가 재사용 가능한 워크플로 라이브러리 자료로 충분한지 확인합니다.
 
 ## 규칙
 
