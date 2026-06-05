@@ -329,6 +329,12 @@ python3 scripts/write_workshop_outputs.py --validate-only --output-dir /tmp/code
 │   ├── output-consistency.md
 │   ├── plan-template.md
 │   └── workflow-analysis.md
+├── sample/
+│   ├── case1-food-aid-review/
+│   ├── case2-mentoring-note-summary/
+│   └── case3-neighborhood-repair-routing/
 └── scripts/
     └── write_workshop_outputs.py
 ```
+
+`sample/`에는 가상 사례 3개의 `input.json`, `PLAN.md`, `MEMORY.md`, `WORKFLOW_ANALYSIS.md`, `CASE_STUDY.md`가 들어 있습니다. 복지, 교육, 지역 사례를 각각 다르게 구성해 개인정보 수준, 공유 가능 범위, 재사용 수준이 어떻게 기록되는지 확인할 수 있습니다.

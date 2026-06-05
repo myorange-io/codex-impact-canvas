@@ -1,0 +1,98 @@
+{
+  "team": {
+    "name": "동네수리팀",
+    "social_innovator": "정지역",
+    "developer": "한개발"
+  },
+  "project": {
+    "name": "생활 불편 제보 분류와 답변 초안",
+    "slug": "neighborhood-repair-router",
+    "created_date": "2026-06-05"
+  },
+  "problem": {
+    "actual_work_problem": "주민 제보가 자유형식으로 들어와 담당 분야 분류와 답변 초안 작성이 늦어진다.",
+    "people_affected": "마을 활동가와 생활 불편을 제보한 주민",
+    "blocked_moment": "비가 온 뒤 시설 파손 제보가 여러 채널로 동시에 들어올 때"
+  },
+  "current_workflow": {
+    "inputs": "카카오톡/폼으로 들어온 제보 텍스트와 사진 설명",
+    "steps": "제보 확인 -> 유형 분류 -> 담당자 추정 -> 답변 작성 -> 공유",
+    "judgment": "안전 위험, 청소, 시설 파손, 사유지 여부, 담당 기관",
+    "outputs": "분류표와 주민 답변 초안",
+    "tools": "카카오톡, 구글폼, 스프레드시트"
+  },
+  "expected_change": {
+    "summary": "제보 분류와 1차 답변 초안을 빠르게 만들어 대응 누락을 줄인다.",
+    "observable_improvement": "샘플 제보 1건에서 유형, 담당 후보, 답변 초안이 나온다."
+  },
+  "mvp": {
+    "single_feature": "주민 제보 텍스트를 넣으면 유형과 담당 후보, 답변 초안을 생성한다.",
+    "demo_input": "익명화한 제보 텍스트 1건",
+    "demo_output": "제보 유형, 담당 후보, 주민 답변 초안",
+    "success_criterion": "샘플 제보가 올바른 유형으로 분류되고 활동가가 수정 가능한 답변 초안이 나온다."
+  },
+  "scope": {
+    "not_today": "사진 판독, 담당 기관 자동 접수",
+    "next_ideas": "사진 업로드와 지도 위치 연결"
+  },
+  "build_plan": {
+    "0_30": "제보 유형과 답변 톤을 정한다.",
+    "30_90": "분류/답변 프롬프트를 만든다.",
+    "90_150": "텍스트 입력 데모를 만든다.",
+    "150_180": "샘플 제보 5건으로 분류 정확성을 확인한다."
+  },
+  "library_metadata": {
+    "sector": "지역",
+    "workflow_type": "분류",
+    "agent_role": "라우팅",
+    "data_type": "반정형",
+    "privacy_level": "공개 데이터",
+    "integration_level": "수동 업로드",
+    "human_review": "최종 검토",
+    "reuse_level": "그대로 재사용 가능",
+    "output_format": "md"
+  },
+  "existing_workflow": {
+    "workflow_trigger": "주민 제보 접수",
+    "baseline_volume": "주 10-25건",
+    "baseline_time": "건당 3-7분",
+    "input_sources": "카카오톡과 구글폼",
+    "current_steps": "활동가가 제보를 읽고 분류한 뒤 답변을 직접 작성한다.",
+    "current_outputs": "스프레드시트 분류표와 답변 메시지",
+    "current_pain_points": "채널이 흩어져 누락이 생기고 답변 톤이 달라진다."
+  },
+  "automation_target": {
+    "selected_task": "제보 유형 분류와 답변 초안 작성",
+    "reason_for_selection": "텍스트 제보 1건만으로 3시간 데모가 가능하다.",
+    "excluded_tasks": "지도 연동과 기관 자동 접수"
+  },
+  "ai_agent_design": {
+    "agent_input_contract": "개인정보를 제거한 제보 텍스트",
+    "agent_output_contract": "유형, 담당 후보, 답변 초안",
+    "decision_boundary": "AI는 담당 후보를 제안하고 활동가가 최종 확인한다.",
+    "tools_used": "Codex, ChatGPT",
+    "changed_workflow": "제보 텍스트 입력 -> AI 분류/답변 초안 -> 활동가 검토 -> 주민 답변"
+  },
+  "human_in_the_loop": {
+    "review_points": "주민에게 답변하기 전 활동가 검토",
+    "handoff_protocol": "담당 후보가 불확실하면 기존 담당자 문의 방식으로 전환한다.",
+    "error_types": "담당 기관 오분류, 사유지/공공영역 혼동",
+    "evaluation_samples": "익명화 제보 5건과 기대 유형"
+  },
+  "data_and_access": {
+    "privacy_action": "연락처와 상세 주소를 제거한다.",
+    "permission_issues": "해당 없음",
+    "shareability": "공개 가능"
+  },
+  "impact_and_reuse": {
+    "expected_time_change": "건당 3-7분에서 초안 생성 1분 이내",
+    "quality_change": "답변 형식과 분류 기준 일관성 향상",
+    "case_reuse_recipe": "지역별 담당 후보 목록과 답변 톤을 바꾼다.",
+    "maintenance_owner": "마을 활동가",
+    "next_iteration": "사진 설명과 위치 정보를 함께 받기"
+  },
+  "case_study": {
+    "title": "생활 불편 제보 분류 에이전트",
+    "lessons": "텍스트 분류와 답변 초안은 3시간 MVP에 적합하지만 실제 접수 자동화는 이후 단계로 두는 편이 안전하다."
+  }
+}
