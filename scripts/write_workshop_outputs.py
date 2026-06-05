@@ -116,6 +116,20 @@ def render_plan(data: dict[str, Any], meta: dict[str, str]) -> str:
 - 30-90분: {pick(data, "build_plan.30_90")}
 - 90-150분: {pick(data, "build_plan.90_150")}
 - 150-180분: {pick(data, "build_plan.150_180")}
+
+## 빠르게 끝났을 때 이어서 할 작업 후보
+- 후보 1 작업: {pick(data, "follow_up_candidates.candidate_1.task")}
+- 후보 1 시작 조건: {pick(data, "follow_up_candidates.candidate_1.start_condition")}
+- 후보 1 구현 내용: {pick(data, "follow_up_candidates.candidate_1.implementation")}
+- 후보 1 데모 산출물: {pick(data, "follow_up_candidates.candidate_1.demo_output")}
+- 후보 1 예상 추가 시간: {pick(data, "follow_up_candidates.candidate_1.timebox")}
+- 후보 1 검수 기준: {pick(data, "follow_up_candidates.candidate_1.success_check")}
+- 후보 2 작업: {pick(data, "follow_up_candidates.candidate_2.task")}
+- 후보 2 시작 조건: {pick(data, "follow_up_candidates.candidate_2.start_condition")}
+- 후보 2 구현 내용: {pick(data, "follow_up_candidates.candidate_2.implementation")}
+- 후보 2 데모 산출물: {pick(data, "follow_up_candidates.candidate_2.demo_output")}
+- 후보 2 예상 추가 시간: {pick(data, "follow_up_candidates.candidate_2.timebox")}
+- 후보 2 검수 기준: {pick(data, "follow_up_candidates.candidate_2.success_check")}
 """
 
 
@@ -284,6 +298,24 @@ def sample_data() -> dict[str, Any]:
             "90_150": "간단한 UI 또는 CLI 데모를 만든다.",
             "150_180": "샘플로 테스트하고 발표 흐름을 정리한다.",
         },
+        "follow_up_candidates": {
+            "candidate_1": {
+                "task": "샘플 여러 건을 한 번에 처리하는 일괄 입력을 추가한다.",
+                "start_condition": "핵심 기능 1개가 샘플 1건에서 통과하고 40분 이상 남았을 때",
+                "implementation": "텍스트 구분자로 여러 입력을 나누고 같은 출력 형식으로 표를 만든다.",
+                "demo_output": "샘플 3건의 누락 항목 요약표",
+                "timebox": "40분",
+                "success_check": "각 샘플마다 누락 항목과 안내 초안이 빠짐없이 나온다.",
+            },
+            "candidate_2": {
+                "task": "담당자 검토 체크리스트를 산출물에 추가한다.",
+                "start_condition": "핵심 기능 결과 형식이 안정되고 25분 이상 남았을 때",
+                "implementation": "AI 산출물 끝에 사람이 확인할 체크박스와 수정 메모 칸을 붙인다.",
+                "demo_output": "검토 체크리스트가 포함된 안내 초안",
+                "timebox": "25분",
+                "success_check": "담당자가 발송 전 확인해야 할 항목을 바로 볼 수 있다.",
+            },
+        },
         "library_metadata": {
             "sector": "운영",
             "workflow_type": "신청서검토",
@@ -376,6 +408,23 @@ def validate_outputs(output_dir: Path) -> list[str]:
     plan = (output_dir / "PLAN.md").read_text(encoding="utf-8") if (output_dir / "PLAN.md").exists() else ""
     if "## 3시간 MVP" not in plan:
         issues.append("PLAN.md에 ## 3시간 MVP 섹션이 없습니다")
+    for field in [
+        "## 빠르게 끝났을 때 이어서 할 작업 후보",
+        "후보 1 작업",
+        "후보 1 시작 조건",
+        "후보 1 구현 내용",
+        "후보 1 데모 산출물",
+        "후보 1 예상 추가 시간",
+        "후보 1 검수 기준",
+        "후보 2 작업",
+        "후보 2 시작 조건",
+        "후보 2 구현 내용",
+        "후보 2 데모 산출물",
+        "후보 2 예상 추가 시간",
+        "후보 2 검수 기준",
+    ]:
+        if field not in plan:
+            issues.append(f"PLAN.md에 {field} 필드가 없습니다")
     workflow = (output_dir / "WORKFLOW_ANALYSIS.md").read_text(encoding="utf-8") if (output_dir / "WORKFLOW_ANALYSIS.md").exists() else ""
     for field in [
         "사례 ID",
