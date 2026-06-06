@@ -400,12 +400,71 @@ def write_outputs(data: dict[str, Any], output_dir: Path, stage: str) -> None:
             handle.write(entry)
 
 
+def read_output(output_dir: Path, name: str) -> str:
+    path = output_dir / name
+    return path.read_text(encoding="utf-8") if path.exists() else ""
+
+
+def extract_field(content: str, label: str) -> str:
+    match = re.search(rf"^- {re.escape(label)}:\s*(.*)$", content, re.MULTILINE)
+    return match.group(1).strip() if match else ""
+
+
+def is_quality_missing(value: str) -> bool:
+    normalized = value.strip()
+    return normalized in {"", UNKNOWN, NA, "검토 필요"}
+
+
+def looks_like_multiple_mvp(value: str) -> bool:
+    if is_quality_missing(value):
+        return False
+    numbered_markers = re.findall(r"(?:^|\s)(?:[0-9]+\.|제안\s*[0-9]+|첫째|둘째|셋째)", value)
+    if len(numbered_markers) >= 2:
+        return True
+    if value.count(",") >= 2 or value.count("、") >= 2:
+        return True
+    return bool(re.search(r"(동시에|그리고)\s+.*(하고|만들고|구축)", value))
+
+
+def validate_quality_warnings(output_dir: Path) -> list[str]:
+    warnings: list[str] = []
+    plan = read_output(output_dir, "PLAN.md")
+    workflow = read_output(output_dir, "WORKFLOW_ANALYSIS.md")
+    case = read_output(output_dir, "CASE_STUDY.md")
+
+    mvp_feature = extract_field(plan, "핵심 기능 1개")
+    if is_quality_missing(mvp_feature):
+        warnings.append("PLAN.md의 핵심 기능 1개가 아직 구체화되지 않았습니다")
+    elif looks_like_multiple_mvp(mvp_feature):
+        warnings.append("PLAN.md의 핵심 기능 1개가 여러 기능이나 시스템 범위를 포함할 수 있습니다")
+
+    for label in ["데모 입력", "데모 산출물", "성공 기준"]:
+        if is_quality_missing(extract_field(plan, label)):
+            warnings.append(f"PLAN.md의 {label}이 샘플 기준으로 구체화되지 않았습니다")
+
+    for label in ["주요 검수 포인트", "실패 시 사람이 이어받는 방식", "개인정보 처리", "결과물의 공유 가능 범위"]:
+        if is_quality_missing(extract_field(workflow, label)):
+            warnings.append(f"WORKFLOW_ANALYSIS.md의 {label} 필드가 비어 있거나 검토가 필요합니다")
+
+    sensitive_patterns = [
+        r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}",
+        r"\b\d{2,3}-\d{3,4}-\d{4}\b",
+        r"(주민등록번호|계좌번호|비밀번호|패스워드|토큰|api\s*key|secret|원본 데이터|내부 문서 원문|접근 방법)",
+    ]
+    for pattern in sensitive_patterns:
+        if re.search(pattern, case, re.IGNORECASE):
+            warnings.append("CASE_STUDY.md에 공개 제외가 필요한 개인정보/비밀/원문 표현이 있을 수 있습니다")
+            break
+
+    return warnings
+
+
 def validate_outputs(output_dir: Path) -> list[str]:
     issues: list[str] = []
     for name in ["PLAN.md", "MEMORY.md", "WORKFLOW_ANALYSIS.md", "CASE_STUDY.md"]:
         if not (output_dir / name).exists():
             issues.append(f"필수 파일이 없습니다: {name}")
-    plan = (output_dir / "PLAN.md").read_text(encoding="utf-8") if (output_dir / "PLAN.md").exists() else ""
+    plan = read_output(output_dir, "PLAN.md")
     if "## 3시간 MVP" not in plan:
         issues.append("PLAN.md에 ## 3시간 MVP 섹션이 없습니다")
     for field in [
@@ -425,7 +484,7 @@ def validate_outputs(output_dir: Path) -> list[str]:
     ]:
         if field not in plan:
             issues.append(f"PLAN.md에 {field} 필드가 없습니다")
-    workflow = (output_dir / "WORKFLOW_ANALYSIS.md").read_text(encoding="utf-8") if (output_dir / "WORKFLOW_ANALYSIS.md").exists() else ""
+    workflow = read_output(output_dir, "WORKFLOW_ANALYSIS.md")
     for field in [
         "사례 ID",
         "데이터 특성",
@@ -447,7 +506,7 @@ def validate_outputs(output_dir: Path) -> list[str]:
     ]:
         if field not in workflow:
             issues.append(f"WORKFLOW_ANALYSIS.md에 {field} 필드가 없습니다")
-    case = (output_dir / "CASE_STUDY.md").read_text(encoding="utf-8") if (output_dir / "CASE_STUDY.md").exists() else ""
+    case = read_output(output_dir, "CASE_STUDY.md")
     for heading in ["## 문제 요약", "## AI 에이전트 워크플로", "## 익명화와 공개 제외"]:
         if heading not in case:
             issues.append(f"CASE_STUDY.md에 {heading} 섹션이 없습니다")
@@ -465,10 +524,13 @@ def main() -> int:
 
     if args.validate_only:
         issues = validate_outputs(args.output_dir)
+        warnings = validate_quality_warnings(args.output_dir)
         if issues:
             for issue in issues:
                 print(f"[오류] {issue}")
             return 1
+        for warning in warnings:
+            print(f"[경고] {warning}")
         print("[완료] 필수 워크숍 산출물 구조가 일관됩니다")
         return 0
 
@@ -481,10 +543,13 @@ def main() -> int:
 
     write_outputs(data, args.output_dir, args.stage)
     issues = validate_outputs(args.output_dir)
+    warnings = validate_quality_warnings(args.output_dir)
     if issues:
         for issue in issues:
             print(f"[오류] {issue}")
         return 1
+    for warning in warnings:
+        print(f"[경고] {warning}")
     print(f"[완료] 워크숍 산출물을 생성했습니다: {args.output_dir}")
     return 0
 
