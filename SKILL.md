@@ -12,6 +12,16 @@ description: 사회문제 해결 해커톤 팀이 준비해 온 현장 문제와
 - `WORKFLOW_ANALYSIS.md`: AI 에이전트 워크플로 구조화 분석
 - `CASE_STUDY.md`: 공개 가능한 익명화 사례 요약
 
+## 커맨드처럼 사용하기
+
+아래 중 하나를 사용자가 입력하면 이 스킬을 시작합니다.
+
+- `/codex-impact-canvas`
+- `codex-impact-canvas 시작`
+- `임팩트 캔버스 시작`
+
+이것은 플러그인의 공식 slash command가 아니라, 스킬 트리거를 커맨드처럼 사용하는 방식입니다.
+
 ## 진행 흐름
 
 1. 사용자가 `/codex-impact-canvas`라고만 입력해도 이 스킬을 시작합니다.
