@@ -102,10 +102,13 @@ def render_plan(data: dict[str, Any], meta: dict[str, str]) -> str:
 - 관찰 가능한 개선: {pick(data, "expected_change.observable_improvement")}
 
 ## 3시간 MVP
+- 해결할 좁은 문제: {pick(data, "mvp.problem_slice")}
 - 핵심 기능 1개: {pick(data, "mvp.single_feature")}
+- 포함할 업무 단계: {pick(data, "mvp.included_workflow_steps")}
 - 데모 입력: {pick(data, "mvp.demo_input")}
 - 데모 산출물: {pick(data, "mvp.demo_output")}
 - 성공 기준: {pick(data, "mvp.success_criterion")}
+- 3시간 안/밖 판단: {pick(data, "mvp.three_hour_decision")}
 
 ## 제외 범위
 - 오늘 하지 않을 것: {pick(data, "scope.not_today", NA)}
@@ -283,13 +286,16 @@ def sample_data() -> dict[str, Any]:
         },
         "expected_change": {
             "summary": "누락 확인 시간을 줄이고 안내 품질을 일정하게 만든다.",
-            "observable_improvement": "샘플 신청서 1개에서 누락 항목과 안내 초안이 바로 나온다.",
+            "observable_improvement": "샘플 신청서 3건에서 누락 항목, 안내 초안, 검토 체크리스트가 바로 나온다.",
         },
         "mvp": {
-            "single_feature": "신청서 텍스트를 넣으면 누락 항목과 안내 초안을 생성한다.",
-            "demo_input": "익명화한 신청서 텍스트 1개",
-            "demo_output": "누락 항목 목록과 이메일 안내 초안",
-            "success_criterion": "핵심 누락 3개 중 2개 이상을 찾고 사람이 수정 가능한 초안을 만든다.",
+            "problem_slice": "신청서 3건의 누락 여부를 담당자가 발송 전 검토 가능한 상태로 끝낸다.",
+            "single_feature": "신청서 텍스트 3건을 넣으면 누락 항목, 안내 초안, 담당자 검토 체크리스트를 생성한다.",
+            "included_workflow_steps": "항목 추출 -> 누락 표시 -> 안내 초안 작성 -> 담당자 검토 체크리스트",
+            "demo_input": "익명화한 신청서 텍스트 3건 묶음",
+            "demo_output": "누락 항목 목록, 이메일 안내 초안, 담당자 검토 체크리스트",
+            "success_criterion": "각 신청서에서 핵심 누락을 찾고 사람이 수정 가능한 안내 초안과 검토 체크리스트를 만든다.",
+            "three_hour_decision": "안 - 샘플 입력이 준비되어 있고 수동 업로드와 검토용 산출물만 필요하다.",
         },
         "scope": {"not_today": "자동 이메일 발송", "next_ideas": "신청서 일괄 처리"},
         "build_plan": {
@@ -300,12 +306,12 @@ def sample_data() -> dict[str, Any]:
         },
         "follow_up_candidates": {
             "candidate_1": {
-                "task": "샘플 여러 건을 한 번에 처리하는 일괄 입력을 추가한다.",
-                "start_condition": "핵심 기능 1개가 샘플 1건에서 통과하고 40분 이상 남았을 때",
-                "implementation": "텍스트 구분자로 여러 입력을 나누고 같은 출력 형식으로 표를 만든다.",
-                "demo_output": "샘플 3건의 누락 항목 요약표",
+                "task": "담당자 회의용 요약 문단을 추가한다.",
+                "start_condition": "핵심 흐름이 샘플 3건에서 통과하고 40분 이상 남았을 때",
+                "implementation": "누락 항목 표를 바탕으로 먼저 확인할 신청과 보류 사유를 5문장으로 요약한다.",
+                "demo_output": "회의용 브리핑 문단",
                 "timebox": "40분",
-                "success_check": "각 샘플마다 누락 항목과 안내 초안이 빠짐없이 나온다.",
+                "success_check": "담당자가 표를 다시 읽지 않아도 먼저 확인할 신청을 이해할 수 있다.",
             },
             "candidate_2": {
                 "task": "담당자 검토 체크리스트를 산출물에 추가한다.",
@@ -421,9 +427,10 @@ def looks_like_multiple_mvp(value: str) -> bool:
     numbered_markers = re.findall(r"(?:^|\s)(?:[0-9]+\.|제안\s*[0-9]+|첫째|둘째|셋째)", value)
     if len(numbered_markers) >= 2:
         return True
-    if value.count(",") >= 2 or value.count("、") >= 2:
+    system_terms = re.findall(r"(로그인|권한|배포|결제|자동\s*발송|DB\s*저장|데이터베이스|외부\s*API|전체\s*시스템)", value, re.IGNORECASE)
+    if len(system_terms) >= 2:
         return True
-    return bool(re.search(r"(동시에|그리고)\s+.*(하고|만들고|구축)", value))
+    return bool(re.search(r"(동시에|그리고)\s+.*(구축|배포|연동|저장|발송)", value))
 
 
 def validate_quality_warnings(output_dir: Path) -> list[str]:
@@ -436,9 +443,9 @@ def validate_quality_warnings(output_dir: Path) -> list[str]:
     if is_quality_missing(mvp_feature):
         warnings.append("PLAN.md의 핵심 기능 1개가 아직 구체화되지 않았습니다")
     elif looks_like_multiple_mvp(mvp_feature):
-        warnings.append("PLAN.md의 핵심 기능 1개가 여러 기능이나 시스템 범위를 포함할 수 있습니다")
+        warnings.append("PLAN.md의 핵심 기능 1개가 독립 기능 여러 개나 시스템 범위를 포함할 수 있습니다")
 
-    for label in ["데모 입력", "데모 산출물", "성공 기준"]:
+    for label in ["해결할 좁은 문제", "포함할 업무 단계", "데모 입력", "데모 산출물", "성공 기준", "3시간 안/밖 판단"]:
         if is_quality_missing(extract_field(plan, label)):
             warnings.append(f"PLAN.md의 {label}이 샘플 기준으로 구체화되지 않았습니다")
 
@@ -468,6 +475,9 @@ def validate_outputs(output_dir: Path) -> list[str]:
     if "## 3시간 MVP" not in plan:
         issues.append("PLAN.md에 ## 3시간 MVP 섹션이 없습니다")
     for field in [
+        "해결할 좁은 문제",
+        "포함할 업무 단계",
+        "3시간 안/밖 판단",
         "## 빠르게 끝났을 때 이어서 할 작업 후보",
         "후보 1 작업",
         "후보 1 시작 조건",
