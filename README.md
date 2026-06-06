@@ -19,6 +19,37 @@ Codex에서 아래처럼 호출합니다.
 
 `/codex-impact-canvas`라고만 입력하면 워크숍 흐름이 시작됩니다. 스킬은 먼저 사회혁신가 이름과 개발자 이름을 받고, 오늘 가져온 현장 문제, 샘플 입력, 기대 산출물을 확인합니다. 이미 준비된 설명은 다시 묻지 않고, 문제 유형을 고른 뒤 3시간 MVP 1개로 압축하는 데 필요한 빈칸만 짧게 묻습니다.
 
+## 설치
+
+이 저장소 전체가 하나의 Codex 스킬 디렉터리입니다. `SKILL.md`뿐 아니라 `references/`, `scripts/`, `agents/`도 함께 있어야 정상 동작합니다.
+
+### 전역 설치
+
+모든 Codex 작업에서 이 스킬을 쓰려면 아래처럼 전역 스킬 폴더에 설치합니다.
+
+```bash
+mkdir -p ~/.codex/skills
+git clone https://github.com/myorange-io/codex-impact-canvas.git ~/.codex/skills/codex-impact-canvas
+```
+
+이미 설치된 스킬을 최신 상태로 갱신하려면 아래 명령을 실행합니다.
+
+```bash
+cd ~/.codex/skills/codex-impact-canvas
+git pull
+```
+
+### 프로젝트별 설치
+
+특정 프로젝트에서만 쓰려면 해당 프로젝트 루트에서 아래처럼 설치합니다.
+
+```bash
+mkdir -p .agents/skills
+git clone https://github.com/myorange-io/codex-impact-canvas.git .agents/skills/codex-impact-canvas
+```
+
+설치 후 새 Codex 세션을 열고 `/codex-impact-canvas`를 입력해 시작합니다.
+
 ## 실행 구조
 
 스킬은 아래 순서로 움직입니다.
