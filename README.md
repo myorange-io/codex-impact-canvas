@@ -75,7 +75,7 @@ git clone https://github.com/myorange-io/codex-impact-canvas.git .agents/skills/
 3. 업무 문제 확인: 반복 처리 업무, 불편을 겪는 사람, 문제가 발생하는 순간
 4. 자료 확인: 실제 자료 유무, 개인정보 제거 샘플, 자료가 없을 경우 가상 샘플 생성
 5. 결과물 선택: 문제를 들은 뒤 자동화 도구, 웹앱, 온보딩 페이지, admin 화면, 대시보드, 문서/메시지 초안 등 가능한 후보 제안
-6. 3시간 MVP 좁히기: 오늘 할 것/하지 않을 것, AI 역할, 사람 검토 지점, 성공/실패 기준
+6. 3시간 MVP 좁히기: 해결할 좁은 문제, 포함할 업무 단계, 오늘 할 것/하지 않을 것, AI 역할, 사람 검토 지점, 성공/실패 기준, 3시간 안/밖 판단
 7. 다음 단계 안내: `PLAN.md`, `workshop.json`, `MEMORY.md`, `WORKFLOW_ANALYSIS.md`, `CASE_STUDY.md`의 용도와 제출/아카이빙 기준 안내
 
 ## 질문 흐름
@@ -155,9 +155,13 @@ git clone https://github.com/myorange-io/codex-impact-canvas.git .agents/skills/
 - 현재 업무 흐름
 - 결과물 형태
 - 기대 변화
+- 해결할 좁은 문제
 - 3시간 MVP 기능 1개
+- 포함할 업무 단계
 - 데모 입력과 데모 산출물
 - 성공 기준
+- 실패 신호
+- 3시간 안/밖 판단
 - 제외 범위
 - 3시간 구현 계획
 - 빠르게 끝났을 때 이어서 할 작업 후보 2개
@@ -308,11 +312,16 @@ python3 scripts/write_workshop_outputs.py --validate-only --output-dir /tmp/code
     "tools": "현재 사용 도구"
   },
   "mvp": {
+    "problem_slice": "3시간 안에 끝까지 해결할 좁은 문제",
     "single_feature": "3시간 MVP 기능 1개",
+    "included_workflow_steps": "포함할 업무 단계",
     "demo_input": "데모 입력",
     "demo_output": "데모 산출물",
+    "ai_role": "AI 역할",
+    "human_review_point": "사람 검토 지점",
     "success_criterion": "성공 기준",
-    "failure_signal": "실패 신호"
+    "failure_signal": "실패 신호",
+    "three_hour_decision": "안/축소 필요/밖 - 근거"
   },
   "submission": {
     "problem_definition_outputs": "PLAN.md, workshop.json 초안",

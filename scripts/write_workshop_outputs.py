@@ -113,13 +113,16 @@ def render_plan(data: dict[str, Any], meta: dict[str, str]) -> str:
 - 관찰 가능한 개선: {pick(data, "expected_change.observable_improvement")}
 
 ## 3시간 MVP
+- 해결할 좁은 문제: {pick(data, "mvp.problem_slice")}
 - 핵심 기능 1개: {pick(data, "mvp.single_feature")}
+- 포함할 업무 단계: {pick(data, "mvp.included_workflow_steps")}
 - 데모 입력: {pick(data, "mvp.demo_input")}
 - 데모 산출물: {pick(data, "mvp.demo_output")}
 - AI 역할: {pick(data, "mvp.ai_role", pick(data, "library_metadata.agent_role"))}
 - 사람 검토 지점: {pick(data, "mvp.human_review_point", pick(data, "human_in_the_loop.key_review_points", pick(data, "human_in_the_loop.review_points")))}
 - 성공 기준: {pick(data, "mvp.success_criterion")}
 - 실패 신호: {pick(data, "mvp.failure_signal", pick(data, "human_in_the_loop.error_types"))}
+- 3시간 안/밖 판단: {pick(data, "mvp.three_hour_decision")}
 
 ## 제외 범위
 - 오늘 하지 않을 것: {pick(data, "scope.not_today", NA)}
@@ -320,13 +323,16 @@ def sample_data() -> dict[str, Any]:
             "observable_improvement": "샘플 신청서 1개에서 누락 항목과 안내 초안이 바로 나온다.",
         },
         "mvp": {
+            "problem_slice": "신청서 3건의 누락 여부를 담당자가 발송 전 검토 가능한 상태로 끝낸다.",
             "single_feature": "신청서 텍스트를 넣으면 누락 항목과 안내 초안을 생성한다.",
+            "included_workflow_steps": "항목 추출 -> 누락 표시 -> 안내 초안 작성 -> 담당자 검토 체크리스트",
             "demo_input": "익명화한 신청서 텍스트 1개",
             "demo_output": "누락 항목 목록과 이메일 안내 초안",
             "ai_role": "검토보조",
             "human_review_point": "담당자가 누락 항목과 안내 문구를 발송 전 최종 확인한다.",
             "success_criterion": "핵심 누락 3개 중 2개 이상을 찾고 사람이 수정 가능한 초안을 만든다.",
             "failure_signal": "필수 항목 누락을 놓치거나 개인정보가 출력에 남아 있으면 실패로 본다.",
+            "three_hour_decision": "안 - 샘플 입력이 준비되어 있고 수동 업로드와 검토용 산출물만 필요하다.",
         },
         "scope": {"not_today": "자동 이메일 발송", "next_ideas": "신청서 일괄 처리"},
         "build_plan": {
@@ -487,7 +493,7 @@ def validate_quality_warnings(output_dir: Path) -> list[str]:
     elif looks_like_multiple_mvp(mvp_feature):
         warnings.append("PLAN.md의 핵심 기능 1개가 여러 기능이나 시스템 범위를 포함할 수 있습니다")
 
-    for label in ["데모 입력", "데모 산출물", "성공 기준"]:
+    for label in ["해결할 좁은 문제", "포함할 업무 단계", "데모 입력", "데모 산출물", "성공 기준", "3시간 안/밖 판단"]:
         if is_quality_missing(extract_field(plan, label)):
             warnings.append(f"PLAN.md의 {label}이 샘플 기준으로 구체화되지 않았습니다")
 
@@ -538,10 +544,13 @@ def validate_outputs(output_dir: Path) -> list[str]:
         "문제 유형",
         "선택한 결과물 형태",
         "선택 이유",
+        "해결할 좁은 문제",
+        "포함할 업무 단계",
         "## 빠르게 끝났을 때 이어서 할 작업 후보",
         "AI 역할",
         "사람 검토 지점",
         "실패 신호",
+        "3시간 안/밖 판단",
         "후보 1 작업",
         "후보 1 시작 조건",
         "후보 1 구현 내용",
