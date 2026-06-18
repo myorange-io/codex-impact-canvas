@@ -138,5 +138,13 @@
   "case_study": {
     "title": "멘토링 일지 위험 신호 요약 에이전트",
     "lessons": "민감한 청소년 사례는 공개 사례 작성 시 업무 흐름만 남기고 원문과 신호 예시는 익명화해야 한다."
+  },
+  "generated_metadata": {
+    "team_name": "멘토링온팀",
+    "project_name": "멘토링 일지 위험 신호 요약",
+    "created_date": "2026-06-05",
+    "event": "Codex Impact Workshop",
+    "version": "1",
+    "case_id": "impact-agent-20260605-mentoring-risk-summary"
   }
 }

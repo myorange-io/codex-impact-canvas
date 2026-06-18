@@ -137,5 +137,13 @@
   "case_study": {
     "title": "긴급식품지원 신청 검토 보조 에이전트",
     "lessons": "민감한 복지 판단은 자동 확정보다 담당자 검토용 초안에 집중해야 안전하다."
+  },
+  "generated_metadata": {
+    "team_name": "푸드케어팀",
+    "project_name": "긴급식품지원 신청 검토 보조",
+    "created_date": "2026-06-05",
+    "event": "Codex Impact Workshop",
+    "version": "1",
+    "case_id": "impact-agent-20260605-case-dec63a0f"
   }
 }

@@ -1,4 +1,4 @@
 interface:
   display_name: "Codex Impact Canvas"
   short_description: "3시간 AI 에이전트 MVP 합의 도구"
-  default_prompt: "/codex-impact-canvas"
+  default_prompt: "$codex-impact-canvas"

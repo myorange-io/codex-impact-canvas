@@ -138,5 +138,13 @@
   "case_study": {
     "title": "생활 불편 제보 분류 에이전트",
     "lessons": "텍스트 분류와 답변 초안은 3시간 MVP에 적합하지만 실제 접수 자동화는 이후 단계로 두는 편이 안전하다."
+  },
+  "generated_metadata": {
+    "team_name": "동네수리팀",
+    "project_name": "생활 불편 제보 분류와 답변 초안",
+    "created_date": "2026-06-05",
+    "event": "Codex Impact Workshop",
+    "version": "1",
+    "case_id": "impact-agent-20260605-neighborhood-repair-router"
   }
 }

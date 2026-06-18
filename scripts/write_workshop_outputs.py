@@ -90,12 +90,23 @@ def render_plan(data: dict[str, Any], meta: dict[str, str]) -> str:
 - 가장 어려움을 겪는 사람: {pick(data, "problem.people_affected")}
 - 문제가 발생하는 순간: {pick(data, "problem.blocked_moment")}
 
+## 자료 확인
+- 자료 상태: {pick(data, "materials.source_status", "미정")}
+- 샘플 입력: {pick(data, "materials.sample_input", pick(data, "mvp.demo_input"))}
+- 개인정보 처리: {pick(data, "materials.privacy_action", pick(data, "data_and_access.privacy_action"))}
+- 자료 유효성 확인: {pick(data, "materials.validity_check", "3시간 안에 처리할 수 있고 공개 가능한 수준으로 비식별화했는지 확인한다.")}
+
 ## 현재 업무 흐름
 - 입력 자료: {pick(data, "current_workflow.inputs")}
 - 처리 순서: {pick(data, "current_workflow.steps")}
 - 판단 기준: {pick(data, "current_workflow.judgment")}
 - 현재 산출물: {pick(data, "current_workflow.outputs")}
 - 현재 사용 도구: {pick(data, "current_workflow.tools")}
+
+## 결과물 형태
+- 문제 유형: {pick(data, "output_choice.problem_archetype", pick(data, "library_metadata.workflow_type"))}
+- 선택한 결과물 형태: {pick(data, "output_choice.output_type", pick(data, "library_metadata.output_format"))}
+- 선택 이유: {pick(data, "output_choice.selection_reason", "업무 문제와 3시간 데모 범위에 맞는 형태로 선택했다.")}
 
 ## 기대 변화
 - 기대 변화: {pick(data, "expected_change.summary")}
@@ -105,7 +116,10 @@ def render_plan(data: dict[str, Any], meta: dict[str, str]) -> str:
 - 핵심 기능 1개: {pick(data, "mvp.single_feature")}
 - 데모 입력: {pick(data, "mvp.demo_input")}
 - 데모 산출물: {pick(data, "mvp.demo_output")}
+- AI 역할: {pick(data, "mvp.ai_role", pick(data, "library_metadata.agent_role"))}
+- 사람 검토 지점: {pick(data, "mvp.human_review_point", pick(data, "human_in_the_loop.key_review_points", pick(data, "human_in_the_loop.review_points")))}
 - 성공 기준: {pick(data, "mvp.success_criterion")}
+- 실패 신호: {pick(data, "mvp.failure_signal", pick(data, "human_in_the_loop.error_types"))}
 
 ## 제외 범위
 - 오늘 하지 않을 것: {pick(data, "scope.not_today", NA)}
@@ -130,6 +144,12 @@ def render_plan(data: dict[str, Any], meta: dict[str, str]) -> str:
 - 후보 2 데모 산출물: {pick(data, "follow_up_candidates.candidate_2.demo_output")}
 - 후보 2 예상 추가 시간: {pick(data, "follow_up_candidates.candidate_2.timebox")}
 - 후보 2 검수 기준: {pick(data, "follow_up_candidates.candidate_2.success_check")}
+
+## 제출과 아카이빙
+- 문제정의 산출물: {pick(data, "submission.problem_definition_outputs", "PLAN.md, workshop.json 초안")}
+- 구현 기록: {pick(data, "submission.build_records", "MEMORY.md")}
+- 완료 후 산출물: {pick(data, "submission.final_outputs", "WORKFLOW_ANALYSIS.md, CASE_STUDY.md, 최종 workshop.json")}
+- 아카이빙 기준: {pick(data, "submission.archive_criteria", "필수 산출물의 핵심 MVP, 자료 상태, 사람 검토, 공개 범위가 서로 일치해야 한다.")}
 """
 
 
@@ -141,6 +161,8 @@ def render_workflow(data: dict[str, Any], meta: dict[str, str]) -> str:
 - 분야: {pick(data, "library_metadata.sector")}
 - 업무 유형: {pick(data, "library_metadata.workflow_type")}
 - 에이전트 역할: {pick(data, "library_metadata.agent_role")}
+- 결과물 형태: {pick(data, "output_choice.output_type", pick(data, "library_metadata.output_format"))}
+- 자료 상태: {pick(data, "materials.source_status")}
 - 데이터 특성: {pick(data, "library_metadata.data_characteristics", pick(data, "current_workflow.inputs"))}
 - 정형/비정형 여부: {pick(data, "library_metadata.data_type")}
 - 개인정보 포함 여부: {pick(data, "library_metadata.privacy_included", pick(data, "library_metadata.privacy_level"))}
@@ -179,6 +201,7 @@ def render_workflow(data: dict[str, Any], meta: dict[str, str]) -> str:
 - 평가 샘플: {pick(data, "human_in_the_loop.evaluation_samples")}
 
 ## 데이터와 접근
+- 샘플 자료: {pick(data, "materials.sample_input", pick(data, "mvp.demo_input"))}
 - 개인정보 처리: {pick(data, "data_and_access.privacy_action")}
 - 권한/접근 이슈: {pick(data, "data_and_access.permission_issues", NA)}
 - 결과물의 공유 가능 범위: {pick(data, "data_and_access.shareability")}
@@ -257,9 +280,9 @@ def memory_entry(data: dict[str, Any], stage: str) -> str:
     today = dt.date.today().isoformat()
     return f"""
 ### {today} {stage}
-- **정한 것 / 한 것**: {pick(data, "memory_entry.did", "필수 마크다운 산출물 구조와 3시간 MVP 범위를 정리했다.")}
+- **정한 것 / 한 것**: {pick(data, "memory_entry.did", "필수 산출물 구조와 3시간 MVP 범위를 정리했다.")}
 - **왜**: {pick(data, "memory_entry.why", "팀별 결과물을 같은 구조로 남겨 이후 사례집과 워크플로 라이브러리로 재사용하기 위해서다.")}
-- **어떻게**: {pick(data, "memory_entry.how", "반응형 질문 답변을 표준 필드로 정규화해 PLAN.md, WORKFLOW_ANALYSIS.md, CASE_STUDY.md, MEMORY.md에 기록했다.")}
+- **어떻게**: {pick(data, "memory_entry.how", "반응형 질문 답변을 표준 필드로 정규화해 PLAN.md, workshop.json, WORKFLOW_ANALYSIS.md, CASE_STUDY.md, MEMORY.md에 기록했다.")}
 - **막힌 점 / 바꾼 점**: {pick(data, "memory_entry.blocked", "없음")}
 - **배운 것 / 다음**: {pick(data, "memory_entry.next", "샘플 데이터로 MVP를 구현하고 검수 포인트를 보완한다.")}
 """
@@ -273,6 +296,17 @@ def sample_data() -> dict[str, Any]:
             "actual_work_problem": "신청서 내용을 사람이 반복해서 읽고 누락 여부를 확인한다.",
             "people_affected": "사업 담당자와 신청자",
             "blocked_moment": "신청 마감 직후 서류가 몰릴 때",
+        },
+        "materials": {
+            "source_status": "익명화 샘플",
+            "sample_input": "이름과 연락처를 제거한 신청서 텍스트 1개",
+            "privacy_action": "이름과 연락처를 제거한 샘플만 사용",
+            "validity_check": "신청서 필수 항목과 누락 여부를 확인할 최소 정보가 남아 있다.",
+        },
+        "output_choice": {
+            "problem_archetype": "문서/콘텐츠 초안 또는 변환",
+            "output_type": "문서/메시지 초안",
+            "selection_reason": "담당자가 최종 발송 전에 검토할 누락 목록과 안내 초안을 바로 볼 수 있다.",
         },
         "current_workflow": {
             "inputs": "신청서 PDF",
@@ -289,7 +323,10 @@ def sample_data() -> dict[str, Any]:
             "single_feature": "신청서 텍스트를 넣으면 누락 항목과 안내 초안을 생성한다.",
             "demo_input": "익명화한 신청서 텍스트 1개",
             "demo_output": "누락 항목 목록과 이메일 안내 초안",
+            "ai_role": "검토보조",
+            "human_review_point": "담당자가 누락 항목과 안내 문구를 발송 전 최종 확인한다.",
             "success_criterion": "핵심 누락 3개 중 2개 이상을 찾고 사람이 수정 가능한 초안을 만든다.",
+            "failure_signal": "필수 항목 누락을 놓치거나 개인정보가 출력에 남아 있으면 실패로 본다.",
         },
         "scope": {"not_today": "자동 이메일 발송", "next_ideas": "신청서 일괄 처리"},
         "build_plan": {
@@ -315,6 +352,12 @@ def sample_data() -> dict[str, Any]:
                 "timebox": "25분",
                 "success_check": "담당자가 발송 전 확인해야 할 항목을 바로 볼 수 있다.",
             },
+        },
+        "submission": {
+            "problem_definition_outputs": "PLAN.md, workshop.json 초안",
+            "build_records": "MEMORY.md append 기록",
+            "final_outputs": "WORKFLOW_ANALYSIS.md, CASE_STUDY.md, 최종 workshop.json",
+            "archive_criteria": "자료 상태, 핵심 MVP, 사람 검토, 공개 범위가 모든 산출물에서 일치해야 한다.",
         },
         "library_metadata": {
             "sector": "운영",
@@ -382,6 +425,12 @@ def sample_data() -> dict[str, Any]:
 def write_outputs(data: dict[str, Any], output_dir: Path, stage: str) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
     meta = metadata(data)
+    normalized_data = dict(data)
+    normalized_data["generated_metadata"] = meta
+    (output_dir / "workshop.json").write_text(
+        json.dumps(normalized_data, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
     files = {
         "PLAN.md": render_plan(data, meta),
         "WORKFLOW_ANALYSIS.md": render_workflow(data, meta),
@@ -442,6 +491,10 @@ def validate_quality_warnings(output_dir: Path) -> list[str]:
         if is_quality_missing(extract_field(plan, label)):
             warnings.append(f"PLAN.md의 {label}이 샘플 기준으로 구체화되지 않았습니다")
 
+    for label in ["자료 상태", "선택한 결과물 형태", "사람 검토 지점", "실패 신호"]:
+        if is_quality_missing(extract_field(plan, label)):
+            warnings.append(f"PLAN.md의 {label}이 비어 있거나 검토가 필요합니다")
+
     for label in ["주요 검수 포인트", "실패 시 사람이 이어받는 방식", "개인정보 처리", "결과물의 공유 가능 범위"]:
         if is_quality_missing(extract_field(workflow, label)):
             warnings.append(f"WORKFLOW_ANALYSIS.md의 {label} 필드가 비어 있거나 검토가 필요합니다")
@@ -464,11 +517,31 @@ def validate_outputs(output_dir: Path) -> list[str]:
     for name in ["PLAN.md", "MEMORY.md", "WORKFLOW_ANALYSIS.md", "CASE_STUDY.md"]:
         if not (output_dir / name).exists():
             issues.append(f"필수 파일이 없습니다: {name}")
+    workshop_json = output_dir / "workshop.json"
+    if not workshop_json.exists():
+        issues.append("필수 파일이 없습니다: workshop.json")
+    else:
+        try:
+            json.loads(workshop_json.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as error:
+            issues.append(f"workshop.json을 JSON으로 읽을 수 없습니다: {error}")
     plan = read_output(output_dir, "PLAN.md")
     if "## 3시간 MVP" not in plan:
         issues.append("PLAN.md에 ## 3시간 MVP 섹션이 없습니다")
     for field in [
+        "## 자료 확인",
+        "자료 상태",
+        "샘플 입력",
+        "개인정보 처리",
+        "자료 유효성 확인",
+        "## 결과물 형태",
+        "문제 유형",
+        "선택한 결과물 형태",
+        "선택 이유",
         "## 빠르게 끝났을 때 이어서 할 작업 후보",
+        "AI 역할",
+        "사람 검토 지점",
+        "실패 신호",
         "후보 1 작업",
         "후보 1 시작 조건",
         "후보 1 구현 내용",
@@ -481,12 +554,19 @@ def validate_outputs(output_dir: Path) -> list[str]:
         "후보 2 데모 산출물",
         "후보 2 예상 추가 시간",
         "후보 2 검수 기준",
+        "## 제출과 아카이빙",
+        "문제정의 산출물",
+        "구현 기록",
+        "완료 후 산출물",
+        "아카이빙 기준",
     ]:
         if field not in plan:
             issues.append(f"PLAN.md에 {field} 필드가 없습니다")
     workflow = read_output(output_dir, "WORKFLOW_ANALYSIS.md")
     for field in [
         "사례 ID",
+        "결과물 형태",
+        "자료 상태",
         "데이터 특성",
         "정형/비정형 여부",
         "데이터 수",
@@ -502,6 +582,7 @@ def validate_outputs(output_dir: Path) -> list[str]:
         "실패 시 사람이 이어받는 방식",
         "결과물의 공유 가능 범위",
         "에이전트 입력 조건",
+        "샘플 자료",
         "재사용 방법",
     ]:
         if field not in workflow:
