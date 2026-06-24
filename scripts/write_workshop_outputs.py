@@ -151,7 +151,7 @@ def render_plan(data: dict[str, Any], meta: dict[str, str]) -> str:
 ## 제출과 아카이빙
 - 문제정의 산출물: {pick(data, "submission.problem_definition_outputs", "PLAN.md, workshop.json 초안")}
 - 구현 기록: {pick(data, "submission.build_records", "MEMORY.md")}
-- 완료 후 산출물: {pick(data, "submission.final_outputs", "WORKFLOW_ANALYSIS.md, CASE_STUDY.md, 최종 workshop.json")}
+- 완료 후 산출물: {pick(data, "submission.final_outputs", "WORKFLOW_ANALYSIS.md, CASE_STUDY.md, 최종 workshop.json, 5장 Google Slides 발표자료")}
 - 아카이빙 기준: {pick(data, "submission.archive_criteria", "필수 산출물의 핵심 MVP, 자료 상태, 사람 검토, 공개 범위가 서로 일치해야 한다.")}
 """
 
@@ -362,7 +362,7 @@ def sample_data() -> dict[str, Any]:
         "submission": {
             "problem_definition_outputs": "PLAN.md, workshop.json 초안",
             "build_records": "MEMORY.md append 기록",
-            "final_outputs": "WORKFLOW_ANALYSIS.md, CASE_STUDY.md, 최종 workshop.json",
+            "final_outputs": "WORKFLOW_ANALYSIS.md, CASE_STUDY.md, 최종 workshop.json, 5장 Google Slides 발표자료",
             "archive_criteria": "자료 상태, 핵심 MVP, 사람 검토, 공개 범위가 모든 산출물에서 일치해야 한다.",
         },
         "library_metadata": {
@@ -428,7 +428,7 @@ def sample_data() -> dict[str, Any]:
     }
 
 
-def write_outputs(data: dict[str, Any], output_dir: Path, stage: str) -> None:
+def write_outputs(data: dict[str, Any], output_dir: Path, stage: str, phase: str = "all") -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
     meta = metadata(data)
     normalized_data = dict(data)
@@ -437,11 +437,12 @@ def write_outputs(data: dict[str, Any], output_dir: Path, stage: str) -> None:
         json.dumps(normalized_data, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
-    files = {
-        "PLAN.md": render_plan(data, meta),
-        "WORKFLOW_ANALYSIS.md": render_workflow(data, meta),
-        "CASE_STUDY.md": render_case_study(data, meta),
-    }
+    files = {}
+    if phase in {"all", "plan"}:
+        files["PLAN.md"] = render_plan(data, meta)
+    if phase in {"all", "final"}:
+        files["WORKFLOW_ANALYSIS.md"] = render_workflow(data, meta)
+        files["CASE_STUDY.md"] = render_case_study(data, meta)
     for name, content in files.items():
         (output_dir / name).write_text(content.rstrip() + "\n", encoding="utf-8")
 
@@ -458,6 +459,12 @@ def write_outputs(data: dict[str, Any], output_dir: Path, stage: str) -> None:
 def read_output(output_dir: Path, name: str) -> str:
     path = output_dir / name
     return path.read_text(encoding="utf-8") if path.exists() else ""
+
+
+def comparable_json(data: dict[str, Any]) -> dict[str, Any]:
+    comparable = dict(data)
+    comparable.pop("generated_metadata", None)
+    return comparable
 
 
 def extract_field(content: str, label: str) -> str:
@@ -481,39 +488,60 @@ def looks_like_multiple_mvp(value: str) -> bool:
     return bool(re.search(r"(동시에|그리고)\s+.*(하고|만들고|구축)", value))
 
 
-def validate_quality_warnings(output_dir: Path) -> list[str]:
+def validate_quality_warnings(output_dir: Path, phase: str = "all") -> list[str]:
     warnings: list[str] = []
     plan = read_output(output_dir, "PLAN.md")
     workflow = read_output(output_dir, "WORKFLOW_ANALYSIS.md")
     case = read_output(output_dir, "CASE_STUDY.md")
 
-    mvp_feature = extract_field(plan, "핵심 기능 1개")
-    if is_quality_missing(mvp_feature):
-        warnings.append("PLAN.md의 핵심 기능 1개가 아직 구체화되지 않았습니다")
-    elif looks_like_multiple_mvp(mvp_feature):
-        warnings.append("PLAN.md의 핵심 기능 1개가 여러 기능이나 시스템 범위를 포함할 수 있습니다")
+    if phase in {"all", "plan"}:
+        mvp_feature = extract_field(plan, "핵심 기능 1개")
+        if is_quality_missing(mvp_feature):
+            warnings.append("PLAN.md의 핵심 기능 1개가 아직 구체화되지 않았습니다")
+        elif looks_like_multiple_mvp(mvp_feature):
+            warnings.append("PLAN.md의 핵심 기능 1개가 여러 기능이나 시스템 범위를 포함할 수 있습니다")
 
-    for label in ["해결할 좁은 문제", "포함할 업무 단계", "데모 입력", "데모 산출물", "성공 기준", "3시간 안/밖 판단"]:
-        if is_quality_missing(extract_field(plan, label)):
-            warnings.append(f"PLAN.md의 {label}이 샘플 기준으로 구체화되지 않았습니다")
+        for label in ["해결할 좁은 문제", "포함할 업무 단계", "데모 입력", "데모 산출물", "성공 기준", "3시간 안/밖 판단"]:
+            if is_quality_missing(extract_field(plan, label)):
+                warnings.append(f"PLAN.md의 {label}이 샘플 기준으로 구체화되지 않았습니다")
 
-    for label in ["자료 상태", "선택한 결과물 형태", "사람 검토 지점", "실패 신호"]:
-        if is_quality_missing(extract_field(plan, label)):
-            warnings.append(f"PLAN.md의 {label}이 비어 있거나 검토가 필요합니다")
+        for label in ["자료 상태", "선택한 결과물 형태", "사람 검토 지점", "실패 신호"]:
+            if is_quality_missing(extract_field(plan, label)):
+                warnings.append(f"PLAN.md의 {label}이 비어 있거나 검토가 필요합니다")
 
-    for label in ["주요 검수 포인트", "실패 시 사람이 이어받는 방식", "개인정보 처리", "결과물의 공유 가능 범위"]:
-        if is_quality_missing(extract_field(workflow, label)):
-            warnings.append(f"WORKFLOW_ANALYSIS.md의 {label} 필드가 비어 있거나 검토가 필요합니다")
+    if phase in {"all", "final"}:
+        for label in ["주요 검수 포인트", "실패 시 사람이 이어받는 방식", "개인정보 처리", "결과물의 공유 가능 범위"]:
+            if is_quality_missing(extract_field(workflow, label)):
+                warnings.append(f"WORKFLOW_ANALYSIS.md의 {label} 필드가 비어 있거나 검토가 필요합니다")
 
     sensitive_patterns = [
         r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}",
         r"\b\d{2,3}-\d{3,4}-\d{4}\b",
         r"(주민등록번호|계좌번호|비밀번호|패스워드|토큰|api\s*key|secret|원본 데이터|내부 문서 원문|접근 방법)",
     ]
-    for pattern in sensitive_patterns:
-        if re.search(pattern, case, re.IGNORECASE):
-            warnings.append("CASE_STUDY.md에 공개 제외가 필요한 개인정보/비밀/원문 표현이 있을 수 있습니다")
-            break
+    if phase in {"all", "final"}:
+        for pattern in sensitive_patterns:
+            if re.search(pattern, case, re.IGNORECASE):
+                warnings.append("CASE_STUDY.md에 공개 제외가 필요한 개인정보/비밀/원문 표현이 있을 수 있습니다")
+                break
+
+    input_json = output_dir / "input.json"
+    workshop_json = output_dir / "workshop.json"
+    if input_json.exists() and workshop_json.exists():
+        try:
+            input_data = json.loads(input_json.read_text(encoding="utf-8"))
+            workshop_data = json.loads(workshop_json.read_text(encoding="utf-8"))
+            if comparable_json(input_data) != comparable_json(workshop_data):
+                warnings.append("input.json이 최종 workshop.json과 다릅니다. 내장 발표자료 제작 단계의 기준은 workshop.json이지만, 혼선을 줄이려면 input.json을 갱신하거나 제거하세요")
+            else:
+                warnings.append("input.json이 있습니다. 발표자료 제작 전 최종 workshop.json과 계속 동기화되어 있는지 확인하세요")
+        except json.JSONDecodeError:
+            warnings.append("input.json 또는 workshop.json을 비교할 수 없습니다. 발표자료 제작 전 기준 데이터를 확인하세요")
+
+    visual_output_types = ["자동화 도구", "웹앱", "온보딩 페이지", "admin 화면", "대시보드"]
+    output_type = extract_field(plan, "선택한 결과물 형태")
+    if any(item in output_type for item in visual_output_types) and not (output_dir / "presentation-assets" / "result_screenshot.png").exists():
+        warnings.append("presentation-assets/result_screenshot.png가 없습니다. 화면형 결과물을 발표자료에 넣어야 한다면 공개 가능한 캡처를 준비하세요")
 
     return warnings
 
@@ -609,6 +637,7 @@ def main() -> int:
     parser.add_argument("--output-dir", type=Path, default=Path("."), help="마크다운 산출물을 쓸 디렉터리")
     parser.add_argument("--demo", action="store_true", help="내장 샘플 데이터로 산출물을 생성합니다")
     parser.add_argument("--stage", default="문제 정의", help="MEMORY.md에 추가할 단계 이름")
+    parser.add_argument("--phase", choices=["all", "plan", "final"], default="all", help="생성 단계: all은 전체, plan은 PLAN/MEMORY/workshop, final은 분석/사례/MEMORY/workshop")
     parser.add_argument("--validate-only", action="store_true", help="기존 산출물 검증만 실행합니다")
     args = parser.parse_args()
 
@@ -631,9 +660,9 @@ def main() -> int:
     else:
         parser.error("--input 또는 --demo를 제공하세요")
 
-    write_outputs(data, args.output_dir, args.stage)
-    issues = validate_outputs(args.output_dir)
-    warnings = validate_quality_warnings(args.output_dir)
+    write_outputs(data, args.output_dir, args.stage, args.phase)
+    issues = validate_outputs(args.output_dir) if args.phase == "all" else []
+    warnings = validate_quality_warnings(args.output_dir, args.phase)
     if issues:
         for issue in issues:
             print(f"[오류] {issue}")

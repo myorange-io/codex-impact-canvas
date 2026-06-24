@@ -85,7 +85,7 @@ version: "1"
 ## 제출과 아카이빙
 - 문제정의 산출물: [PLAN.md, workshop.json 초안]
 - 구현 기록: [MEMORY.md]
-- 완료 후 산출물: [WORKFLOW_ANALYSIS.md, CASE_STUDY.md, 최종 workshop.json]
+- 완료 후 산출물: [WORKFLOW_ANALYSIS.md, CASE_STUDY.md, 최종 workshop.json, 5장 Google Slides 발표자료]
 - 아카이빙 기준: [최종 제출 전 확인할 기준]
 ```
 

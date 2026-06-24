@@ -9,6 +9,7 @@
 - 체크리스트로 쓰는 기존 앵커
 - 수렴 규칙
 - 산출물 안내
+- 발표자료 핸드오프
 
 ## 질문 도구 사용
 
@@ -165,12 +166,12 @@ options:
 
 ### 6. 다음 단계 안내
 
-문제정의가 끝나면 `PLAN.md`와 `workshop.json` 초안을 만들고, 구현이 끝난 뒤 후속 산출물로 이어진다는 점을 안내합니다.
+문제정의가 끝나면 `PLAN.md`와 `workshop.json` 초안을 만들고, 구현이 끝난 뒤 후속 산출물과 같은 스킬 안의 발표자료 제작으로 이어진다는 점을 안내합니다.
 
 질문:
 
 ```text
-문제정의는 `PLAN.md`와 `workshop.json` 초안으로 저장하겠습니다. 구현 후에는 기록을 바탕으로 워크플로 분석과 공개 사례까지 만들면 될까요?
+문제정의는 `PLAN.md`와 `workshop.json` 초안으로 저장하겠습니다. 구현 후에는 기록을 바탕으로 워크플로 분석, 공개 사례, 5장 발표자료 제작까지 이어가면 될까요?
 ```
 
 완료 기준:
@@ -178,7 +179,7 @@ options:
 - `PLAN.md` 초안의 용도가 팀 합의와 3시간 실행 계획임을 안내했습니다.
 - `workshop.json`의 용도가 제출/아카이빙/산출물 재생성 기준 데이터임을 안내했습니다.
 - 구현 중 `MEMORY.md`를 append-only로 기록할 것을 안내했습니다.
-- 완료 후 `WORKFLOW_ANALYSIS.md`, `CASE_STUDY.md`, 최종 `workshop.json`을 만들 것을 안내했습니다.
+- 완료 후 `WORKFLOW_ANALYSIS.md`, `CASE_STUDY.md`, 최종 `workshop.json`을 만들고 같은 스킬 안에서 발표자료 제작까지 이어질 것을 안내했습니다.
 
 ## 체크리스트로 쓰는 기존 앵커
 
@@ -227,6 +228,7 @@ options:
 - 문제정의 후: `PLAN.md`, `workshop.json` 초안
 - 구현 중: `MEMORY.md` append, `workshop.json` 업데이트
 - 완료 후: `WORKFLOW_ANALYSIS.md`, `CASE_STUDY.md`, 최종 `workshop.json`
+- 발표자료 제작 전: `workshop.json` 기준 입력 폴더, 선택적 `presentation-assets/result_screenshot.png`
 
 제출/아카이빙 기준:
 
@@ -235,3 +237,17 @@ options:
 - `MEMORY.md`에는 구현 중 결정과 변경이 누적되어 있습니다.
 - `WORKFLOW_ANALYSIS.md`에는 재사용 가능한 AI Agent Workflow 필드가 채워져 있습니다.
 - `CASE_STUDY.md`에는 공개 가능한 수준의 익명화 사례만 들어 있습니다.
+- 발표자료 제작 전에는 최종 `workshop.json`을 기준 파일로 사용합니다. `input.json`이 남아 있으면 최종 데이터와 충돌하지 않는지 확인합니다.
+- 결과물 캡처가 필요한 팀은 공개 가능한 이미지만 `presentation-assets/result_screenshot.png`에 둡니다.
+
+## 발표자료 핸드오프
+
+워크숍 기록과 사례 정리가 끝나면 `references/presentation-handoff.md`와 `references/presentation-build.md`를 확인합니다. 이 단계의 목표는 참가팀 폴더를 같은 `codex-impact-canvas` 스킬 안에서 5장 Google Slides로 만들 수 있는 상태로 만드는 것입니다.
+
+완료 기준:
+
+- 최종 `workshop.json`이 기준 데이터입니다.
+- `PLAN.md`, `MEMORY.md`, `WORKFLOW_ANALYSIS.md`, `CASE_STUDY.md`가 같은 프로젝트를 가리킵니다.
+- 참가자 폴더에 `input.json`이 있으면 최종 `workshop.json`과 동기화되어 있습니다.
+- 필요한 경우 `presentation-assets/result_screenshot.png`가 공개 가능한 캡처로 준비되어 있습니다.
+- 발표자 한줄소개는 발표자료 제작 단계에서 별도로 받습니다. 파일에서 임의로 추론하지 않습니다.

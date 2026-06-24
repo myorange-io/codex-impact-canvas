@@ -1,23 +1,24 @@
 ---
 name: codex-impact-canvas
-description: 사회문제 해결 해커톤 팀이 준비해 온 현장 문제를 자연스러운 질문 순서로 확인하고, 자료와 결과물 형태를 정한 뒤 3시간 MVP 1개와 AI Agent Workflow 자산으로 압축하도록 돕는 스킬입니다. 사용자가 $codex-impact-canvas 또는 /codex-impact-canvas라고 입력하거나, 현장 업무를 하나의 AI 에이전트 MVP 기능으로 수렴하고, PLAN.md, workshop.json, MEMORY.md, WORKFLOW_ANALYSIS.md, CASE_STUDY.md를 만들 때 사용합니다.
+description: 사회문제 해결 해커톤 팀이 준비해 온 현장 문제를 자연스러운 질문 순서로 확인하고, 자료와 결과물 형태를 정한 뒤 3시간 MVP 1개와 AI Agent Workflow 자산과 5장 Google Slides 발표자료로 압축하도록 돕는 스킬입니다. 사용자가 $codex-impact-canvas 또는 /codex-impact-canvas라고 입력하거나, 현장 업무를 하나의 AI 에이전트 MVP 기능으로 수렴하고, PLAN.md, workshop.json, MEMORY.md, WORKFLOW_ANALYSIS.md, CASE_STUDY.md, 발표자료를 만들 때 사용합니다.
 ---
 
 # Codex Impact Canvas
 
-이 스킬은 2인 워크숍 팀이 준비해 온 현장 문제를 바탕으로 실제 업무, 자료 상태, 결과물 형태를 차례로 확인한 뒤 3시간 안에 보여줄 수 있는 AI 에이전트 MVP 1개로 범위를 압축합니다. 동시에 워크숍 결과를 나중에 AI Agent Workflow 자산으로 재사용할 수 있도록 아래 산출물을 남깁니다.
+이 스킬은 2인 워크숍 팀이 준비해 온 현장 문제를 바탕으로 실제 업무, 자료 상태, 결과물 형태를 차례로 확인한 뒤 3시간 안에 보여줄 수 있는 AI 에이전트 MVP 1개로 범위를 압축합니다. 동시에 워크숍 결과를 나중에 AI Agent Workflow 자산과 발표자료로 재사용할 수 있도록 아래 산출물을 남깁니다.
 
 - `PLAN.md`: 문제정의 단계의 팀 합의, 3시간 MVP 실행 계획, 빠르게 끝났을 때 이어서 할 작업 후보 2개
 - `workshop.json`: 질문 답변과 구현 결과를 표준 필드로 정규화한 제출/아카이빙 기준 데이터
 - `MEMORY.md`: 구현 중 결정, 변경, 막힌 점, 검증 내용을 누적하는 append-only 기록
 - `WORKFLOW_ANALYSIS.md`: 완료 후 결과물과 기록을 분석한 AI 에이전트 워크플로 구조화 자료
 - `CASE_STUDY.md`: 완료 후 공개 가능한 수준으로 익명화한 사례 요약
+- 발표자료: 최종 `workshop.json`, 사용자 제공 한줄소개, 선택적 결과물 캡처를 기준으로 만든 5장 Google Slides
 
 ## 진행 흐름
 
 1. 사용자가 `$codex-impact-canvas`라고 입력하면 이 스킬을 시작합니다. `/codex-impact-canvas`도 호환 호출로 인정합니다.
 2. 먼저 `references/pre-workshop-guide.md`를 기준으로 준비 안내를 짧게 확인합니다. 현장 문제, 반복 업무, 샘플 자료, 개인정보 비식별화, 제출 산출물 기준을 안내하되 길게 설명하지 않습니다.
-3. `references/canvas-flow.md`, `references/problem-archetypes.md`, `references/output-types.md`, `references/mvp-scope.md`, `references/multiple-choice.md`를 읽고 기본 정보 확인 -> 업무 문제 확인 -> 자료 확인 -> 결과물 선택 -> 3시간 MVP 좁히기 -> 다음 단계 안내 순서로 진행합니다.
+3. `references/canvas-flow.md`, `references/problem-archetypes.md`, `references/output-types.md`, `references/mvp-scope.md`, `references/multiple-choice.md`, `references/presentation-handoff.md`, `references/presentation-build.md`를 읽고 기본 정보 확인 -> 업무 문제 확인 -> 자료 확인 -> 결과물 선택 -> 3시간 MVP 좁히기 -> 다음 단계 안내 순서로 진행합니다.
 4. 처음에는 샘플 입력이나 기대 산출물을 강요하지 않습니다. 사회혁신가 이름, 개발자 이름, 팀/프로젝트 이름은 한 번에 묻지 않고 하나씩 순차 질문한 뒤, 업무 문제와 실제 자료 유무, 결과물 형태를 단계적으로 정합니다. 현재 모드에서 `request_user_input`이 활성화되어 있으면 도구로 묻고, 비활성화되어 있으면 일반 채팅 질문으로 같은 흐름을 진행합니다.
 5. 자료가 있으면 개인정보 제거 샘플 기준을 확인하고, 자료가 없으면 가상 샘플을 만들어도 되는지 확인합니다.
 6. 문제를 들은 뒤 자동화 도구, 웹앱, 온보딩 페이지, admin 화면, 대시보드, 문서/메시지 초안 등 가능한 결과물 후보를 2-4개 제안하고 하나를 고릅니다.
@@ -25,6 +26,8 @@ description: 사회문제 해결 해커톤 팀이 준비해 온 현장 문제를
 8. 문제정의가 끝나면 `PLAN.md`와 `workshop.json` 초안을 생성합니다. 답변을 JSON으로 정규화했다면 `scripts/write_workshop_outputs.py`를 우선 사용합니다.
 9. 구현이나 큰 변경이 끝날 때마다 `MEMORY.md` 파일 끝에 새 항목을 추가하고 `workshop.json`을 갱신합니다. 이전 항목은 덮어쓰지 않습니다. 형식은 `references/memory-log.md`를 따릅니다.
 10. 완료 시 `references/output-consistency.md`, `references/intent-check.md`, `references/workflow-analysis.md`를 읽고 구현 결과와 기록을 분석해 `WORKFLOW_ANALYSIS.md`, `CASE_STUDY.md`, 최종 `workshop.json`이 제출/아카이빙 기준을 만족하는지 확인합니다.
+11. 발표자료 제작 전 `references/presentation-handoff.md`를 기준으로 최종 입력 폴더를 점검합니다. 최종 기준 데이터는 `workshop.json`이며, `input.json`이 남아 있으면 최종 데이터와 충돌하지 않는지 확인합니다. 공개 가능한 결과물 캡처가 있으면 `presentation-assets/result_screenshot.png`로 준비합니다.
+12. 사용자가 발표자료 제작을 요청하면 `references/presentation-build.md`를 따릅니다. Google Slides 업로드 동의를 먼저 받고, 사회혁신가와 개발자 한줄소개를 한 명씩 받은 뒤, 내장 스크립트 `scripts/prepare-presentation-content.mjs`와 `scripts/build-google-slides-requests.mjs`를 사용해 Google Slides 사본을 채웁니다.
 
 ## 규칙
 
@@ -46,6 +49,10 @@ description: 사회문제 해결 해커톤 팀이 준비해 온 현장 문제를
 - 제품 PRD, 시장성, 가격 전략, GTM 검토로 확장하지 않습니다. 현장 업무, 샘플 데이터, 사람 검토, 공개 가능성, 데모 산출물에 집중합니다.
 - 사용자의 실제 업무 표현은 기록에 보존하되, 산출물 섹션과 필드 라벨은 표준 형식으로 정규화합니다.
 - `CASE_STUDY.md`에는 개인정보, 내부 문서 원문, 원본 데이터, 비밀값, 토큰, 접근권한 세부 정보를 넣지 않습니다.
+- 발표자료 제작 단계의 기준 파일은 최종 `workshop.json`입니다. 참가자 폴더에 `input.json`이 있으면 `workshop.json`과 같은 내용인지 확인하거나 발표자료 제작 전에 제거/갱신하도록 안내합니다.
+- 결과물 화면, 대시보드, 웹앱, admin 화면처럼 시각적 결과가 있으면 공개 가능한 캡처만 `presentation-assets/result_screenshot.png`에 둡니다. 개인정보나 내부 원문이 보이는 캡처는 사용하지 않습니다.
+- 발표자 한줄소개는 발표자료 제작 단계에서 사용자에게 직접 확인합니다. 파일 내용에서 추론하지 않습니다.
+- Google Slides 템플릿 원본을 직접 수정하지 않습니다. 반드시 사본을 만든 뒤 사본에 내용을 채우고 최종 URL은 사본이어야 합니다.
 - 알 수 없는 필드는 `미정`, 해당하지 않는 필드는 `해당 없음`으로 씁니다. 필수 제목은 비워두거나 삭제하지 않습니다.
 
 ## 참고 자료
@@ -61,4 +68,8 @@ description: 사회문제 해결 해커톤 팀이 준비해 온 현장 문제를
 - `references/plan-template.md`: `PLAN.md` 필수 구조
 - `references/workflow-analysis.md`: `WORKFLOW_ANALYSIS.md`와 `CASE_STUDY.md` 필수 필드
 - `references/memory-log.md`: 누적 과정 기록 규칙
+- `references/presentation-handoff.md`: 발표자료 제작 전 입력 폴더와 캡처 점검 규칙
+- `references/presentation-build.md`: 내장 발표자료 제작 흐름, Google Slides 템플릿, 스크립트, 검증 규칙
 - `scripts/write_workshop_outputs.py`: 정규화한 JSON에서 일관된 마크다운 산출물 생성
+- `scripts/prepare-presentation-content.mjs`: 최종 `workshop.json`과 마크다운 산출물에서 발표 문구 생성
+- `scripts/build-google-slides-requests.mjs`: 발표 문구를 Google Slides batchUpdate 요청으로 변환

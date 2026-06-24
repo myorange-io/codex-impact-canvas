@@ -45,4 +45,6 @@
 - `WORKFLOW_ANALYSIS.md`: AI Agent Workflow 라이브러리용 구조화 분석
 - `CASE_STUDY.md`: 공개 가능한 익명화 사례 요약
 
-`workshop.json`은 제출과 아카이빙의 기준 파일입니다. 마크다운 산출물을 다시 만들거나, 여러 팀 결과를 모아 분석할 때 이 파일을 사용합니다.
+`workshop.json`은 제출과 아카이빙, 발표자료 제작의 기준 파일입니다. 마크다운 산출물을 다시 만들거나, 여러 팀 결과를 모아 분석할 때 이 파일을 사용합니다.
+
+발표자료 제작 전에는 같은 참가자 폴더를 이 스킬의 발표자료 제작 단계가 읽을 수 있는지 확인합니다. `input.json`이 남아 있으면 최종 `workshop.json`과 충돌하지 않아야 하며, 화면형 결과물은 공개 가능한 캡처를 `presentation-assets/result_screenshot.png`에 둡니다.

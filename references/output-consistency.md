@@ -47,6 +47,7 @@
 - 문제정의 후: `PLAN.md`, `workshop.json` 초안
 - 구현 중: `MEMORY.md` append, `workshop.json` 업데이트
 - 완료 후: `WORKFLOW_ANALYSIS.md`, `CASE_STUDY.md`, 최종 `workshop.json`
+- 발표자료 제작 전: 최종 `workshop.json` 기준 참가자 폴더, 사용자 제공 발표자 한줄소개, 선택적 `presentation-assets/result_screenshot.png`
 
 ## YAML 메타데이터
 
@@ -89,6 +90,8 @@ slug는 소문자 ASCII를 사용하고, 공백은 하이픈으로 바꿉니다.
 - `PLAN.md`에는 핵심 기능이 빨리 끝났을 때 이어서 할 작업 후보 2개가 있고, 각 후보에는 시작 조건, 구현 내용, 데모 산출물, 예상 추가 시간, 검수 기준이 있습니다.
 - `WORKFLOW_ANALYSIS.md`에는 데이터 특성, 정형/비정형 여부, 데이터 수, 개인정보 포함 여부, MCP/CLI 연결 여부, 입력 데이터 출처, 산출물 형식, 반복 빈도, 기존 대비 소요 시간 변화, 주요 검수 포인트, 권한/접근 이슈, 재사용 가능성, 실패 시 사람이 이어받는 방식, 결과물의 공유 가능 범위가 있습니다.
 - `CASE_STUDY.md`에는 원본 개인정보, 비밀값, 내부 문서 원문, 접근 방법, 토큰, 익명화되지 않은 원본 데이터가 없습니다.
+- 발표자료 제작에 넘길 기준 데이터는 최종 `workshop.json`입니다. `input.json`이 참가자 폴더에 있으면 최종 `workshop.json`과 충돌하지 않는지 확인합니다.
+- 결과물 캡처를 쓰는 경우 `presentation-assets/result_screenshot.png`에 공개 가능한 익명화 이미지가 있습니다.
 - 알 수 없는 필드는 `미정`을 사용하고, 필수 제목을 조용히 삭제하지 않습니다.
 - 추가 아이디어는 MVP에 섞지 않고 제외 범위나 다음 단계에 기록합니다.
 
@@ -97,7 +100,9 @@ slug는 소문자 ASCII를 사용하고, 공백은 하이픈으로 바꿉니다.
 가능하면 답변을 JSON으로 정규화한 뒤 아래 명령을 실행합니다.
 
 ```bash
-python3 scripts/write_workshop_outputs.py --input workshop.json --output-dir .
+python3 scripts/write_workshop_outputs.py --input workshop.json --output-dir . --phase all
 ```
 
 이 스크립트는 모든 팀의 산출물 제목과 값을 같은 구조로 유지하고, 출력 디렉터리에 표준화한 `workshop.json`도 함께 저장합니다.
+
+문제정의 직후에는 최종 분석 문서를 미리 만들지 않도록 `--phase plan`을 사용합니다. 구현 완료 후 분석과 사례 정리를 만들 때는 `--phase final`을 사용합니다.

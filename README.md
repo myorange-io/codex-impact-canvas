@@ -1,6 +1,6 @@
 # Codex Impact Canvas
 
-사회문제 해결 해커톤 팀이 준비해 온 현장 문제를 바탕으로, 3시간 안에 보여줄 수 있는 AI 에이전트 MVP 기능 1개로 범위를 좁히고, 결과를 AI Agent Workflow 자산으로 남기도록 돕는 Codex 스킬입니다.
+사회문제 해결 해커톤 팀이 준비해 온 현장 문제를 바탕으로, 3시간 안에 보여줄 수 있는 AI 에이전트 MVP 기능 1개로 범위를 좁히고, 결과를 AI Agent Workflow 자산과 5장 발표자료로 남기도록 돕는 Codex 스킬입니다.
 
 ## 언제 쓰나
 
@@ -9,6 +9,7 @@
 - 샘플 자료가 있거나, 자료가 없어서 가상 샘플로 시작해야 할 때
 - 자동화 도구, 웹앱, 온보딩 페이지, admin 화면, 대시보드, 문서/메시지 초안 중 어떤 결과물이 맞는지 고를 때
 - 결과물을 나중에 "AI 에이전트를 활용한 사회문제 해결 사례집" 또는 "사회혁신가를 위한 AI 에이전트 워크플로 라이브러리"로 모으고 싶을 때
+- 같은 스킬 설치만으로 워크숍 기록부터 5장 Google Slides 발표자료 제작까지 이어가고 싶을 때
 
 ## 기본 사용법
 
@@ -76,6 +77,7 @@ git clone https://github.com/myorange-io/codex-impact-canvas.git .agents/skills/
 5. 결과물 선택: 문제를 들은 뒤 자동화 도구, 웹앱, 온보딩 페이지, admin 화면, 대시보드, 문서/메시지 초안 등 가능한 후보 제안
 6. 3시간 MVP 좁히기: 해결할 좁은 문제, 포함할 업무 단계, 오늘 할 것/하지 않을 것, AI 역할, 사람 검토 지점, 성공/실패 기준, 3시간 안/밖 판단
 7. 다음 단계 안내: `PLAN.md`, `workshop.json`, `MEMORY.md`, `WORKFLOW_ANALYSIS.md`, `CASE_STUDY.md`의 용도와 제출/아카이빙 기준 안내
+8. 발표자료 제작: 최종 `workshop.json`을 기준으로 입력 폴더를 점검하고, 필요한 경우 `presentation-assets/result_screenshot.png`를 준비한 뒤 이 스킬 안에서 5장 Google Slides를 만듭니다.
 
 ## 팀 시작
 
@@ -163,7 +165,7 @@ git clone https://github.com/myorange-io/codex-impact-canvas.git .agents/skills/
 
 ### 6. 다음 단계 안내
 
-문제정의가 끝나면 `PLAN.md`와 `workshop.json` 초안을 만들고, 구현 중에는 `MEMORY.md`를 누적합니다. 완료 후에는 구현 결과와 기록을 바탕으로 `WORKFLOW_ANALYSIS.md`, `CASE_STUDY.md`, 최종 `workshop.json`을 만듭니다.
+문제정의가 끝나면 `PLAN.md`와 `workshop.json` 초안을 만들고, 구현 중에는 `MEMORY.md`를 누적합니다. 완료 후에는 구현 결과와 기록을 바탕으로 `WORKFLOW_ANALYSIS.md`, `CASE_STUDY.md`, 최종 `workshop.json`을 만듭니다. 그 뒤 같은 참가자 폴더를 기준으로 이 스킬 안에서 5장 Google Slides 발표자료를 제작합니다.
 
 ## 필수 산출물
 
@@ -255,6 +257,27 @@ AI 에이전트 워크플로 라이브러리용 구조화 분석입니다.
 - 재사용 가이드
 - 익명화와 공개 제외 내용
 
+### 발표자료
+
+최종 산출물 작성 후 같은 스킬 안에서 만드는 5장 Google Slides 발표자료입니다.
+
+포함 내용:
+
+- 최종 기준 데이터는 `workshop.json`입니다.
+- 참가자 폴더에 `input.json`이 있으면 최종 `workshop.json`과 같은 내용인지 확인합니다. 내장 발표 스크립트는 `workshop.json`을 먼저 읽습니다.
+- 화면, 웹앱, admin 화면, 대시보드처럼 시각 결과물이 있으면 공개 가능한 캡처만 `presentation-assets/result_screenshot.png`에 둡니다.
+- 발표자 한줄소개는 사회혁신가와 개발자에게 한 명씩 따로 받습니다. 파일에서 임의로 추론하지 않습니다.
+- 자세한 기준은 `references/presentation-handoff.md`와 `references/presentation-build.md`를 따릅니다.
+
+발표 문구와 Google Slides 요청 파일은 아래 스크립트로 만듭니다.
+
+```bash
+node scripts/prepare-presentation-content.mjs --input-dir /path/to/team-folder
+node scripts/build-google-slides-requests.mjs --input-dir /path/to/team-folder
+```
+
+최종 산출물은 로컬 PPTX가 아니라 복사한 Google Slides deck입니다.
+
 ## 출력 일관성 규칙
 
 결과물을 여러 팀의 사례로 모으기 위해 아래 규칙을 지킵니다.
@@ -280,10 +303,22 @@ impact-agent-[YYYYMMDD]-[short-slug]
 답변을 JSON으로 정리했다면 아래 명령으로 필수 산출물을 만들 수 있습니다.
 
 ```bash
-python3 scripts/write_workshop_outputs.py --input workshop.json --output-dir .
+python3 scripts/write_workshop_outputs.py --input workshop.json --output-dir . --phase all
 ```
 
 이 명령은 마크다운 산출물과 함께 표준화된 `workshop.json`도 출력 디렉터리에 저장합니다.
+
+문제정의 직후 `PLAN.md`, `MEMORY.md`, `workshop.json` 초안만 만들 때는 아래처럼 실행합니다.
+
+```bash
+python3 scripts/write_workshop_outputs.py --input workshop.json --output-dir . --phase plan
+```
+
+구현 완료 후 `WORKFLOW_ANALYSIS.md`, `CASE_STUDY.md`, 최종 `workshop.json`을 만들 때는 아래처럼 실행합니다.
+
+```bash
+python3 scripts/write_workshop_outputs.py --input workshop.json --output-dir . --phase final --stage "워크플로 분석"
+```
 
 내장 샘플 데이터로 구조를 확인하려면 아래 명령을 실행합니다.
 
@@ -351,7 +386,7 @@ python3 scripts/write_workshop_outputs.py --validate-only --output-dir /tmp/code
   "submission": {
     "problem_definition_outputs": "PLAN.md, workshop.json 초안",
     "build_records": "MEMORY.md",
-    "final_outputs": "WORKFLOW_ANALYSIS.md, CASE_STUDY.md, 최종 workshop.json",
+    "final_outputs": "WORKFLOW_ANALYSIS.md, CASE_STUDY.md, 최종 workshop.json, 5장 Google Slides 발표자료",
     "archive_criteria": "제출/아카이빙 기준"
   },
   "follow_up_candidates": {
