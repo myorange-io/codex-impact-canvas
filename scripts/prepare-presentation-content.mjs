@@ -1,7 +1,12 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
+import { fileURLToPath } from "node:url";
 
 const CWD = process.cwd();
+const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
+const execFileAsync = promisify(execFile);
 
 function parseArgs(argv) {
   const args = { inputDir: null };
@@ -121,6 +126,37 @@ async function resolveInputDir(args) {
     throw new Error(`입력 후보가 여러 개입니다. 참가자 폴더를 명시하세요.\n\n${list}`);
   }
   return candidates[0];
+}
+
+async function ensureFinalOutputs(source) {
+  const required = ["WORKFLOW_ANALYSIS.md", "CASE_STUDY.md"];
+  const missing = [];
+  for (const name of required) {
+    if (!await exists(path.join(source.dir, name))) missing.push(name);
+  }
+  if (missing.length === 0) return null;
+
+  let inputPath = path.join(source.dir, "workshop.json");
+  if (!await exists(inputPath)) inputPath = path.join(source.dir, "input.json");
+  if (!await exists(inputPath)) {
+    throw new Error(
+      `${missing.join(", ")} 파일이 없습니다. 발표자료 제작 전에 WORKFLOW_ANALYSIS.md와 CASE_STUDY.md를 먼저 만들어야 합니다. workshop.json 또는 input.json을 준비한 뒤 scripts/write_workshop_outputs.py --phase final을 실행하세요.`
+    );
+  }
+
+  const scriptPath = path.join(SCRIPT_DIR, "write_workshop_outputs.py");
+  await execFileAsync("python3", [
+    scriptPath,
+    "--input",
+    inputPath,
+    "--output-dir",
+    source.dir,
+    "--phase",
+    "final",
+    "--stage",
+    "발표자료 제작 전 정리",
+  ]);
+  return missing;
 }
 
 async function readMarkdownData(inputDir) {
@@ -412,7 +448,12 @@ async function writeExampleInput(inputDir) {
 
 async function main() {
   const args = parseArgs(process.argv.slice(2));
-  const source = await resolveInputDir(args);
+  let source = await resolveInputDir(args);
+  const generatedFinalOutputs = await ensureFinalOutputs(source);
+  const workshopPath = path.join(source.dir, "workshop.json");
+  if (await exists(workshopPath)) {
+    source = { dir: source.dir, sourcePath: workshopPath, type: "workshop.json" };
+  }
   const data = await readProjectData(source);
   const overrides = await readOverrides(source.dir);
   const content = buildContent(data, overrides);
@@ -427,6 +468,7 @@ async function main() {
     inputDir: source.dir,
     dataSource: source.sourcePath,
     dataSourceType: source.type,
+    generatedFinalOutputs,
     googleSlidesTemplate: "https://docs.google.com/presentation/d/13pVNcDsFf1DX6emPLjOt1NvtPE9xpkh02GQAbs3IT1g/edit?usp=sharing",
     content: contentPath,
     exampleInput,

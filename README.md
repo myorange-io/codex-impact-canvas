@@ -270,6 +270,7 @@ AI 에이전트 워크플로 라이브러리용 구조화 분석입니다.
 포함 내용:
 
 - 최종 기준 데이터는 `workshop.json`입니다.
+- `WORKFLOW_ANALYSIS.md` 또는 `CASE_STUDY.md`가 없으면 발표자료를 만들기 전에 `scripts/write_workshop_outputs.py --phase final`로 두 파일을 먼저 생성합니다.
 - 참가자 폴더에 `input.json`이 있으면 최종 `workshop.json`과 같은 내용인지 확인합니다. 내장 발표 스크립트는 `workshop.json`을 먼저 읽습니다.
 - 화면, 웹앱, admin 화면, 대시보드처럼 시각 결과물이 있으면 공개 가능한 캡처만 `presentation-assets/result_screenshot.png`에 둡니다.
 - 발표자 한줄소개는 사회혁신가와 개발자에게 한 명씩 따로 받습니다. 파일에서 임의로 추론하지 않습니다.

@@ -27,7 +27,7 @@ description: 사회문제 해결 해커톤 팀이 준비해 온 현장 문제를
 9. 사용자가 구현을 마친 뒤 다시 정리를 요청하면 `MEMORY.md` 파일 끝에 새 항목을 추가하고 `workshop.json`을 갱신합니다. 이전 항목은 덮어쓰지 않습니다. 형식은 `references/memory-log.md`를 따릅니다.
 10. 완료 시 `references/output-consistency.md`, `references/intent-check.md`, `references/workflow-analysis.md`를 읽고 구현 결과와 기록을 분석해 `WORKFLOW_ANALYSIS.md`, `CASE_STUDY.md`, 최종 `workshop.json`이 제출/아카이빙 기준을 만족하는지 확인합니다.
 11. 발표자료 제작 전 `references/presentation-handoff.md`를 기준으로 최종 입력 폴더를 점검합니다. 최종 기준 데이터는 `workshop.json`이며, `input.json`이 남아 있으면 최종 데이터와 충돌하지 않는지 확인합니다. 공개 가능한 결과물 캡처가 있으면 `presentation-assets/result_screenshot.png`로 준비합니다.
-12. 사용자가 발표자료 제작을 요청하면 `references/presentation-build.md`를 따릅니다. Google Slides 업로드 동의를 먼저 받고, 사회혁신가와 개발자 한줄소개를 한 명씩 받은 뒤, 내장 스크립트 `scripts/prepare-presentation-content.mjs`와 `scripts/build-google-slides-requests.mjs`를 사용해 Google Slides 사본을 채웁니다. 생성한 사본은 반드시 링크가 있는 모든 사용자가 뷰어 권한으로 볼 수 있도록 공유 설정합니다.
+12. 사용자가 발표자료 제작을 요청하면 `references/presentation-build.md`를 따릅니다. 먼저 참가자 폴더에 `WORKFLOW_ANALYSIS.md`와 `CASE_STUDY.md`가 있는지 확인하고, 둘 중 하나라도 없으면 `scripts/write_workshop_outputs.py --phase final`로 두 파일을 먼저 만든 뒤 발표자료 제작을 시작합니다. 그 다음 Google Slides 업로드 동의를 받고, 사회혁신가와 개발자 한줄소개를 한 명씩 받은 뒤, 내장 스크립트 `scripts/prepare-presentation-content.mjs`와 `scripts/build-google-slides-requests.mjs`를 사용해 Google Slides 사본을 채웁니다. 생성한 사본은 반드시 링크가 있는 모든 사용자가 뷰어 권한으로 볼 수 있도록 공유 설정합니다.
 
 ## 규칙
 
@@ -53,6 +53,7 @@ description: 사회문제 해결 해커톤 팀이 준비해 온 현장 문제를
 - 문제정의와 `PLAN.md` 작성이 끝난 직후에는 구현을 시작하지 않습니다. 구현은 사용자가 맡으며, 스킬은 계획과 다음 행동을 넘겨주는 데서 멈춥니다. 단, `PLAN.md`에는 이후 새 세션의 구현자가 구현 중 결정, 변경, 막힌 점, 검증 결과를 `MEMORY.md`에 append-only로 기록하라는 지침을 반드시 포함합니다.
 - `CASE_STUDY.md`에는 개인정보, 내부 문서 원문, 원본 데이터, 비밀값, 토큰, 접근권한 세부 정보를 넣지 않습니다.
 - 발표자료 제작 단계의 기준 파일은 최종 `workshop.json`입니다. 참가자 폴더에 `input.json`이 있으면 `workshop.json`과 같은 내용인지 확인하거나 발표자료 제작 전에 제거/갱신하도록 안내합니다.
+- 발표자료 제작 요청을 받았을 때 `WORKFLOW_ANALYSIS.md` 또는 `CASE_STUDY.md`가 없으면 발표자료를 먼저 만들지 않습니다. `workshop.json` 또는 `input.json`을 기준으로 `scripts/write_workshop_outputs.py --phase final`을 실행해 두 파일을 만든 뒤 진행합니다.
 - 결과물 화면, 대시보드, 웹앱, admin 화면처럼 시각적 결과가 있으면 공개 가능한 캡처만 `presentation-assets/result_screenshot.png`에 둡니다. 개인정보나 내부 원문이 보이는 캡처는 사용하지 않습니다.
 - 발표자 한줄소개는 발표자료 제작 단계에서 사용자에게 직접 확인합니다. 파일 내용에서 추론하지 않습니다.
 - Google Slides 템플릿 원본을 직접 수정하지 않습니다. 반드시 사본을 만든 뒤 사본에 내용을 채우고 최종 URL은 사본이어야 합니다.

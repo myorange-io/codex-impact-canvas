@@ -1,6 +1,6 @@
 # 발표자료 핸드오프
 
-이 문서는 `WORKFLOW_ANALYSIS.md`, `CASE_STUDY.md`, 최종 `workshop.json`까지 만든 뒤 같은 `codex-impact-canvas` 스킬 안에서 발표자료 제작 단계로 넘어가기 전에 확인합니다. 전체 흐름의 끝은 기록 파일 생성이 아니라, 참가팀이 발표할 수 있는 5장 발표자료 제작까지입니다.
+이 문서는 같은 `codex-impact-canvas` 스킬 안에서 발표자료 제작 단계로 넘어가기 전에 확인합니다. 전체 흐름의 끝은 기록 파일 생성이 아니라, 참가팀이 발표할 수 있는 5장 발표자료 제작까지입니다. 발표자료 제작 요청을 받았을 때 `WORKFLOW_ANALYSIS.md` 또는 `CASE_STUDY.md`가 없으면, 발표자료를 만들기 전에 두 파일부터 생성합니다.
 
 ## 기준 스킬
 
@@ -13,6 +13,14 @@
 - `MEMORY.md`
 - `WORKFLOW_ANALYSIS.md`
 - `CASE_STUDY.md`
+
+`WORKFLOW_ANALYSIS.md` 또는 `CASE_STUDY.md`가 없으면 `workshop.json`을 기준으로 아래 명령을 먼저 실행합니다.
+
+```bash
+python3 scripts/write_workshop_outputs.py --input <participant-folder>/workshop.json --output-dir <participant-folder> --phase final --stage "발표자료 제작 전 정리"
+```
+
+`workshop.json`이 없고 `input.json`만 있으면 `--input <participant-folder>/input.json`을 사용합니다.
 
 ## 최종 기준 데이터
 
@@ -43,6 +51,7 @@ presentation-assets/result_screenshot.png
 
 - `workshop.json`이 최종 기준 데이터입니다.
 - `PLAN.md`, `MEMORY.md`, `WORKFLOW_ANALYSIS.md`, `CASE_STUDY.md`가 같은 프로젝트와 같은 사례 ID를 가리킵니다.
+- `WORKFLOW_ANALYSIS.md` 또는 `CASE_STUDY.md`가 없으면 발표자료 제작 전에 먼저 생성했습니다.
 - `CASE_STUDY.md`에는 공개 불가 정보가 없습니다.
 - `input.json`이 있으면 최종 `workshop.json`과 충돌하지 않습니다.
 - 필요한 경우 `presentation-assets/result_screenshot.png`가 공개 가능한 이미지로 준비되어 있습니다.
@@ -57,5 +66,6 @@ presentation-assets/result_screenshot.png
 워크숍 기록과 사례 정리가 끝났습니다. 최종 기준 파일은 `workshop.json`입니다.
 이제 같은 참가자 폴더를 기준으로 이 스킬의 발표자료 제작 단계를 이어가 5장 Google Slides를 만들 수 있습니다.
 발표자료 제작 전에 `input.json`이 최종 `workshop.json`과 충돌하지 않는지, 필요한 경우 `presentation-assets/result_screenshot.png`가 준비되어 있는지 확인하세요.
+`WORKFLOW_ANALYSIS.md` 또는 `CASE_STUDY.md`가 없다면 발표자료를 만들기 전에 먼저 생성하세요.
 생성한 Google Slides 사본은 링크가 있는 모든 사용자가 뷰어 권한으로 볼 수 있도록 공유 설정하세요.
 ```

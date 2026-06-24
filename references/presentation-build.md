@@ -44,38 +44,47 @@ https://docs.google.com/presentation/d/13pVNcDsFf1DX6emPLjOt1NvtPE9xpkh02GQAbs3I
 ## 필수 진행 순서
 
 1. 참가자 입력 폴더를 확인합니다.
-2. Google Slides에 텍스트와 이미지를 업로드해도 되는지 사용자에게 명시적으로 확인합니다.
-3. 표지용 한줄소개를 사회혁신가와 개발자에게 한 명씩 따로 묻습니다. 두 질문을 한 메시지에 묶지 않습니다.
-4. 사회혁신가 한줄소개를 묻기 전 정확히 아래 문구로 설명합니다.
+2. `WORKFLOW_ANALYSIS.md`와 `CASE_STUDY.md`가 모두 있는지 확인합니다.
+3. 둘 중 하나라도 없으면 Google Slides 제작을 시작하기 전에 먼저 아래 명령으로 최종 분석/사례 파일을 만듭니다.
+
+```bash
+python3 scripts/write_workshop_outputs.py --input <participant-folder>/workshop.json --output-dir <participant-folder> --phase final --stage "발표자료 제작 전 정리"
+```
+
+4. `workshop.json`이 없고 `input.json`만 있으면 `--input <participant-folder>/input.json`을 사용해 `workshop.json`, `WORKFLOW_ANALYSIS.md`, `CASE_STUDY.md`를 먼저 만듭니다.
+5. `WORKFLOW_ANALYSIS.md`와 `CASE_STUDY.md`가 생성되었는지 확인한 뒤에만 발표자료 제작을 계속합니다.
+6. Google Slides에 텍스트와 이미지를 업로드해도 되는지 사용자에게 명시적으로 확인합니다.
+7. 표지용 한줄소개를 사회혁신가와 개발자에게 한 명씩 따로 묻습니다. 두 질문을 한 메시지에 묶지 않습니다.
+8. 사회혁신가 한줄소개를 묻기 전 정확히 아래 문구로 설명합니다.
 
 ```text
 표지에 발표자를 소개하기 위해 한줄소개가 필요합니다.
 ```
 
-5. 사회혁신가 한줄소개는 정확히 아래 문구로 묻습니다.
+9. 사회혁신가 한줄소개는 정확히 아래 문구로 묻습니다.
 
 ```text
 사회혁신가 한줄소개를 입력해주세요. (공백 포함 65자 이내)
 ```
 
-6. 답변이 65자 이내이면 개발자 한줄소개를 정확히 아래 문구로 묻습니다.
+10. 답변이 65자 이내이면 개발자 한줄소개를 정확히 아래 문구로 묻습니다.
 
 ```text
 개발자 한줄소개를 입력해주세요. (공백 포함 65자 이내)
 ```
 
-7. 각 한줄소개는 공백 포함 65자 이하여야 합니다. 넘으면 줄여달라고 묻고 진행을 멈춥니다.
-8. 한줄소개는 파일에서 추론하지 않습니다. 사용자가 확인한 그대로 `presentation-input.json`의 `social_innovator_intro`, `developer_intro`에 저장합니다.
-9. `scripts/prepare-presentation-content.mjs --input-dir <participant-folder>`를 실행합니다.
-10. Google Drive/Slides connector로 템플릿을 복사합니다.
-11. 복사한 프레젠테이션을 읽어 5장인지 확인합니다.
-12. `scripts/build-google-slides-requests.mjs --input-dir <participant-folder>`를 실행합니다.
-13. 생성된 `outputs/google-slides-requests.json`을 복사한 deck에 `batchUpdate`로 적용합니다.
-14. `outputs/google-slides-image-uris.txt`가 있으면 그 내용을 image URI로 함께 넘깁니다.
-15. `outputs/google-drive-permission.json`의 permission body를 복사한 deck 파일 ID에 Google Drive permissions.create로 적용합니다. 권한은 `type: anyone`, `role: reader`, `allowFileDiscovery: false`여야 합니다.
-16. 편집된 deck을 다시 읽어 템플릿 샘플 문구가 교체되었는지 확인합니다.
-17. 복사한 deck의 공유 설정이 `링크가 있는 모든 사용자` + `뷰어`인지 확인합니다.
-18. 5장 썸네일을 새로 가져와 텍스트 넘침, 겹침, 미교체 placeholder가 없는지 눈으로 확인합니다.
+11. 각 한줄소개는 공백 포함 65자 이하여야 합니다. 넘으면 줄여달라고 묻고 진행을 멈춥니다.
+12. 한줄소개는 파일에서 추론하지 않습니다. 사용자가 확인한 그대로 `presentation-input.json`의 `social_innovator_intro`, `developer_intro`에 저장합니다.
+13. `scripts/prepare-presentation-content.mjs --input-dir <participant-folder>`를 실행합니다.
+14. Google Drive/Slides connector로 템플릿을 복사합니다.
+15. 복사한 프레젠테이션을 읽어 5장인지 확인합니다.
+16. `scripts/build-google-slides-requests.mjs --input-dir <participant-folder>`를 실행합니다.
+17. 생성된 `outputs/google-slides-requests.json`을 복사한 deck에 `batchUpdate`로 적용합니다.
+18. `outputs/google-slides-image-uris.txt`가 있으면 그 내용을 image URI로 함께 넘깁니다.
+19. `outputs/google-drive-permission.json`의 permission body를 복사한 deck 파일 ID에 Google Drive permissions.create로 적용합니다. 권한은 `type: anyone`, `role: reader`, `allowFileDiscovery: false`여야 합니다.
+20. 편집된 deck을 다시 읽어 템플릿 샘플 문구가 교체되었는지 확인합니다.
+21. 복사한 deck의 공유 설정이 `링크가 있는 모든 사용자` + `뷰어`인지 확인합니다.
+22. 5장 썸네일을 새로 가져와 텍스트 넘침, 겹침, 미교체 placeholder가 없는지 눈으로 확인합니다.
 
 최종 산출물은 로컬 PPTX가 아니라 편집 가능한 Google Slides 사본입니다.
 
@@ -152,6 +161,7 @@ Slide 1 발표자 노트는 아래 문구로 시작해야 합니다.
 
 마무리 전 아래를 확인합니다.
 
+- `WORKFLOW_ANALYSIS.md`와 `CASE_STUDY.md`가 없던 경우, 발표자료 제작 전에 먼저 생성했습니다.
 - 최종 URL은 원본 템플릿이 아니라 복사한 deck입니다.
 - 복사한 deck은 링크가 있는 모든 사용자가 뷰어 권한으로 볼 수 있습니다.
 - 복사한 deck은 5장입니다.
