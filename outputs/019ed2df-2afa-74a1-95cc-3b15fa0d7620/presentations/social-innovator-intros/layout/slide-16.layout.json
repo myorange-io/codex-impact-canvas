@@ -1,0 +1,1521 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/2ezqot",
+    "id": "2ezqot",
+    "slide": 16,
+    "layoutId": "84de4cfc-2e24-43e0-8748-5f993652e694",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "b4c7d562-7d1f-4f4e-b1d4-a60a8a65cceb",
+    "masterLayoutName": "Master",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "Apple SD Gothic Neo"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "84de4cfc-2e24-43e0-8748-5f993652e694",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "b4c7d562-7d1f-4f4e-b1d4-a60a8a65cceb",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "b4c7d562-7d1f-4f4e-b1d4-a60a8a65cceb",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vahoza1g",
+      "id": "1",
+      "bbox": [
+        0,
+        0,
+        1280,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#F6F7F4",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ovahoza1",
+      "id": "2",
+      "bbox": [
+        0,
+        0,
+        16,
+        720
+      ],
+      "geometry": "rect",
+      "fillColor": "#7C3AED",
+      "lineColor": "#7C3AED",
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dg7adsji",
+      "id": "3",
+      "bbox": [
+        60,
+        674,
+        760,
+        18
+      ],
+      "geometry": "rect",
+      "text": "Codex Impact Workshop · 선발 사회혁신가 소개",
+      "textPreview": "Codex Impact Workshop · 선발 사회혁신가 소개",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 11,
+        "typeface": "Apple SD Gothic Neo",
+        "color": "#8A94A6",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Codex Impact Workshop · 선발 사회혁신가 소개"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Codex Impact Workshop · 선발 사회혁신가 소개",
+          "resolvedTextStyle": {
+            "fontSize": 11,
+            "typeface": "Apple SD Gothic Neo",
+            "color": "#8A94A6",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Codex Impact Workshop · 선발 사회혁신가 소개",
+              "fontSize": 11,
+              "typeface": "Apple SD Gothic Neo",
+              "color": "#8A94A6"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6hcrmhk3",
+      "id": "4",
+      "bbox": [
+        1160,
+        672,
+        60,
+        18
+      ],
+      "geometry": "rect",
+      "text": "16",
+      "textPreview": "16",
+      "resolvedFontSize": 11,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 11,
+        "typeface": "Apple SD Gothic Neo",
+        "color": "#8A94A6",
+        "alignment": "right",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "16"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "16",
+          "resolvedTextStyle": {
+            "fontSize": 11,
+            "typeface": "Apple SD Gothic Neo",
+            "color": "#8A94A6",
+            "alignment": "right"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "16",
+              "fontSize": 11,
+              "typeface": "Apple SD Gothic Neo",
+              "color": "#8A94A6"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/z25kb6xk",
+      "id": "5",
+      "bbox": [
+        60,
+        38,
+        260,
+        54
+      ],
+      "geometry": "rect",
+      "text": "이상화",
+      "textPreview": "이상화",
+      "resolvedFontSize": 42,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 42,
+        "typeface": "Apple SD Gothic Neo",
+        "color": "#172033",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "이상화"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "이상화",
+          "resolvedTextStyle": {
+            "fontSize": 42,
+            "typeface": "Apple SD Gothic Neo",
+            "color": "#172033",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "이상화",
+              "fontSize": 42,
+              "typeface": "Apple SD Gothic Neo",
+              "color": "#172033",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/onyd0z61",
+      "id": "6",
+      "bbox": [
+        64,
+        92,
+        620,
+        24
+      ],
+      "geometry": "rect",
+      "text": "경기도공익활동지원센터 · 기획홍보팀장",
+      "textPreview": "경기도공익활동지원센터 · 기획홍보팀장",
+      "resolvedFontSize": 18,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 18,
+        "typeface": "Apple SD Gothic Neo",
+        "color": "#64748B",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "경기도공익활동지원센터 · 기획홍보팀장"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "경기도공익활동지원센터 · 기획홍보팀장",
+          "resolvedTextStyle": {
+            "fontSize": 18,
+            "typeface": "Apple SD Gothic Neo",
+            "color": "#64748B",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "경기도공익활동지원센터 · 기획홍보팀장",
+              "fontSize": 18,
+              "typeface": "Apple SD Gothic Neo",
+              "color": "#64748B"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d8v6psfi",
+      "id": "7",
+      "bbox": [
+        880,
+        48,
+        300,
+        34
+      ],
+      "geometry": "rect",
+      "fillColor": "#F5F3FF",
+      "lineColor": "#7C3AED",
+      "lineWidth": 1.2
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6dcbulwv",
+      "id": "8",
+      "bbox": [
+        898,
+        57,
+        264,
+        16
+      ],
+      "geometry": "rect",
+      "text": "중간지원조직 확산형",
+      "textPreview": "중간지원조직 확산형",
+      "resolvedFontSize": 14,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 14,
+        "typeface": "Apple SD Gothic Neo",
+        "color": "#4C1D95",
+        "bold": true,
+        "alignment": "center",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "중간지원조직 확산형"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "중간지원조직 확산형",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "typeface": "Apple SD Gothic Neo",
+            "color": "#4C1D95",
+            "bold": true,
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "중간지원조직 확산형",
+              "fontSize": 14,
+              "typeface": "Apple SD Gothic Neo",
+              "color": "#4C1D95",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vy90je9c",
+      "id": "9",
+      "bbox": [
+        60,
+        138,
+        1120,
+        1.5
+      ],
+      "geometry": "rect",
+      "fillColor": "#7C3AED",
+      "lineColor": "#7C3AED",
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nuxc3ylc",
+      "id": "10",
+      "bbox": [
+        70,
+        164,
+        500,
+        20
+      ],
+      "geometry": "rect",
+      "text": "참여 동기",
+      "textPreview": "참여 동기",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 13,
+        "typeface": "Apple SD Gothic Neo",
+        "color": "#4C1D95",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "참여 동기"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "참여 동기",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "typeface": "Apple SD Gothic Neo",
+            "color": "#4C1D95",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "참여 동기",
+              "fontSize": 13,
+              "typeface": "Apple SD Gothic Neo",
+              "color": "#4C1D95",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/y90je9cv",
+      "id": "11",
+      "bbox": [
+        70,
+        186,
+        500,
+        76
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#E2E8F0",
+      "lineWidth": 1
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5wjudg7a",
+      "id": "12",
+      "bbox": [
+        84,
+        198,
+        472,
+        56
+      ],
+      "geometry": "rect",
+      "text": "공익단체 지원과 홍보 업무를 더 효율적으로 운영하는 방법을 찾고 싶습니다.",
+      "textPreview": "공익단체 지원과 홍보 업무를 더 효율적으로 운영하는 방법을 찾고 싶습니다.",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 15,
+        "typeface": "Apple SD Gothic Neo",
+        "color": "#172033",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "공익단체 지원과 홍보 업무를 더 효율적으로 운영하는 방법을 찾고 싶습니다."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "공익단체 지원과 홍보 업무를 더 효율적으로 운영하는 방법을 찾고 싶습니다.",
+          "resolvedTextStyle": {
+            "fontSize": 15,
+            "typeface": "Apple SD Gothic Neo",
+            "color": "#172033",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "공익단체 지원과 홍보 업무를 더 효율적으로 운영하는 방법을 찾고 싶습니다.",
+              "fontSize": 15,
+              "typeface": "Apple SD Gothic Neo",
+              "color": "#172033"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gbq1oryt",
+      "id": "13",
+      "bbox": [
+        630,
+        164,
+        500,
+        20
+      ],
+      "geometry": "rect",
+      "text": "해결하고 싶은 문제",
+      "textPreview": "해결하고 싶은 문제",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 13,
+        "typeface": "Apple SD Gothic Neo",
+        "color": "#4C1D95",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "해결하고 싶은 문제"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "해결하고 싶은 문제",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "typeface": "Apple SD Gothic Neo",
+            "color": "#4C1D95",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "해결하고 싶은 문제",
+              "fontSize": 13,
+              "typeface": "Apple SD Gothic Neo",
+              "color": "#4C1D95",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 14,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/n29gr2p8",
+      "id": "14",
+      "bbox": [
+        630,
+        186,
+        500,
+        76
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#E2E8F0",
+      "lineWidth": 1
+    },
+    {
+      "order": 15,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/yhgn29gr",
+      "id": "15",
+      "bbox": [
+        644,
+        198,
+        472,
+        56
+      ],
+      "geometry": "rect",
+      "text": "공익단체 활동소식을 알리고 모으는 일이 수동 서칭과 개별 연락에 의존합니다.",
+      "textPreview": "공익단체 활동소식을 알리고 모으는 일이 수동 서칭과 개별 연락에 의존합니다.",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 15,
+        "typeface": "Apple SD Gothic Neo",
+        "color": "#172033",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "공익단체 활동소식을 알리고 모으는 일이 수동 서칭과 개별 연락에 의존합니다."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "공익단체 활동소식을 알리고 모으는 일이 수동 서칭과 개별 연락에 의존합니다.",
+          "resolvedTextStyle": {
+            "fontSize": 15,
+            "typeface": "Apple SD Gothic Neo",
+            "color": "#172033",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "공익단체 활동소식을 알리고 모으는 일이 수동 서칭과 개별 연락에 의존합니다.",
+              "fontSize": 15,
+              "typeface": "Apple SD Gothic Neo",
+              "color": "#172033"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 16,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/58z25kb6",
+      "id": "16",
+      "bbox": [
+        70,
+        268,
+        500,
+        20
+      ],
+      "geometry": "rect",
+      "text": "현재 처리 방식",
+      "textPreview": "현재 처리 방식",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 13,
+        "typeface": "Apple SD Gothic Neo",
+        "color": "#4C1D95",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "현재 처리 방식"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "현재 처리 방식",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "typeface": "Apple SD Gothic Neo",
+            "color": "#4C1D95",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "현재 처리 방식",
+              "fontSize": 13,
+              "typeface": "Apple SD Gothic Neo",
+              "color": "#4C1D95",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 17,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/gn29gr2p",
+      "id": "17",
+      "bbox": [
+        70,
+        290,
+        500,
+        76
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#E2E8F0",
+      "lineWidth": 1
+    },
+    {
+      "order": 18,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/neloj2t8",
+      "id": "18",
+      "bbox": [
+        84,
+        302,
+        472,
+        56
+      ],
+      "geometry": "rect",
+      "text": "공익단체 소식을 직접 찾거나 연락해 수집하고 웹사이트 운영 자료를 정리합니다.",
+      "textPreview": "공익단체 소식을 직접 찾거나 연락해 수집하고 웹사이트 운영 자료를 정리합니다.",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 15,
+        "typeface": "Apple SD Gothic Neo",
+        "color": "#172033",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "공익단체 소식을 직접 찾거나 연락해 수집하고 웹사이트 운영 자료를 정리합니다."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "공익단체 소식을 직접 찾거나 연락해 수집하고 웹사이트 운영 자료를 정리합니다.",
+          "resolvedTextStyle": {
+            "fontSize": 15,
+            "typeface": "Apple SD Gothic Neo",
+            "color": "#172033",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "공익단체 소식을 직접 찾거나 연락해 수집하고 웹사이트 운영 자료를 정리합니다.",
+              "fontSize": 15,
+              "typeface": "Apple SD Gothic Neo",
+              "color": "#172033"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 19,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ytsvu9kn",
+      "id": "19",
+      "bbox": [
+        630,
+        268,
+        500,
+        20
+      ],
+      "geometry": "rect",
+      "text": "반복 업무 / 병목 / 비용·시간 낭비",
+      "textPreview": "반복 업무 / 병목 / 비용·시간 낭비",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 13,
+        "typeface": "Apple SD Gothic Neo",
+        "color": "#4C1D95",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "반복 업무 / 병목 / 비용·시간 낭비"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "반복 업무 / 병목 / 비용·시간 낭비",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "typeface": "Apple SD Gothic Neo",
+            "color": "#4C1D95",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "반복 업무 / 병목 / 비용·시간 낭비",
+              "fontSize": 13,
+              "typeface": "Apple SD Gothic Neo",
+              "color": "#4C1D95",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 20,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2x4nap4r",
+      "id": "20",
+      "bbox": [
+        630,
+        290,
+        500,
+        76
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#E2E8F0",
+      "lineWidth": 1
+    },
+    {
+      "order": 21,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/vixczed8",
+      "id": "21",
+      "bbox": [
+        644,
+        302,
+        472,
+        56
+      ],
+      "geometry": "rect",
+      "text": "자료 업로드 시 썸네일 제작, 공익소식 서치, 원고 검토 같은 반복 업무가 홍보 역량을 분산시킵니다.",
+      "textPreview": "자료 업로드 시 썸네일 제작, 공익소식 서치, 원고 검토 같은 반복 업무가 홍보 역량을 분산시킵니다.",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 15,
+        "typeface": "Apple SD Gothic Neo",
+        "color": "#172033",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "자료 업로드 시 썸네일 제작, 공익소식 서치, 원고 검토 같은 반복 업무가 홍보"
+          },
+          {
+            "index": 2,
+            "text": "역량을 분산시킵니다."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "자료 업로드 시 썸네일 제작, 공익소식 서치, 원고 검토 같은 반복 업무가 홍보 역량을 분산시킵니다.",
+          "resolvedTextStyle": {
+            "fontSize": 15,
+            "typeface": "Apple SD Gothic Neo",
+            "color": "#172033",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "자료 업로드 시 썸네일 제작, 공익소식 서치, 원고 검토 같은 반복 업무가 홍보 역량을 분산시킵니다.",
+              "fontSize": 15,
+              "typeface": "Apple SD Gothic Neo",
+              "color": "#172033"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 22,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/k3q5o7qp",
+      "id": "22",
+      "bbox": [
+        70,
+        372,
+        500,
+        20
+      ],
+      "geometry": "rect",
+      "text": "개발자와 함께 해보고 싶은 일",
+      "textPreview": "개발자와 함께 해보고 싶은 일",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 13,
+        "typeface": "Apple SD Gothic Neo",
+        "color": "#4C1D95",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "개발자와 함께 해보고 싶은 일"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "개발자와 함께 해보고 싶은 일",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "typeface": "Apple SD Gothic Neo",
+            "color": "#4C1D95",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "개발자와 함께 해보고 싶은 일",
+              "fontSize": 13,
+              "typeface": "Apple SD Gothic Neo",
+              "color": "#4C1D95",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 23,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/donyd0z6",
+      "id": "23",
+      "bbox": [
+        70,
+        394,
+        500,
+        76
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#E2E8F0",
+      "lineWidth": 1
+    },
+    {
+      "order": 24,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6psfil0r",
+      "id": "24",
+      "bbox": [
+        84,
+        406,
+        472,
+        56
+      ],
+      "geometry": "rect",
+      "text": "데이터 정리와 웹사이트 운영을 원활하게 만드는 도구 또는 자동화 흐름을 만들고 싶습니다.",
+      "textPreview": "데이터 정리와 웹사이트 운영을 원활하게 만드는 도구 또는 자동화 흐름을 만들고 싶습니다.",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 15,
+        "typeface": "Apple SD Gothic Neo",
+        "color": "#172033",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "데이터 정리와 웹사이트 운영을 원활하게 만드는 도구 또는 자동화 흐름을 만들고"
+          },
+          {
+            "index": 2,
+            "text": "싶습니다."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "데이터 정리와 웹사이트 운영을 원활하게 만드는 도구 또는 자동화 흐름을 만들고 싶습니다.",
+          "resolvedTextStyle": {
+            "fontSize": 15,
+            "typeface": "Apple SD Gothic Neo",
+            "color": "#172033",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "데이터 정리와 웹사이트 운영을 원활하게 만드는 도구 또는 자동화 흐름을 만들고 싶습니다.",
+              "fontSize": 15,
+              "typeface": "Apple SD Gothic Neo",
+              "color": "#172033"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 25,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/val87ed8",
+      "id": "25",
+      "bbox": [
+        630,
+        372,
+        500,
+        20
+      ],
+      "geometry": "rect",
+      "text": "해결 후 기대 변화",
+      "textPreview": "해결 후 기대 변화",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 13,
+        "typeface": "Apple SD Gothic Neo",
+        "color": "#4C1D95",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "해결 후 기대 변화"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "해결 후 기대 변화",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "typeface": "Apple SD Gothic Neo",
+            "color": "#4C1D95",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "해결 후 기대 변화",
+              "fontSize": 13,
+              "typeface": "Apple SD Gothic Neo",
+              "color": "#4C1D95",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 26,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/kre1w7mp",
+      "id": "26",
+      "bbox": [
+        630,
+        394,
+        500,
+        76
+      ],
+      "geometry": "rect",
+      "fillColor": "#FFFFFF",
+      "lineColor": "#E2E8F0",
+      "lineWidth": 1
+    },
+    {
+      "order": 27,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dcbulwva",
+      "id": "27",
+      "bbox": [
+        644,
+        406,
+        472,
+        56
+      ],
+      "geometry": "rect",
+      "text": "센터 홍보기능이 강화되어 경기도 공익단체들의 활동을 더 널리 알릴 수 있습니다.",
+      "textPreview": "센터 홍보기능이 강화되어 경기도 공익단체들의 활동을 더 널리 알릴 수 있습니다.",
+      "resolvedFontSize": 15,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 15,
+        "typeface": "Apple SD Gothic Neo",
+        "color": "#172033",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "센터 홍보기능이 강화되어 경기도 공익단체들의 활동을 더 널리 알릴 수 있습니다."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "센터 홍보기능이 강화되어 경기도 공익단체들의 활동을 더 널리 알릴 수 있습니다.",
+          "resolvedTextStyle": {
+            "fontSize": 15,
+            "typeface": "Apple SD Gothic Neo",
+            "color": "#172033",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "센터 홍보기능이 강화되어 경기도 공익단체들의 활동을 더 널리 알릴 수 있습니다.",
+              "fontSize": 15,
+              "typeface": "Apple SD Gothic Neo",
+              "color": "#172033"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 28,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2lszqtcj",
+      "id": "28",
+      "bbox": [
+        70,
+        582,
+        1060,
+        1
+      ],
+      "geometry": "rect",
+      "fillColor": "#CBD5E1",
+      "lineColor": "#CBD5E1",
+      "lineWidth": 0
+    },
+    {
+      "order": 29,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/v6psfil0",
+      "id": "29",
+      "bbox": [
+        70,
+        604,
+        100,
+        18
+      ],
+      "geometry": "rect",
+      "text": "소개 포인트",
+      "textPreview": "소개 포인트",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 13,
+        "typeface": "Apple SD Gothic Neo",
+        "color": "#4C1D95",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "소개 포인트"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "소개 포인트",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "typeface": "Apple SD Gothic Neo",
+            "color": "#4C1D95",
+            "bold": true,
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "소개 포인트",
+              "fontSize": 13,
+              "typeface": "Apple SD Gothic Neo",
+              "color": "#4C1D95",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    },
+    {
+      "order": 30,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/h4byhgn2",
+      "id": "30",
+      "bbox": [
+        170,
+        604,
+        950,
+        20
+      ],
+      "geometry": "rect",
+      "text": "중간지원조직 확산형 · 공익단체 활동소식을 알리고 모으는 일이 수동 서칭과 개별 연락에 의존합니다.",
+      "textPreview": "중간지원조직 확산형 · 공익단체 활동소식을 알리고 모으는 일이 수동 서칭과 개별 연락에 의존합니다.",
+      "resolvedFontSize": 13,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 13,
+        "typeface": "Apple SD Gothic Neo",
+        "color": "#64748B",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "insets": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "중간지원조직 확산형 · 공익단체 활동소식을 알리고 모으는 일이 수동 서칭과 개별 연락에 의존합니다."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "중간지원조직 확산형 · 공익단체 활동소식을 알리고 모으는 일이 수동 서칭과 개별 연락에 의존합니다.",
+          "resolvedTextStyle": {
+            "fontSize": 13,
+            "typeface": "Apple SD Gothic Neo",
+            "color": "#64748B",
+            "alignment": "left"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "중간지원조직 확산형 · 공익단체 활동소식을 알리고 모으는 일이 수동 서칭과 개별 연락에 의존합니다.",
+              "fontSize": 13,
+              "typeface": "Apple SD Gothic Neo",
+              "color": "#64748B"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "fillColor": "rgba(0, 0, 0, 0)",
+      "lineColor": "rgba(0, 0, 0, 0)",
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}
