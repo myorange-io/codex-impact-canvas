@@ -47,6 +47,7 @@ presentation-assets/result_screenshot.png
 - `input.json`이 있으면 최종 `workshop.json`과 충돌하지 않습니다.
 - 필요한 경우 `presentation-assets/result_screenshot.png`가 공개 가능한 이미지로 준비되어 있습니다.
 - 발표자 한줄소개는 발표자료 제작 단계에서 사회혁신가와 개발자에게 한 명씩 따로 받습니다. 캔버스 스킬에서 임의로 추론하지 않습니다.
+- 발표자료 Google Slides 사본은 생성 후 `링크가 있는 모든 사용자`가 `뷰어` 권한으로 볼 수 있게 공유 설정해야 합니다.
 
 ## 안내 문구
 
@@ -56,4 +57,5 @@ presentation-assets/result_screenshot.png
 워크숍 기록과 사례 정리가 끝났습니다. 최종 기준 파일은 `workshop.json`입니다.
 이제 같은 참가자 폴더를 기준으로 이 스킬의 발표자료 제작 단계를 이어가 5장 Google Slides를 만들 수 있습니다.
 발표자료 제작 전에 `input.json`이 최종 `workshop.json`과 충돌하지 않는지, 필요한 경우 `presentation-assets/result_screenshot.png`가 준비되어 있는지 확인하세요.
+생성한 Google Slides 사본은 링크가 있는 모든 사용자가 뷰어 권한으로 볼 수 있도록 공유 설정하세요.
 ```

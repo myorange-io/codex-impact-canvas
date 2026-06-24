@@ -1,6 +1,6 @@
 # Codex Impact Canvas
 
-사회문제 해결 해커톤 팀이 준비해 온 현장 문제를 바탕으로, 3시간 안에 보여줄 수 있는 AI 에이전트 MVP 기능 1개로 범위를 좁히고, 결과를 AI Agent Workflow 자산과 5장 발표자료로 남기도록 돕는 Codex 스킬입니다.
+사회문제 해결 해커톤 팀이 준비해 온 현장 문제를 바탕으로, 3시간 안에 보여줄 수 있는 AI 에이전트 MVP 기능 1개로 범위를 좁히고, 결과를 워크숍 표준 산출물과 5장 발표자료로 남기도록 돕는 Codex 스킬입니다.
 
 ## 언제 쓰나
 
@@ -33,7 +33,9 @@ $codex-impact-canvas
 - 자료 상태: 실제 자료, 익명화 샘플, 더미 데이터, 가상 샘플 중 무엇을 쓸 수 있는지
 - 기대 결과: 발표장에서 어떤 형태의 결과물을 보면 도움이 되는지
 
-개인정보와 내부자료는 원본 그대로 넣지 않습니다. 이름, 연락처, 주소, 주민등록번호, 계좌번호, 이메일, 상담 원문, 비밀값, 토큰, 접근권한 세부 정보는 익명화, 마스킹, 삭제, 더미 생성, 화면 시연 중 하나로 처리합니다.
+개인정보와 내부자료는 원본 그대로 넣지 않습니다. 이름, 연락처, 주소, 주민등록번호, 계좌번호, 이메일, 상담 원문, 비밀값, 토큰, 접근권한 세부 정보는 익명화, 마스킹, 삭제, 더미 생성, 화면 시연 중 하나로 처리합니다. 샘플이 아직 익명화되어 있지 않으면 오렌지필터를 설치해 익명화한 뒤 사용합니다.
+
+- 오렌지필터 설치: https://chromewebstore.google.com/detail/%EC%98%A4%EB%A0%8C%EC%A7%80%ED%95%84%ED%84%B0orange-filter-ai-%ED%94%84%EB%9D%BC%EC%9D%B4/gnkcbdgbajeboglkplllicdghlcghjai
 
 ## 설치
 
@@ -73,10 +75,10 @@ git clone https://github.com/myorange-io/codex-impact-canvas.git .agents/skills/
 1. 사용자가 `$codex-impact-canvas`라고 입력합니다. `/codex-impact-canvas`도 호환 호출로 인정합니다.
 2. 기본 정보 확인: 사회혁신가 이름, 개발자 이름, 팀 또는 프로젝트 이름을 하나씩 순차 질문합니다. `request_user_input`이 활성화되어 있으면 도구로 묻고, 비활성화되어 있으면 일반 채팅으로 묻습니다.
 3. 업무 문제 확인: 반복 처리 업무, 불편을 겪는 사람, 문제가 발생하는 순간
-4. 자료 확인: 실제 자료 유무, 개인정보 제거 샘플, 자료가 없을 경우 가상 샘플 생성
+4. 자료 확인: 실제 자료 유무, 개인정보 제거 샘플, 익명화되지 않은 샘플은 오렌지필터 안내, 자료가 없을 경우 가상 샘플 생성
 5. 결과물 선택: 문제를 들은 뒤 자동화 도구, 웹앱, 온보딩 페이지, admin 화면, 대시보드, 문서/메시지 초안 등 가능한 후보 제안
 6. 3시간 MVP 좁히기: 해결할 좁은 문제, 포함할 업무 단계, 오늘 할 것/하지 않을 것, AI 역할, 사람 검토 지점, 성공/실패 기준, 3시간 안/밖 판단
-7. 다음 단계 안내: `PLAN.md`, `workshop.json`, `MEMORY.md`, `WORKFLOW_ANALYSIS.md`, `CASE_STUDY.md`의 용도와 제출/아카이빙 기준 안내
+7. 다음 단계 안내: `PLAN.md`, `workshop.json` 초안 생성 후 스킬은 직접 구현하지 않고 사용자에게 구현을 넘김
 8. 발표자료 제작: 최종 `workshop.json`을 기준으로 입력 폴더를 점검하고, 필요한 경우 `presentation-assets/result_screenshot.png`를 준비한 뒤 이 스킬 안에서 5장 Google Slides를 만듭니다.
 
 ## 팀 시작
@@ -130,13 +132,14 @@ git clone https://github.com/myorange-io/codex-impact-canvas.git .agents/skills/
 ### 3. 자료 확인
 
 ```text
-오늘 써볼 실제 자료가 있나요? 있다면 개인정보를 제거한 샘플로 쓸 수 있고, 없다면 가상 샘플로 시작해도 됩니다.
+오늘 써볼 실제 자료가 있나요? 있다면 개인정보를 제거한 샘플로 쓸 수 있고, 아직 익명화되지 않았다면 오렌지필터로 익명화한 뒤 사용합니다. 자료가 없다면 가상 샘플로 시작해도 됩니다.
 ```
 
 완료 기준:
 
 - 실제 자료, 익명화 샘플, 가상 샘플 중 무엇을 쓸지 정합니다.
 - 자료 형태와 개인정보 처리 방식을 기록합니다.
+- 익명화되지 않은 샘플은 원본 그대로 쓰지 않고 오렌지필터 설치 후 익명화하도록 안내합니다.
 - 자료가 없으면 스킬이 만들 가상 샘플 조건을 정합니다.
 
 ### 4. 결과물 선택
@@ -165,9 +168,11 @@ git clone https://github.com/myorange-io/codex-impact-canvas.git .agents/skills/
 
 ### 6. 다음 단계 안내
 
-문제정의가 끝나면 `PLAN.md`와 `workshop.json` 초안을 만들고, 구현 중에는 `MEMORY.md`를 누적합니다. 완료 후에는 구현 결과와 기록을 바탕으로 `WORKFLOW_ANALYSIS.md`, `CASE_STUDY.md`, 최종 `workshop.json`을 만듭니다. 그 뒤 같은 참가자 폴더를 기준으로 이 스킬 안에서 5장 Google Slides 발표자료를 제작합니다.
+문제정의가 끝나면 `PLAN.md`와 `workshop.json` 초안을 만들고, 스킬은 직접 구현으로 넘어가지 않습니다. 다음 단계는 사용자가 `PLAN.md`의 3시간 구현 계획을 기준으로 구현하는 것입니다. `PLAN.md`에는 새 세션에서 구현하더라도 구현 중 결정, 변경, 막힌 점, 검증 결과를 `MEMORY.md`에 append-only로 기록하라는 구현자 지침을 포함합니다. 구현 완료 후 다시 요청하면 산출물 범위를 묻지 않고 워크숍 표준 흐름에 따라 `WORKFLOW_ANALYSIS.md`, `CASE_STUDY.md`, 최종 `workshop.json`, 5장 Google Slides 발표자료 제작으로 이어갑니다.
 
 ## 필수 산출물
+
+산출물 범위는 질문하지 않고 워크숍 표준 흐름을 기본으로 적용합니다.
 
 ### PLAN.md
 
@@ -191,6 +196,7 @@ git clone https://github.com/myorange-io/codex-impact-canvas.git .agents/skills/
 - 3시간 안/밖 판단
 - 제외 범위
 - 3시간 구현 계획
+- 구현자 지침
 - 빠르게 끝났을 때 이어서 할 작업 후보 2개
 - 제출/아카이빙 기준
 
@@ -267,6 +273,7 @@ AI 에이전트 워크플로 라이브러리용 구조화 분석입니다.
 - 참가자 폴더에 `input.json`이 있으면 최종 `workshop.json`과 같은 내용인지 확인합니다. 내장 발표 스크립트는 `workshop.json`을 먼저 읽습니다.
 - 화면, 웹앱, admin 화면, 대시보드처럼 시각 결과물이 있으면 공개 가능한 캡처만 `presentation-assets/result_screenshot.png`에 둡니다.
 - 발표자 한줄소개는 사회혁신가와 개발자에게 한 명씩 따로 받습니다. 파일에서 임의로 추론하지 않습니다.
+- Google Slides 사본은 생성 후 링크가 있는 모든 사용자가 뷰어 권한으로 볼 수 있게 공유 설정합니다.
 - 자세한 기준은 `references/presentation-handoff.md`와 `references/presentation-build.md`를 따릅니다.
 
 발표 문구와 Google Slides 요청 파일은 아래 스크립트로 만듭니다.
@@ -276,7 +283,7 @@ node scripts/prepare-presentation-content.mjs --input-dir /path/to/team-folder
 node scripts/build-google-slides-requests.mjs --input-dir /path/to/team-folder
 ```
 
-최종 산출물은 로컬 PPTX가 아니라 복사한 Google Slides deck입니다.
+최종 산출물은 로컬 PPTX가 아니라 복사한 Google Slides deck입니다. `outputs/google-drive-permission.json`의 permission body를 복사한 deck 파일 ID에 적용해 `링크가 있는 모든 사용자` + `뷰어` 권한으로 공유합니다.
 
 ## 출력 일관성 규칙
 

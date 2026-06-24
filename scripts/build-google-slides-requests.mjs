@@ -28,7 +28,7 @@ const COLORS = {
 };
 
 function parseArgs(argv) {
-  const args = { inputDir: null };
+  const args = { inputDir: null, presentationId: "" };
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
     if (arg === "--input-dir") {
@@ -36,6 +36,11 @@ function parseArgs(argv) {
       i += 1;
     } else if (arg.startsWith("--input-dir=")) {
       args.inputDir = arg.slice("--input-dir=".length);
+    } else if (arg === "--presentation-id") {
+      args.presentationId = argv[i + 1] ?? "";
+      i += 1;
+    } else if (arg.startsWith("--presentation-id=")) {
+      args.presentationId = arg.slice("--presentation-id=".length);
     } else if (!arg.startsWith("-") && !args.inputDir) {
       args.inputDir = arg;
     }
@@ -229,6 +234,26 @@ function screenshotRequests(screenshotPath) {
   ];
 }
 
+async function writeDrivePermission(outputDir, presentationId) {
+  const permission = {
+    type: "anyone",
+    role: "reader",
+    allowFileDiscovery: false,
+  };
+  const payload = {
+    target: {
+      fileId: presentationId || "<COPIED_GOOGLE_SLIDES_FILE_ID>",
+      description: "복사한 Google Slides deck 파일 ID",
+    },
+    operation: "drive.permissions.create",
+    body: permission,
+    expectedAccess: "링크가 있는 모든 사용자 - 뷰어",
+  };
+  const permissionPath = path.join(outputDir, "google-drive-permission.json");
+  await fs.writeFile(permissionPath, JSON.stringify(payload, null, 2));
+  return permissionPath;
+}
+
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   const inputDir = path.resolve(CWD, args.inputDir);
@@ -244,6 +269,7 @@ async function main() {
   await fs.mkdir(outputDir, { recursive: true });
   const requestsPath = path.join(outputDir, "google-slides-requests.json");
   await fs.writeFile(requestsPath, JSON.stringify(requests, null, 2));
+  const drivePermissionPath = await writeDrivePermission(outputDir, args.presentationId);
 
   let imageUrisPath = null;
   if (hasScreenshot) {
@@ -254,6 +280,7 @@ async function main() {
   console.log(JSON.stringify({
     inputDir,
     requests: requestsPath,
+    drivePermission: drivePermissionPath,
     imageUris: imageUrisPath,
     requestCount: requests.length,
     hasScreenshot,

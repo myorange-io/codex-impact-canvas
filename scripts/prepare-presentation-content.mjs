@@ -431,7 +431,7 @@ async function main() {
     content: contentPath,
     exampleInput,
     resultScreenshot: await exists(screenshot) ? screenshot : null,
-    nextAction: "Google Slides 템플릿을 복사한 뒤 scripts/build-google-slides-requests.mjs를 실행하고 batchUpdate를 적용하세요.",
+    nextAction: "Google Slides 템플릿을 복사한 뒤 scripts/build-google-slides-requests.mjs를 실행하고 batchUpdate와 링크가 있는 모든 사용자 뷰어 권한을 적용하세요.",
   }, null, 2));
 }
 

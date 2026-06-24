@@ -94,7 +94,7 @@ def render_plan(data: dict[str, Any], meta: dict[str, str]) -> str:
 - 자료 상태: {pick(data, "materials.source_status", "미정")}
 - 샘플 입력: {pick(data, "materials.sample_input", pick(data, "mvp.demo_input"))}
 - 개인정보 처리: {pick(data, "materials.privacy_action", pick(data, "data_and_access.privacy_action"))}
-- 자료 유효성 확인: {pick(data, "materials.validity_check", "3시간 안에 처리할 수 있고 공개 가능한 수준으로 비식별화했는지 확인한다.")}
+- 자료 유효성 확인: {pick(data, "materials.validity_check", "3시간 안에 처리할 수 있고 공개 가능한 수준으로 비식별화했는지 확인한다. 익명화되지 않은 샘플은 오렌지필터로 익명화한 뒤 사용한다.")}
 
 ## 현재 업무 흐름
 - 입력 자료: {pick(data, "current_workflow.inputs")}
@@ -134,6 +134,12 @@ def render_plan(data: dict[str, Any], meta: dict[str, str]) -> str:
 - 90-150분: {pick(data, "build_plan.90_150")}
 - 150-180분: {pick(data, "build_plan.150_180")}
 
+## 구현자 지침
+- 구현 시작 전 이 `PLAN.md`와 `workshop.json` 초안을 먼저 읽습니다.
+- 새 세션에서 구현하더라도 구현 중 결정, 변경, 막힌 점, 검증 결과를 `MEMORY.md`에 append-only로 기록합니다.
+- `MEMORY.md`가 없으면 새로 만들고, 있으면 기존 내용을 덮어쓰지 않고 파일 끝에만 추가합니다.
+- 구현이 끝나면 `workshop.json`의 구현 결과 관련 필드를 갱신할 수 있게 변경 요약과 검증 결과를 남깁니다.
+
 ## 빠르게 끝났을 때 이어서 할 작업 후보
 - 후보 1 작업: {pick(data, "follow_up_candidates.candidate_1.task")}
 - 후보 1 시작 조건: {pick(data, "follow_up_candidates.candidate_1.start_condition")}
@@ -150,9 +156,10 @@ def render_plan(data: dict[str, Any], meta: dict[str, str]) -> str:
 
 ## 제출과 아카이빙
 - 문제정의 산출물: {pick(data, "submission.problem_definition_outputs", "PLAN.md, workshop.json 초안")}
-- 구현 기록: {pick(data, "submission.build_records", "MEMORY.md")}
+- 구현 핸드오프: {pick(data, "submission.implementation_handoff", "PLAN.md 작성 후 스킬은 직접 구현하지 않고 사용자가 3시간 구현 계획을 기준으로 구현한다.")}
+- 구현 기록: {pick(data, "submission.build_records", "새 세션 구현 중에도 MEMORY.md append-only 갱신")}
 - 완료 후 산출물: {pick(data, "submission.final_outputs", "WORKFLOW_ANALYSIS.md, CASE_STUDY.md, 최종 workshop.json, 5장 Google Slides 발표자료")}
-- 아카이빙 기준: {pick(data, "submission.archive_criteria", "필수 산출물의 핵심 MVP, 자료 상태, 사람 검토, 공개 범위가 서로 일치해야 한다.")}
+- 아카이빙 기준: {pick(data, "submission.archive_criteria", "표준 산출물 범위는 질문하지 않고 적용하며, 핵심 MVP, 자료 상태, 사람 검토, 공개 범위가 서로 일치해야 한다.")}
 """
 
 
@@ -287,7 +294,7 @@ def memory_entry(data: dict[str, Any], stage: str) -> str:
 - **왜**: {pick(data, "memory_entry.why", "팀별 결과물을 같은 구조로 남겨 이후 사례집과 워크플로 라이브러리로 재사용하기 위해서다.")}
 - **어떻게**: {pick(data, "memory_entry.how", "반응형 질문 답변을 표준 필드로 정규화해 PLAN.md, workshop.json, WORKFLOW_ANALYSIS.md, CASE_STUDY.md, MEMORY.md에 기록했다.")}
 - **막힌 점 / 바꾼 점**: {pick(data, "memory_entry.blocked", "없음")}
-- **배운 것 / 다음**: {pick(data, "memory_entry.next", "샘플 데이터로 MVP를 구현하고 검수 포인트를 보완한다.")}
+- **배운 것 / 다음**: {pick(data, "memory_entry.next", "사용자가 PLAN.md 기준으로 MVP를 구현하고, 완료 후 검수 포인트와 기록을 보완한다.")}
 """
 
 
@@ -303,8 +310,8 @@ def sample_data() -> dict[str, Any]:
         "materials": {
             "source_status": "익명화 샘플",
             "sample_input": "이름과 연락처를 제거한 신청서 텍스트 1개",
-            "privacy_action": "이름과 연락처를 제거한 샘플만 사용",
-            "validity_check": "신청서 필수 항목과 누락 여부를 확인할 최소 정보가 남아 있다.",
+            "privacy_action": "이름과 연락처를 제거한 샘플만 사용. 익명화 전 샘플은 오렌지필터로 처리한 뒤 사용",
+            "validity_check": "신청서 필수 항목과 누락 여부를 확인할 최소 정보가 남아 있고 공개 가능한 수준으로 익명화되어 있다.",
         },
         "output_choice": {
             "problem_archetype": "문서/콘텐츠 초안 또는 변환",
@@ -361,9 +368,10 @@ def sample_data() -> dict[str, Any]:
         },
         "submission": {
             "problem_definition_outputs": "PLAN.md, workshop.json 초안",
-            "build_records": "MEMORY.md append 기록",
+            "implementation_handoff": "PLAN.md 작성 후 스킬은 직접 구현하지 않고 사용자가 3시간 구현 계획을 기준으로 구현",
+            "build_records": "새 세션 구현 중에도 MEMORY.md append-only 갱신",
             "final_outputs": "WORKFLOW_ANALYSIS.md, CASE_STUDY.md, 최종 workshop.json, 5장 Google Slides 발표자료",
-            "archive_criteria": "자료 상태, 핵심 MVP, 사람 검토, 공개 범위가 모든 산출물에서 일치해야 한다.",
+            "archive_criteria": "산출물 범위는 표준 흐름을 적용하고, 자료 상태, 핵심 MVP, 사람 검토, 공개 범위가 모든 산출물에서 일치해야 한다.",
         },
         "library_metadata": {
             "sector": "운영",
