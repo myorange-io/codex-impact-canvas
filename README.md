@@ -114,8 +114,10 @@ git clone https://github.com/myorange-io/codex-impact-canvas.git .agents/skills/
 ### 1. 기본 정보 확인
 
 ```text
-오늘 작업할 팀 정보를 먼저 확인하겠습니다. 사회혁신가 이름, 개발자 이름, 정해진 팀/프로젝트 이름을 알려주세요.
+사회혁신가 이름은 무엇인가요?
 ```
+
+답변을 받은 뒤 개발자 이름, 팀 또는 프로젝트 이름을 각각 한 번에 하나씩 묻습니다.
 
 ### 2. 업무 문제 확인
 
@@ -272,7 +274,7 @@ AI 에이전트 워크플로 라이브러리용 구조화 분석입니다.
 - 최종 기준 데이터는 `workshop.json`입니다.
 - `WORKFLOW_ANALYSIS.md` 또는 `CASE_STUDY.md`가 없으면 발표자료를 만들기 전에 `scripts/write_workshop_outputs.py --phase final`로 두 파일을 먼저 생성합니다.
 - 참가자 폴더에 `input.json`이 있으면 최종 `workshop.json`과 같은 내용인지 확인합니다. 내장 발표 스크립트는 `workshop.json`을 먼저 읽습니다.
-- 화면, 웹앱, admin 화면, 대시보드처럼 시각 결과물이 있으면 공개 가능한 캡처만 `presentation-assets/result_screenshot.png`에 둡니다.
+- 화면, 웹앱, admin 화면, 대시보드처럼 시각 결과물이 있으면 공개 가능한 캡처만 `presentation-assets/result_screenshot.png`에 둡니다. 캡처를 4장에 넣으려면 Google Slides API가 접근 가능한 이미지 URL을 `--screenshot-url`로 넘깁니다.
 - 발표자 한줄소개는 사회혁신가와 개발자에게 한 명씩 따로 받습니다. 파일에서 임의로 추론하지 않습니다.
 - Google Slides 사본은 생성 후 링크가 있는 모든 사용자가 뷰어 권한으로 볼 수 있게 공유 설정합니다.
 - 자세한 기준은 `references/presentation-handoff.md`와 `references/presentation-build.md`를 따릅니다.
@@ -282,6 +284,8 @@ AI 에이전트 워크플로 라이브러리용 구조화 분석입니다.
 ```bash
 node scripts/prepare-presentation-content.mjs --input-dir /path/to/team-folder
 node scripts/build-google-slides-requests.mjs --input-dir /path/to/team-folder
+# 캡처를 넣는 경우:
+node scripts/build-google-slides-requests.mjs --input-dir /path/to/team-folder --screenshot-url https://example.com/result.png
 ```
 
 최종 산출물은 로컬 PPTX가 아니라 복사한 Google Slides deck입니다. `outputs/google-drive-permission.json`의 permission body를 복사한 deck 파일 ID에 적용해 `링크가 있는 모든 사용자` + `뷰어` 권한으로 공유합니다.

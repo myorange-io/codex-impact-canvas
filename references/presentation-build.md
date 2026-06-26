@@ -78,10 +78,10 @@ python3 scripts/write_workshop_outputs.py --input <participant-folder>/workshop.
 13. `scripts/prepare-presentation-content.mjs --input-dir <participant-folder>`를 실행합니다.
 14. Google Drive/Slides connector로 템플릿을 복사합니다.
 15. 복사한 프레젠테이션을 읽어 5장인지 확인합니다.
-16. `scripts/build-google-slides-requests.mjs --input-dir <participant-folder>`를 실행합니다.
+16. `scripts/build-google-slides-requests.mjs --input-dir <participant-folder>`를 실행합니다. `presentation-assets/result_screenshot.png`를 4장에 넣으려면 먼저 이미지를 Google Slides API가 읽을 수 있는 URL로 업로드하거나 공개 가능한 이미지 URL을 준비한 뒤 `--screenshot-url <image-url>`을 함께 넘깁니다.
 17. 생성된 `outputs/google-slides-requests.json`을 복사한 deck에 `batchUpdate`로 적용합니다. 이 요청은 텍스트 교체 뒤 제목, 본문, 이름, 푸터, 카드 문구의 `fontFamily`, `fontSize`, `bold`, 색상을 템플릿 스타일과 같은 값으로 명시적으로 다시 적용해야 합니다.
 18. 이어서 `outputs/google-slides-style-requests.json`을 같은 deck에 한 번 더 `batchUpdate`로 적용합니다. 텍스트 교체 직후 Google Slides가 일부 run 스타일을 Calibri/themeColor로 남기는 경우를 막기 위한 스타일 전용 2차 적용입니다.
-19. `outputs/google-slides-image-uris.txt`가 있으면 그 내용을 image URI로 함께 넘깁니다.
+19. `outputs/google-slides-image-uris.txt`가 있으면 그 내용을 확인합니다. `LOCAL_ONLY:`로 시작하면 로컬 캡처만 있고 Slides에 넣을 이미지 URL이 아직 없다는 뜻이므로, 캡처를 업로드한 뒤 `--screenshot-url`로 다시 요청을 생성합니다.
 20. `outputs/google-drive-permission.json`의 permission body를 복사한 deck 파일 ID에 Google Drive permissions.create로 적용합니다. 권한은 `type: anyone`, `role: reader`, `allowFileDiscovery: false`여야 합니다.
 21. 편집된 deck을 다시 읽어 템플릿 샘플 문구가 교체되었는지 확인합니다.
 22. 복사한 deck의 공유 설정이 `링크가 있는 모든 사용자` + `뷰어`인지 확인합니다.
@@ -101,6 +101,9 @@ Google Slides batchUpdate 요청 생성:
 
 ```bash
 node scripts/build-google-slides-requests.mjs --input-dir <participant-folder>
+
+# 결과물 캡처를 4장에 넣는 경우
+node scripts/build-google-slides-requests.mjs --input-dir <participant-folder> --screenshot-url <image-url>
 ```
 
 요청 생성 스크립트는 아래 파일을 만듭니다.
@@ -108,7 +111,7 @@ node scripts/build-google-slides-requests.mjs --input-dir <participant-folder>
 - `outputs/google-slides-requests.json`
 - `outputs/google-slides-style-requests.json`
 - `outputs/google-drive-permission.json`
-- `outputs/google-slides-image-uris.txt` when a result screenshot exists
+- `outputs/google-slides-image-uris.txt` when a result screenshot URL or local screenshot exists
 
 `outputs/google-drive-permission.json`은 복사한 Google Slides deck에 적용할 Drive 권한 payload입니다. 복사한 deck 파일 ID에 대해 permissions.create를 실행하고, 아래 body를 사용합니다.
 
@@ -125,7 +128,8 @@ node scripts/build-google-slides-requests.mjs --input-dir <participant-folder>
 4장에는 결과물 캡처 영역이 있습니다.
 
 - 캡처가 있으면 `presentation-assets/result_screenshot.png`에 둡니다.
-- 캡처가 없으면 deck은 생성하고 템플릿 placeholder를 남깁니다.
+- 캡처를 장표에 넣으려면 Google Slides API가 접근 가능한 이미지 URL을 준비해 `--screenshot-url`로 넘깁니다. 로컬 파일 경로만으로는 `createImage` 요청을 만들지 않습니다.
+- 캡처가 없거나 URL을 아직 준비하지 못했으면 deck은 생성하고 템플릿 placeholder를 남깁니다.
 - 공개 불가 정보, 개인정보, 내부 원문, 계정 정보가 보이는 캡처는 사용하지 않습니다.
 - 캡처를 임의로 찾거나 새로 꾸며내지 않습니다.
 

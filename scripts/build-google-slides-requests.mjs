@@ -71,7 +71,7 @@ for (const objectId of PROBLEM_OBJECTS) STYLE_OBJECTS[objectId] = TYPOGRAPHY.pro
 for (const objectId of WORKFLOW_OBJECTS) STYLE_OBJECTS[objectId] = TYPOGRAPHY.bodyBold;
 
 function parseArgs(argv) {
-  const args = { inputDir: null, presentationId: "" };
+  const args = { inputDir: null, presentationId: "", screenshotUrl: "" };
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
     if (arg === "--input-dir") {
@@ -84,11 +84,22 @@ function parseArgs(argv) {
       i += 1;
     } else if (arg.startsWith("--presentation-id=")) {
       args.presentationId = arg.slice("--presentation-id=".length);
+    } else if (arg === "--screenshot-url") {
+      args.screenshotUrl = argv[i + 1] ?? "";
+      i += 1;
+    } else if (arg.startsWith("--screenshot-url=")) {
+      args.screenshotUrl = arg.slice("--screenshot-url=".length);
     } else if (!arg.startsWith("-") && !args.inputDir) {
       args.inputDir = arg;
     }
   }
   if (!args.inputDir) throw new Error("--input-dir is required");
+  if (args.screenshotUrl) {
+    const parsed = new URL(args.screenshotUrl);
+    if (!["http:", "https:"].includes(parsed.protocol)) {
+      throw new Error("--screenshot-url must be an http(s) URL that Google Slides can fetch");
+    }
+  }
   return args;
 }
 
@@ -182,13 +193,21 @@ function buildTextRequests(content) {
 }
 
 function buildSpeakerNoteRequests(content) {
-  return asList(content.speaker_notes, 5).map((note, index) => ({
-    insertText: {
-      objectId: SPEAKER_NOTE_OBJECTS[index],
-      insertionIndex: 0,
-      text: note,
+  return asList(content.speaker_notes, 5).flatMap((note, index) => [
+    {
+      deleteText: {
+        objectId: SPEAKER_NOTE_OBJECTS[index],
+        textRange: { type: "ALL" },
+      },
     },
-  }));
+    {
+      insertText: {
+        objectId: SPEAKER_NOTE_OBJECTS[index],
+        insertionIndex: 0,
+        text: note,
+      },
+    },
+  ]);
 }
 
 function buildRoleStyleRequests() {
@@ -222,12 +241,12 @@ function buildRoleStyleRequests() {
   ];
 }
 
-function screenshotRequests(screenshotPath) {
+function screenshotRequests(screenshotUrl) {
   return [
     {
       createImage: {
         objectId: "result_screenshot_image",
-        url: screenshotPath,
+        url: screenshotUrl,
         elementProperties: {
           pageObjectId: "p4",
           size: {
@@ -278,8 +297,9 @@ async function main() {
   const content = JSON.parse(await fs.readFile(contentPath, "utf8"));
   const requests = buildTextRequests(content);
   const styleRequests = [...buildStyleRequests(), ...buildRoleStyleRequests()];
-  const hasScreenshot = await exists(screenshotPath);
-  if (hasScreenshot) requests.push(...screenshotRequests(screenshotPath));
+  const hasLocalScreenshot = await exists(screenshotPath);
+  const hasScreenshotUrl = Boolean(args.screenshotUrl);
+  if (hasScreenshotUrl) requests.push(...screenshotRequests(args.screenshotUrl));
 
   await fs.mkdir(outputDir, { recursive: true });
   const requestsPath = path.join(outputDir, "google-slides-requests.json");
@@ -289,9 +309,15 @@ async function main() {
   const drivePermissionPath = await writeDrivePermission(outputDir, args.presentationId);
 
   let imageUrisPath = null;
-  if (hasScreenshot) {
+  if (hasScreenshotUrl || hasLocalScreenshot) {
     imageUrisPath = path.join(outputDir, "google-slides-image-uris.txt");
-    await fs.writeFile(imageUrisPath, screenshotPath);
+    const lines = hasScreenshotUrl
+      ? [args.screenshotUrl]
+      : [
+          `LOCAL_ONLY: ${screenshotPath}`,
+          "Upload this image or provide an accessible image URL, then rerun with --screenshot-url <image-url>.",
+        ];
+    await fs.writeFile(imageUrisPath, `${lines.join("\n")}\n`);
   }
 
   console.log(JSON.stringify({
@@ -302,7 +328,9 @@ async function main() {
     imageUris: imageUrisPath,
     requestCount: requests.length,
     styleRequestCount: styleRequests.length,
-    hasScreenshot,
+    hasScreenshot: hasScreenshotUrl,
+    hasLocalScreenshot,
+    hasScreenshotUrl,
   }, null, 2));
 }
 

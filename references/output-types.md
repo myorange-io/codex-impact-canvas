@@ -114,7 +114,7 @@
 
 - 최종 표현, 사실관계, 발송 가능 여부
 
-## AskUserQuestion 후보 구성 예시
+## request_user_input 후보 구성 예시
 
 ```text
 question: "오늘 결과물은 어떤 형태로 보여주는 것이 가장 자연스러울까요?"
@@ -126,6 +126,4 @@ options:
     description: "담당자가 여러 건을 검토하고 보류/확정할 수 있는 화면을 보여줍니다."
   - label: "문서/메시지 초안"
     description: "최종 발송 전 사람이 다듬을 수 있는 초안을 만듭니다."
-  - label: "직접 입력"
-    description: "다른 결과물 형태를 직접 설명합니다."
 ```
