@@ -79,12 +79,13 @@ python3 scripts/write_workshop_outputs.py --input <participant-folder>/workshop.
 14. Google Drive/Slides connector로 템플릿을 복사합니다.
 15. 복사한 프레젠테이션을 읽어 5장인지 확인합니다.
 16. `scripts/build-google-slides-requests.mjs --input-dir <participant-folder>`를 실행합니다.
-17. 생성된 `outputs/google-slides-requests.json`을 복사한 deck에 `batchUpdate`로 적용합니다.
-18. `outputs/google-slides-image-uris.txt`가 있으면 그 내용을 image URI로 함께 넘깁니다.
-19. `outputs/google-drive-permission.json`의 permission body를 복사한 deck 파일 ID에 Google Drive permissions.create로 적용합니다. 권한은 `type: anyone`, `role: reader`, `allowFileDiscovery: false`여야 합니다.
-20. 편집된 deck을 다시 읽어 템플릿 샘플 문구가 교체되었는지 확인합니다.
-21. 복사한 deck의 공유 설정이 `링크가 있는 모든 사용자` + `뷰어`인지 확인합니다.
-22. 5장 썸네일을 새로 가져와 텍스트 넘침, 겹침, 미교체 placeholder가 없는지 눈으로 확인합니다.
+17. 생성된 `outputs/google-slides-requests.json`을 복사한 deck에 `batchUpdate`로 적용합니다. 이 요청은 텍스트 교체 뒤 제목, 본문, 이름, 푸터, 카드 문구의 `fontFamily`, `fontSize`, `bold`, 색상을 템플릿 스타일과 같은 값으로 명시적으로 다시 적용해야 합니다.
+18. 이어서 `outputs/google-slides-style-requests.json`을 같은 deck에 한 번 더 `batchUpdate`로 적용합니다. 텍스트 교체 직후 Google Slides가 일부 run 스타일을 Calibri/themeColor로 남기는 경우를 막기 위한 스타일 전용 2차 적용입니다.
+19. `outputs/google-slides-image-uris.txt`가 있으면 그 내용을 image URI로 함께 넘깁니다.
+20. `outputs/google-drive-permission.json`의 permission body를 복사한 deck 파일 ID에 Google Drive permissions.create로 적용합니다. 권한은 `type: anyone`, `role: reader`, `allowFileDiscovery: false`여야 합니다.
+21. 편집된 deck을 다시 읽어 템플릿 샘플 문구가 교체되었는지 확인합니다.
+22. 복사한 deck의 공유 설정이 `링크가 있는 모든 사용자` + `뷰어`인지 확인합니다.
+23. 5장 썸네일을 새로 가져와 텍스트 넘침, 겹침, 미교체 placeholder가 없는지 눈으로 확인합니다.
 
 최종 산출물은 로컬 PPTX가 아니라 편집 가능한 Google Slides 사본입니다.
 
@@ -105,6 +106,7 @@ node scripts/build-google-slides-requests.mjs --input-dir <participant-folder>
 요청 생성 스크립트는 아래 파일을 만듭니다.
 
 - `outputs/google-slides-requests.json`
+- `outputs/google-slides-style-requests.json`
 - `outputs/google-drive-permission.json`
 - `outputs/google-slides-image-uris.txt` when a result screenshot exists
 
@@ -172,3 +174,4 @@ Slide 1 발표자 노트는 아래 문구로 시작해야 합니다.
 - 모든 장표에 3분 발표자 노트가 있고, 장표별 초와 시간 범위가 들어 있습니다.
 - 4장은 제공된 캡처를 포함하거나 캡처 없음이 의도적으로 남아 있습니다.
 - 새 썸네일 기준으로 넘침, 겹침, 미교체 placeholder가 없습니다.
+- 새 deck의 텍스트 스타일이 샘플처럼 Arial 기반이며, 제목/카드/이름/푸터의 글자 크기와 bold가 템플릿 샘플과 다르지 않습니다.

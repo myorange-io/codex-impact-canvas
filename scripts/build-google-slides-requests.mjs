@@ -25,7 +25,50 @@ const COLORS = {
   white: { red: 1, green: 1, blue: 1 },
   ink: { red: 0.050980393, green: 0.078431375, blue: 0.13725491 },
   muted: { red: 0.59607846, green: 0.6392157, blue: 0.69411767 },
+  blue: { red: 0.24705882, green: 0.5764706, blue: 1 },
 };
+
+const TYPOGRAPHY = {
+  coverTitle: { color: COLORS.white, fontSize: 35.63, bold: true },
+  slideTitle: { color: COLORS.ink, fontSize: 24.94, bold: true },
+  coverSubtitle: { color: COLORS.muted, fontSize: 12.47, bold: false },
+  roleLabel: { color: COLORS.muted, fontSize: 9.69, bold: true },
+  speakerName: { color: COLORS.white, fontSize: 12, bold: true },
+  speakerIntro: { color: COLORS.muted, fontSize: 9, bold: false },
+  month: { color: COLORS.muted, fontSize: 10.69, bold: true },
+  footer: { color: COLORS.muted, fontSize: 8.91, bold: false },
+  problemPoint: { color: COLORS.ink, fontSize: 12.47, bold: true },
+  body: { color: COLORS.ink, fontSize: 10.69, bold: false },
+  bodyBold: { color: COLORS.ink, fontSize: 10.69, bold: true },
+  inverseBody: { color: COLORS.white, fontSize: 10.69, bold: false },
+  impactTitle: { color: COLORS.white, fontSize: 24.94, bold: true },
+};
+
+const STYLE_OBJECTS = {
+  p1_i2: TYPOGRAPHY.coverTitle,
+  p1_i7: TYPOGRAPHY.coverSubtitle,
+  p1_i8: TYPOGRAPHY.roleLabel,
+  p1_i10: TYPOGRAPHY.speakerIntro,
+  "g3f234d17e0b_0_4": TYPOGRAPHY.speakerName,
+  "g3f234d17e0b_0_12": TYPOGRAPHY.roleLabel,
+  "g3f234d17e0b_0_14": TYPOGRAPHY.speakerName,
+  "g3f234d17e0b_0_13": TYPOGRAPHY.speakerIntro,
+  p2_i2: TYPOGRAPHY.slideTitle,
+  p3_i2: TYPOGRAPHY.slideTitle,
+  p3_i12: TYPOGRAPHY.body,
+  p3_i16: TYPOGRAPHY.inverseBody,
+  p3_i18: TYPOGRAPHY.inverseBody,
+  p5_i9: TYPOGRAPHY.impactTitle,
+  p5_i13: TYPOGRAPHY.bodyBold,
+  p5_i14: TYPOGRAPHY.body,
+  p5_i17: TYPOGRAPHY.bodyBold,
+  p5_i18: TYPOGRAPHY.body,
+};
+
+for (const objectId of MONTH_OBJECTS) STYLE_OBJECTS[objectId] = TYPOGRAPHY.month;
+for (const objectId of FOOTER_OBJECTS) STYLE_OBJECTS[objectId] = TYPOGRAPHY.footer;
+for (const objectId of PROBLEM_OBJECTS) STYLE_OBJECTS[objectId] = TYPOGRAPHY.problemPoint;
+for (const objectId of WORKFLOW_OBJECTS) STYLE_OBJECTS[objectId] = TYPOGRAPHY.bodyBold;
 
 function parseArgs(argv) {
   const args = { inputDir: null, presentationId: "" };
@@ -80,30 +123,15 @@ function replaceTextRequest(objectId, text) {
   ];
 }
 
-function styleRequest(objectId, color, bold = false) {
+function styleRequest(objectId, spec) {
   return {
     updateTextStyle: {
       objectId,
       textRange: { type: "ALL" },
       style: {
-        foregroundColor: { opaqueColor: { rgbColor: color } },
-        bold,
-        fontFamily: "Arial",
-      },
-      fields: "foregroundColor,bold,fontFamily",
-    },
-  };
-}
-
-function nameStyleRequest(objectId) {
-  return {
-    updateTextStyle: {
-      objectId,
-      textRange: { type: "ALL" },
-      style: {
-        foregroundColor: { opaqueColor: { rgbColor: COLORS.white } },
-        fontSize: { magnitude: 12, unit: "PT" },
-        bold: true,
+        foregroundColor: { opaqueColor: { rgbColor: spec.color } },
+        fontSize: { magnitude: spec.fontSize, unit: "PT" },
+        bold: spec.bold,
         fontFamily: "Arial",
       },
       fields: "foregroundColor,fontSize,bold,fontFamily",
@@ -112,30 +140,7 @@ function nameStyleRequest(objectId) {
 }
 
 function buildStyleRequests() {
-  return [
-    styleRequest("p1_i2", COLORS.white, true),
-    styleRequest("p1_i7", COLORS.muted),
-    styleRequest("p1_i8", COLORS.muted, true),
-    nameStyleRequest("g3f234d17e0b_0_4"),
-    styleRequest("p1_i10", COLORS.muted),
-    styleRequest("g3f234d17e0b_0_12", COLORS.muted, true),
-    nameStyleRequest("g3f234d17e0b_0_14"),
-    styleRequest("g3f234d17e0b_0_13", COLORS.muted),
-    ...MONTH_OBJECTS.map((objectId) => styleRequest(objectId, COLORS.muted, true)),
-    ...FOOTER_OBJECTS.map((objectId) => styleRequest(objectId, COLORS.muted)),
-    styleRequest("p2_i2", COLORS.ink, true),
-    ...PROBLEM_OBJECTS.map((objectId) => styleRequest(objectId, COLORS.ink, true)),
-    styleRequest("p3_i2", COLORS.ink, true),
-    styleRequest("p3_i12", COLORS.ink),
-    styleRequest("p3_i16", COLORS.white),
-    styleRequest("p3_i18", COLORS.white),
-    ...WORKFLOW_OBJECTS.map((objectId) => styleRequest(objectId, COLORS.ink, true)),
-    styleRequest("p5_i9", COLORS.white, true),
-    styleRequest("p5_i13", COLORS.ink, true),
-    styleRequest("p5_i14", COLORS.ink),
-    styleRequest("p5_i17", COLORS.ink, true),
-    styleRequest("p5_i18", COLORS.ink),
-  ];
+  return Object.entries(STYLE_OBJECTS).map(([objectId, spec]) => styleRequest(objectId, spec));
 }
 
 function buildTextRequests(content) {
@@ -187,22 +192,31 @@ function buildSpeakerNoteRequests(content) {
 }
 
 function buildRoleStyleRequests() {
-  const blue = { red: 0.24705882, green: 0.5764706, blue: 1 };
   return [
     {
       updateTextStyle: {
         objectId: "p3_i16",
         textRange: { type: "FIXED_RANGE", startIndex: 0, endIndex: 2 },
-        style: { foregroundColor: { opaqueColor: { rgbColor: blue } }, bold: true, fontFamily: "Arial" },
-        fields: "foregroundColor,bold,fontFamily",
+        style: {
+          foregroundColor: { opaqueColor: { rgbColor: COLORS.blue } },
+          fontSize: { magnitude: TYPOGRAPHY.inverseBody.fontSize, unit: "PT" },
+          bold: true,
+          fontFamily: "Arial",
+        },
+        fields: "foregroundColor,fontSize,bold,fontFamily",
       },
     },
     {
       updateTextStyle: {
         objectId: "p3_i18",
         textRange: { type: "FIXED_RANGE", startIndex: 0, endIndex: 2 },
-        style: { foregroundColor: { opaqueColor: { rgbColor: blue } }, bold: true, fontFamily: "Arial" },
-        fields: "foregroundColor,bold,fontFamily",
+        style: {
+          foregroundColor: { opaqueColor: { rgbColor: COLORS.blue } },
+          fontSize: { magnitude: TYPOGRAPHY.inverseBody.fontSize, unit: "PT" },
+          bold: true,
+          fontFamily: "Arial",
+        },
+        fields: "foregroundColor,fontSize,bold,fontFamily",
       },
     },
   ];
@@ -263,12 +277,15 @@ async function main() {
 
   const content = JSON.parse(await fs.readFile(contentPath, "utf8"));
   const requests = buildTextRequests(content);
+  const styleRequests = [...buildStyleRequests(), ...buildRoleStyleRequests()];
   const hasScreenshot = await exists(screenshotPath);
   if (hasScreenshot) requests.push(...screenshotRequests(screenshotPath));
 
   await fs.mkdir(outputDir, { recursive: true });
   const requestsPath = path.join(outputDir, "google-slides-requests.json");
   await fs.writeFile(requestsPath, JSON.stringify(requests, null, 2));
+  const styleRequestsPath = path.join(outputDir, "google-slides-style-requests.json");
+  await fs.writeFile(styleRequestsPath, JSON.stringify(styleRequests, null, 2));
   const drivePermissionPath = await writeDrivePermission(outputDir, args.presentationId);
 
   let imageUrisPath = null;
@@ -280,9 +297,11 @@ async function main() {
   console.log(JSON.stringify({
     inputDir,
     requests: requestsPath,
+    styleRequests: styleRequestsPath,
     drivePermission: drivePermissionPath,
     imageUris: imageUrisPath,
     requestCount: requests.length,
+    styleRequestCount: styleRequests.length,
     hasScreenshot,
   }, null, 2));
 }
